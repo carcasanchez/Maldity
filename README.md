@@ -3,4 +3,8 @@
 
 Created by Carlos Cabreira
 
-See the Wiki and the Web for more information
+See the [Maldity Wiki](https://github.com/carcasanchez/Maldity/wiki/Maldity:-Sea's-silence)
+
+and the [Maldity Web](http://carcasanchez.github.io/Maldity)
+
+for more information
