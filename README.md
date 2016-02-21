@@ -3,7 +3,8 @@
 
 Created by Carlos Cabreira
 
-v0.1
+[v0.1](https://github.com/carcasanchez/Maldity/releases)
+
 
 Last Changes: 
 
