@@ -3,12 +3,6 @@
 
 Created by Carlos Cabreira
 
-<<<<<<< HEAD
-v0.1.2
-=======
-[v0.1](https://github.com/carcasanchez/Maldity/releases)
-
->>>>>>> origin/master
 
 Redesigning code and porting to C++
 
