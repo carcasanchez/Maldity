@@ -3,11 +3,10 @@
 
 Created by Carlos Cabreira
 
-v0.1
+v0.1.2
 
-Last Changes: 
+Redesigning code and porting to C++
 
-You can walk for the map segment from the forest to the city center
 
 
 See the [Maldity Wiki](https://github.com/carcasanchez/Maldity/wiki/Maldity:-Sea's-silence)
