@@ -1,26 +1,28 @@
-class World{
-public:
-	int x;
-	int y;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <iostream>
+#ifndef __MALDITY_H__
+#define __MALDITY_H__
 
+
+class World{
+	public:
+		/*
+	Room* room = nullptr;
+	Exits* exit = nullptr;
 	World();
 	~World();
+*/
 
-
-	void CreateWorld(int * &room)const;
-
-	void DestroyWorld(int * &room);
+	void CreateWorld();
+	
 };
-	
-	
-	
-	 
-	
-
+		
 struct Room{
-
-	char name[10];
-	char description[];
+	
+	char name[15];
+	char description[250];
 
 };
 
@@ -37,3 +39,8 @@ struct Exits{
 	bool door();
 
 };
+
+
+void MyStrtok(char *player_input, char *command1, char *command2);
+
+#endif
