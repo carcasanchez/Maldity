@@ -16,7 +16,10 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Exits.h" />
     <ClInclude Include="Functions.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Rooms.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

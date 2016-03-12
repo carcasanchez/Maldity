@@ -4,4 +4,5 @@
 void MyStrtok(char *player_input, char *command1, char *command2);
 void AskCommands(char *command1, char *command2);
 
+
 #endif

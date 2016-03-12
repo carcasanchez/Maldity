@@ -2,16 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
-
-#ifndef __WORLD_H__
-#define __WORLD_H__
-/*
+#include "Rooms.h"
+#include "Player.h"
+#include "Exits.h"
+#include "Functions.h"
 
 class World{
-	public:
+public:
 		
 	Room* room = nullptr;
 	Exits* exit = nullptr;
+	Player* player = nullptr;
 	World();
 	~World();
 
@@ -19,28 +20,7 @@ class World{
 	void CreateWorld();
 	
 };
-	*/	
-struct Room{
 	
-	char name[15];
-	char description[250];
-
-};
-
-struct Player{
-
-	char position[10];
-
-};
-
-struct Exits{
-	char origin[10];
-	char destination[10];
-	char description[];
-	bool door();
-
-};
 
 
 
-#endif
