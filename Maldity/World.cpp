@@ -1,4 +1,4 @@
-#include "Maldity.h"
+#include "World.h"
 
 /*
 World::World()
@@ -17,6 +17,7 @@ World::~World()
 
 void World::CreateWorld()
 {
+	
 
 	strcpy(room[0].name, "Forest");
 	strcpy(room[0].description, "You are in a forest. \nAt south, you see that the road drives to a city. \nAt west, a high hill. \nAt north, the road vanishes in the distance. \nAt east, only the sea.");
@@ -34,23 +35,5 @@ void World::CreateWorld()
 	strcpy(room[3].description, "The dock is really impressive.\nThere are enourmous woody ships in all directions except for the east.\n");
 
 }
+
 */
-void MyStrtok(char *player_input, char *command1, char *command2){
-	int i, j;
-
-	for (i = 0; player_input[i] != ' ' && player_input[i] != '\0'; i++){
-
-		command1[i] = player_input[i];
-	}
-	command1[i] = '\0';
-
-	if (player_input[i] == ' '){
-		i++;
-		for (j = 0; player_input[i] != NULL; j++, i++){
-
-			command2[j] = player_input[i];
-		}
-		command2[j] = '\0';
-	}
-
-}

@@ -1,28 +1,31 @@
-#include "Maldity.h"
+#include "World.h"
+#include "Functions.h"
+#define _CRT_SECURE_NO_WARNINGS
 
-World world;
+//World world;
 
 int main(){
-
-	char player_input[20];
+	
 	char command1[10] = "empty";
 	char command2[10] = "empty";
-	
-	//world.CreateWorld();
-		
-	gets_s(player_input, 20);
+		//world.CreateWorld();
 
-	MyStrtok(player_input, command1, command2);
-	
-	
-	if (strcmp("empty", command2)==0){
-		printf("Insert second command\n");
-		gets_s(command2, 10);
+
+	while (1){
+
+		while (strcmp(command1, "empty")==0){
+			AskCommands(command1, command2);
+		}
+
+		if (strcmp(command1, "quit") == 0){
+			return 0;
+		}
+
+	printf("%s ", command1);
+	printf("%s\n", command2);
+	strcpy_s(command1, 6, "empty");
+	strcpy_s(command2, 6, "empty");
 	}
 
-	printf("%s\n", command1);
-	printf("%s\n", command2);
-	getchar();
-	return 0;
 
 }
