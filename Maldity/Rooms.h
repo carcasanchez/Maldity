@@ -1,6 +1,7 @@
 struct Room{
 
 	char name[15];
-	char description[250];
+	char description[300];
+
 
 };
