@@ -62,7 +62,7 @@ void AskCommands(char *command1, char *command2){
 		}
 
 		else {
-			printf("You have entered and invalid command\n");
+			printf("You have entered and invalid command\n\n");
 			strcpy_s(command1, 6,"empty");
 		}
 
