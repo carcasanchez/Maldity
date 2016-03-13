@@ -1,3 +1,4 @@
 struct Player{
-	int position;
+		char position[10];
+
 };
