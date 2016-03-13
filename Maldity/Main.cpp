@@ -34,8 +34,12 @@ int main(){
 			if (strcmp(command2, "empty") == 0)
 				printf("%s", world.room[*position].description);
 
-			for (int i = 0; i < 52; i++){
+			else for (int i = 0; i <= 52; i++){
 
+				if (i == 52){
+					printf("You can't do that\n");
+					break;
+				}
 
 				if ((strcmp(command2, world.exit[i].orientation) != 0) || (strcmp(world.room[*position].name, world.exit[i].origin) != 0)){
 					continue;
@@ -46,10 +50,16 @@ int main(){
 			}
 		}
 
+
 		//go
 		else if (strcmp(command1, "go") == 0){
-			for (int i = 0; i < 52; i++){
-				
+			for (int i = 0; i <= 52; i++){
+
+				if (i == 52){
+					printf("You can't do that\n");
+					break;
+				}
+
 				if ((strcmp(command2, world.exit[i].orientation) != 0) || (strcmp(world.room[*position].name, world.exit[i].origin) != 0)){
 					continue;
 					}
@@ -70,10 +80,12 @@ int main(){
 					printf("%s", world.room[*position].description);
 				}
 				break;
-			
 			}
 		}
 	
+
+
+
 	strcpy_s(command1, 6, "empty");
 	strcpy_s(command2, 6, "empty");
 	}
