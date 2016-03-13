@@ -35,7 +35,7 @@ void AskCommands(char *command1, char *command2){
 		
 		
 		if (strcmp(command1, "look") == 0){
-			strcpy_s(command1, 6, "empty");
+		
 			}
 		else if (strcmp(command1, "go") == 0){
 			printf("Where do you want to go?\n");
@@ -71,3 +71,4 @@ void AskCommands(char *command1, char *command2){
 
 
 }
+
