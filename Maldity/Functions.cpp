@@ -5,7 +5,7 @@
 void MyStrtok(char *player_input, char *command1, char *command2){
 	int i, j;
 
-	for (i = 0; player_input[i] != ' ' && player_input[i] != '\0'; i++){
+	for (i = 0; (player_input[i] != ' ' && player_input[i] != '\0'); i++){
 
 		command1[i] = player_input[i];
 	}
@@ -23,7 +23,8 @@ void MyStrtok(char *player_input, char *command1, char *command2){
 
 }
 
-void AskCommands(char *command1, char *command2){
+void AskCommands(char *command1, char *command2)
+{
 	
 
 	char player_input[20];
@@ -35,29 +36,34 @@ void AskCommands(char *command1, char *command2){
 		
 		
 		if (strcmp(command1, "look") == 0){
-		
+			strcpy_s(command2, 6, "empty");
 			}
-		else if (strcmp(command1, "go") == 0){
+		else if (strcmp(command1, "go") == 0)
+		{
 			printf("Where do you want to go?\n");
 			gets_s(command2, 10);
 		}
 
-		else if (strcmp(command1, "open") == 0){
+		else if (strcmp(command1, "open") == 0)
+		{
 			printf("What do you want to open?\n");
 			gets_s(command2, 10);
 		}
 
-		else if (strcmp(command1, "close") == 0){
+		else if (strcmp(command1, "close") == 0)
+		{
 			printf("What do you want to close?\n");
 			gets_s(command2, 10);
 		}
 
-		else if (strcmp(command1, "quit") == 0){
+		else if (strcmp(command1, "quit") == 0)
+		{
 			strcpy_s(command1, 5,"quit");
 		}
 
-		else if (strcmp(command1, "help") == 0){
-			printf("This is a Zork in construction\nValid commands are 'go', 'look', 'open', 'close', 'quit', and 'help'\n");
+		else if (strcmp(command1, "help") == 0)
+		{
+			printf("Welcome to maldity!\nUse the commands 'go' and 'look', and the cardinal directions \nto explore the map.\nIf you use only 'look', you will receive a description of your current room.\nIf you encounter a closed door, use the 'open door' command.\nUse 'close door' for close it.\nUse 'quit' if you want to exit the game.\n\n");
 			strcpy_s(command1, 6, "empty");
 		}
 

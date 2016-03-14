@@ -12,17 +12,20 @@ World::World()
 
 World::~World()
 {
-	
-	delete[] room;
-	delete[] exit;
 	delete player;
+	delete[] exit;
+	delete[] room;
 }
 
 
 
-
-void World::CreateWorld()
+void World::CreateWorld()const
 {
+
+	for (int i = 0; i < 52;i++){
+		exit[i].door = false;
+		exit[i].open = true;
+	}
 	
 	//Forest
 	strcpy_s(room[0].name, 10, "Forest");
@@ -126,7 +129,7 @@ void World::CreateWorld()
 
 	//Center
 	strcpy_s(room[4].name, 10, "Center");
-	strcpy_s(room[4].description, 300, "Gothic buildings are all around of a narrow square.\nYou can see the main road at south, and a couple of sinister alleys that go \ndeeper into the city.\nOnly the alley of the north seems a little bit safer.\nThe door of the east is widely open, but the west one needs a little push.\n");
+	strcpy_s(room[4].description, 300, "Gothic buildings are all around of a narrow square.\nYou can see the main road at south, and a couple of sinister alleys that go \ndeeper into the city.\nOnly the alley of the north seems a little bit safer.\nYou can see two doors, at west and at east.\n");
 
 	strcpy_s(exit[16].orientation, 10, "north");
 	strcpy_s(exit[17].orientation, 10, "south");
@@ -146,8 +149,10 @@ void World::CreateWorld()
 	strcpy_s(exit[16].description, 300, "The northern alley leaves the square between buildings. It seems to ascend.\n");
 	strcpy_s(exit[17].description, 300, "You can see the main road, near the sea.\n");
 	strcpy_s(exit[18].description, 300, "A little door is widely open. It seems to be a shop.\n");
-	strcpy_s(exit[19].description, 300, "The door is closed, but it looks like you can open it easily.\n");
+	strcpy_s(exit[19].description, 300, "It seems to be a door to a house.\n");
 
+	exit[19].door = true;
+	exit[19].open = false;
 
 	//Alley
 	strcpy_s(room[5].name, 10, "Alley");
@@ -171,7 +176,11 @@ void World::CreateWorld()
 	strcpy_s(exit[20].description, 300, "The alley continues ascending.\n");
 	strcpy_s(exit[21].description, 300, "The alley descends to the city center.\n");
 	strcpy_s(exit[22].description, 300, "The gothic buildings looks impressive, and the rest of the alleys,\ntoo dark to go into.\n");
-	strcpy_s(exit[23].description, 300, "The door is closed, but it looks like you can open it easily.\n");
+	strcpy_s(exit[23].description, 300, "It seems to be the door of a tavern.\n");
+
+	exit[23].door = true;
+	exit[23].open = false;
+
 
 	//Tavern
 	strcpy_s(room[6].name, 10, "Tavern");
@@ -194,13 +203,15 @@ void World::CreateWorld()
 
 	strcpy_s(exit[24].description, 300, "The tavern has no more exits than the east one.\n");
 	strcpy_s(exit[25].description, 300, "The tavern has no more exits than the east one.\n");
-	strcpy_s(exit[26].description, 300, "The door is open.\n");
+	strcpy_s(exit[26].description, 300, "This is the only door of the tavern.\n");
 	strcpy_s(exit[27].description, 300, "The tavern has no more exits than the east one.\n");
 
+	exit[26].door = true;
+	exit[26].open = true;
 
 	//Top Disctrict
 	strcpy_s(room[7].name, 10, "Top");
-	strcpy_s(room[7].description, 300, "You are in the elevated district of the city.\nYou can see a little alley at south and a enormous statue at east, beyond the\nhill.\n");
+	strcpy_s(room[7].description, 300, "You are in the elevated district of the city.\nYou can see a little alley at south and a enormous statue at east, beyond the\nfells.\n");
 
 	strcpy_s(exit[28].orientation, 10, "north");
 	strcpy_s(exit[29].orientation, 10, "south");
@@ -320,8 +331,11 @@ void World::CreateWorld()
 
 	strcpy_s(exit[44].description, 300, "The only exit is the door at the east.\n");
 	strcpy_s(exit[45].description, 300, "The only exit is the door at the east.\n");
-	strcpy_s(exit[46].description, 300, "The door is open.\n");
+	strcpy_s(exit[46].description, 300, "This is the only exit of the old house.\n");
 	strcpy_s(exit[47].description, 300, "The only exit is the door at the east.\n");
+
+	exit[46].door = true;
+	exit[46].open = true;
 
 
 	//Shop
