@@ -3,9 +3,6 @@
 
 Created by [Carlos Cabreira](https://github.com/carcasanchez/Maldity)
 
-
-Redesigning code and porting to C++
-
 Current version: [v0.2](https://github.com/carcasanchez/Maldity/releases/tag/v0.2)
 
 Now you can explore the whole map! 
