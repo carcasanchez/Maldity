@@ -15,7 +15,7 @@ Use 'open door' if you find a closed door, or 'close door' if you want to close 
 
 Use 'help' to see the controls and 'quit' if you want to finish the game.
 
-
+Don't use capital letters! Write all commands in lower ones.
 
 See the [Maldity Wiki](https://github.com/carcasanchez/Maldity/wiki/Maldity:-Sea's-silence)
 
