@@ -228,7 +228,7 @@ void World::CreateWorld()const
 	strcpy_s(exit[30].destination, 10, "Fells");
 	strcpy_s(exit[31].destination, 10, "empty");
 
-	strcpy_s(exit[28].description, 300, "The city is surrounded by a chain of old fells.\nThe woody mountains looks dark and threatening.\n");
+	strcpy_s(exit[28].description, 300, "The city is surrounded by a chain of old fells.\nThe woody mountain looks dark and threatening.\n");
 	strcpy_s(exit[29].description, 300, "You can see the alley descending to the city.\n");
 	strcpy_s(exit[30].description, 300, "Between dark and high trees, you can see a enormous statue.\n");
 	strcpy_s(exit[31].description, 300, "The city is surrounded by a chain of old fells.\nThe woody mountains looks dark and threatening.\n");

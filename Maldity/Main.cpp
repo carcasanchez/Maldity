@@ -1,9 +1,11 @@
 #include "World.h"
 
-World world;
+
 
 int main(){
-	
+
+	World world;
+
 	char command1[10] = "empty";
 	char command2[10] = "empty";
 	int *position=nullptr;
@@ -126,6 +128,8 @@ int main(){
 					}
 					break;
 				}
+
+				if (i == 51) printf("There's no door here.\n");
 			}
 		}
 
@@ -145,15 +149,19 @@ int main(){
 						world.exit[i].open = false;
 					}
 					
-					else
+					else 
 					{
 						printf("The door is already closed\n");
 						
 					}
 					break;
 				}
+				if (i == 51) printf("There's no door here.\n");
 			}
+			
 		}
+
+		else printf("You have entered an invalid command.\n");
 
 
 

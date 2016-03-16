@@ -21,4 +21,6 @@ See the [Maldity Wiki](https://github.com/carcasanchez/Maldity/wiki/Maldity:-Sea
 
 and the [Maldity Web](http://carcasanchez.github.io/Maldity)
 
-for more information
+for more information.
+
+P.S. for Ricard: the two Revert commits are errors, please, don't mind them.

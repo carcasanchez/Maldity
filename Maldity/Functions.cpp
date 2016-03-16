@@ -2,7 +2,7 @@
 #include "World.h"
 #define _CRT_SECURE_NO_WARNINGS
 
-void MyStrtok(char *player_input, char *command1, char *command2){
+void MyStrtok(const char *player_input, char *command1, char *command2){
 	int i, j;
 
 	for (i = 0; (player_input[i] != ' ' && player_input[i] != '\0'); i++){
@@ -63,7 +63,7 @@ void AskCommands(char *command1, char *command2)
 
 		else if (strcmp(command1, "help") == 0)
 		{
-			printf("Welcome to maldity!\nUse the commands 'go' and 'look', and the cardinal directions \nto explore the map.\nIf you use only 'look', you will receive a description of your current room.\nIf you encounter a closed door, use the 'open door' command.\nUse 'close door' for close it.\nUse 'quit' if you want to exit the game.\n\n");
+			printf("Welcome to Maldity!\nUse the commands 'go' and 'look', and the cardinal directions \nto explore the map.\nIf you use only 'look', you will receive a description of your current room.\nIf you encounter a closed door, use the 'open door' command.\nUse 'close door' for close it.\nUse 'quit' if you want to exit the game.\n\n");
 			strcpy_s(command1, 6, "empty");
 		}
 
