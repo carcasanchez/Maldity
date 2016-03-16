@@ -3,7 +3,7 @@
 
 Created by [Carlos Cabreira](https://github.com/carcasanchez/Maldity)
 
-Current version: [v0.2](https://github.com/carcasanchez/Maldity/releases/tag/v0.2)
+Current version: [v0.2.1](https://github.com/carcasanchez/Maldity/releases/tag/v0.2.1)
 
 Now you can explore the whole map! 
 
