@@ -1,19 +1,26 @@
 #include "World.h"
 
 
-
 int main(){
+	World* world = nullptr;
+	world = new World;
 
-	World world;
+	world->CreateWorld();
+
+	printf("%s", world->room[0].description.C_str());
+
+	getchar();
+
+	/*
 
 	char command1[10] = "empty";
 	char command2[10] = "empty";
 	int *position=nullptr;
 
-	world.CreateWorld();
-	position = &world.player->position;
+	world->CreateWorld();
+	position = &world->player->position;
 
-	printf("%s", world.room[*position].description);
+	printf("%s", world->room[*position].description);
 
 	while (1){
 		
@@ -25,6 +32,7 @@ int main(){
 			
 
 		//quit
+
 		if (strcmp(command1, "quit") == 0)
 		{
 			return 0;
@@ -34,32 +42,7 @@ int main(){
 		//look
 		else if (strcmp(command1, "look") == 0)
 		{
-			if (strcmp(command2, "empty") == 0)
-				printf("%s", world.room[*position].description);
-
-			else for (int i = 0; i <= 52; i++){
-
-				if (i == 52){
-					printf("You can't do that\n");
-					break;
-				}
-
-				if ((strcmp(command2, world.exit[i].orientation) != 0) || (strcmp(world.room[*position].name, world.exit[i].origin) != 0)){
-					continue;
-
-				}
-
-				printf("%s", world.exit[i].description);
-				
-				if (world.exit[i].door)
-				{
-					if (world.exit[i].open)
-						printf("The door is open.\n");
-					else printf("The door is closed.\n");
-				}
-				
-				break;
-			}
+			world.Look(command1, command2);
 		}
 
 
@@ -79,8 +62,8 @@ int main(){
 				{
 					continue;
 				}
-				
-				
+
+
 				if (strcmp(world.exit[i].destination, "empty") == 0)
 					printf("%s", world.exit[i].description);
 				else if (world.exit[i].door == true && world.exit[i].open == false)
@@ -93,7 +76,7 @@ int main(){
 					int j = 0;
 					for (j = 0; j < 52; j++)
 					{
-						if (strcmp(world.room[j].name, world.exit[i].destination)!=0)
+						if (strcmp(world.room[j].name, world.exit[i].destination) != 0)
 						{
 							continue;
 						}
@@ -170,5 +153,5 @@ int main(){
 	strcpy_s(command2, 6, "empty");
 	}
 
-
+	*/
 }

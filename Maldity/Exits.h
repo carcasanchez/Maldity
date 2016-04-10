@@ -1,10 +1,14 @@
 #ifndef __EXITS_H__
 #define __EXITS_H__
-struct Exits{
-	char origin[10];
-	char destination[10];
-	char description[300];
+#include"Entity.h"
+
+class Exits:public Entity{
+public:
+	String origin;
+	String description;
+	String destination;
+	String orientation;
 	bool door, open;
-	char orientation[10];
+	
 };
 #endif

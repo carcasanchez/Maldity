@@ -8,7 +8,7 @@
 #include "Rooms.h"
 #include "Player.h"
 #include "Exits.h"
-#include "Functions.h"
+#include "MyString.h"
 
 class World{
 public:
@@ -19,10 +19,12 @@ public:
 	World();
 	~World();
 
-
+	//void Look(const char *command1, const char *command2);
 	void CreateWorld()const;
 	
 };
+
+extern World* world;
 
 #endif
 	

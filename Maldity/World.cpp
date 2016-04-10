@@ -16,21 +16,52 @@ World::~World()
 	delete[] exit;
 	delete[] room;
 }
+/*
+void World::Look(const char *command1, const char *command2){
 
+	if (strcmp(command2, "empty") == 0)
+		printf("%s", room[player->position].description);
 
+	else for (int i = 0; i <= 52; i++){
 
+		if (i == 52){
+			printf("You can't do that\n");
+			break;
+		}
+
+		if ((strcmp(command2, exit[i].orientation) != 0) || (strcmp(room[player->position].name, exit[i].origin) != 0)){
+			continue;
+
+		}
+
+		printf("%s", exit[i].description);
+
+		if (exit[i].door)
+		{
+			if (exit[i].open)
+				printf("The door is open.\n");
+			else printf("The door is closed.\n");
+		}
+
+		break;
+	}
+
+}
+*/
 void World::CreateWorld()const
 {
-
+	/*
 	for (int i = 0; i < 52;i++){
 		exit[i].door = false;
 		exit[i].open = true;
-	}
+	}*/
 	
 	//Forest
-	strcpy_s(room[0].name, 10, "Forest");
-	strcpy_s(room[0].description, 300, "You are in a forest. \nAt south, you see that the road drives to a city. \nAt west, a high hill. \nAt north, the road vanishes in the distance. \nAt east, only the sea.\n");
-	
+	String a = "forest";
+
+	room[0].name= a;
+	room[0].description= "You are in a forest. \nAt south, you see that the road drives to a city. \nAt west, a high hill. \nAt north, the road vanishes in the distance. \nAt east, only the sea.\n";
+	/*
 	strcpy_s(exit[0].orientation, 10, "north");
 	strcpy_s(exit[1].orientation, 10, "south");
 	strcpy_s(exit[2].orientation, 10, "east");
@@ -361,7 +392,8 @@ void World::CreateWorld()const
 	strcpy_s(exit[48].description, 300, "The only exit is the door at the west.\n");
 	strcpy_s(exit[50].description, 300, "The only exit is the door at the west.\n");
 	strcpy_s(exit[51].description, 300, "You can see the city center from the interior of the shop.\n");
-
+	
 	player->position = 0;
+	player->name = "Jasna";*/
 }
 

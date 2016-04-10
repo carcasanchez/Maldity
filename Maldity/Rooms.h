@@ -1,12 +1,11 @@
 #ifndef __ROOMS_H__
 #define __ROOMS_H__
+#include"Entity.h"
 
-struct Room{
-
-	char name[15];
-	char description[300];
-
-
+class Room:public Entity{
+public:
+	String name;
+	String description;
 };
 
 #endif
