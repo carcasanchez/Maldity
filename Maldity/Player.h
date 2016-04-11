@@ -8,6 +8,10 @@ class Player: public Entity{
 public:
 	int position;
 	
+	
+	void Go(const String& dest);
+
+
 };
 
 #endif 

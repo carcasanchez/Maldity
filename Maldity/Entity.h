@@ -6,6 +6,9 @@ class Entity{
 public:
 	String name;
 	String description;
+
+
+	
 	virtual void Look(){};
 	
 

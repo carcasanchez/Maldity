@@ -1,4 +1,5 @@
 #include "World.h"
+#include "Player.h"
 
 
 int main(){
@@ -30,18 +31,25 @@ int main(){
 			command3 = player_input.Strtok(' ', 3);
 			command4 = player_input.Strtok(' ', 4);
 
-			if (player_input.Compare("quit") && command2.Empty())
-				break;
+			
 
+
+			if (player_input.Compare("quit"))
+				break;
+			
 			else if (command1.Compare("look"))
 			{ 
-				if(command2.Empty());
-				world->Look();
+				if(command2.Empty())
+					world->Look();
 			}
 
 			else if (command1.Compare("go"))
 			{
+				if (command2.Empty())
+					printf("Where do you want to go?\n");
+					scanf_s("%s", command2);
 
+					world->player->Go(command2);
 			}
 			
 			else printf("%s", "You have entered an invalid command.\n");

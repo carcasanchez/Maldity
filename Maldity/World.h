@@ -6,9 +6,11 @@
 #include <string.h>
 #include <iostream>
 #include "Rooms.h"
-#include "Player.h"
 #include "Exits.h"
 #include "MyString.h"
+
+
+class Player;
 
 class World{
 public:
@@ -19,7 +21,6 @@ public:
 	World();
 	~World();
 
-	//void Look(const char *command1, const char *command2);
 	void CreateWorld()const;
 	void Look()const;
 	
