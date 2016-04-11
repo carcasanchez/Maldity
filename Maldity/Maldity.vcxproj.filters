@@ -30,6 +30,9 @@
     <ClCompile Include="MyString.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="Exits.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">

@@ -188,15 +188,17 @@ char* String::Strtok(const char character, const int num_word)const
 	for (i = 0, j = 0, num_char = 0; i < len; i++)
 	{
 
+		if ((buffer[i] == character) || (buffer[i] == NULL))
+		{
+		num_char++;
+		i++;
+		}
+
 		if (num_char == num_word - 1)
 		{
 			temp[j] = buffer[i];
 			j++;
 		}
-
-		if ((buffer[i] == character) || (buffer[i] == NULL))
-			num_char++;
-
 	}
 	temp[j] = '\0';
 

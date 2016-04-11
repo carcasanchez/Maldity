@@ -61,7 +61,7 @@ void World::CreateWorld()const
 	//Forest
 	
 
-	room[0].name = "forest";
+	room[0].name = "Forest";
 	room[0].description= "You are in a forest. \nAt south, you see that the road drives to a city. \nAt west, a high hill. \nAt north, the road vanishes in the distance. \nAt east, only the sea.\n";
 	
 	exit[0].orientation="north";

@@ -7,6 +7,7 @@ int main(){
 	world = new World;
 
 	int *player_pos = &world->player->position;
+	char temp[20];
 	String player_input;
 	String command1;
 	String command2;
@@ -15,7 +16,7 @@ int main(){
 
 
 	world->CreateWorld();
-
+	
 	
 	while (player_input.Compare("quit")==false)
 	{
@@ -24,8 +25,10 @@ int main(){
 		while (1)
 		{	
 			printf("\n");
-			scanf_s("%s", player_input);  ///NEEDS REVISION
-			
+			gets_s(temp, 20);  ///NEEDS REVISION
+		
+			player_input = temp;
+
 			command1 = player_input.Strtok(' ', 1);
 			command2 = player_input.Strtok(' ', 2);
 			command3 = player_input.Strtok(' ', 3);
@@ -37,23 +40,43 @@ int main(){
 			if (player_input.Compare("quit"))
 				break;
 			
+
 			else if (command1.Compare("look"))
 			{ 
+				//Look the room
 				if(command2.Empty())
 					world->Look();
+				//Look the exits
+				else if (command3.Empty())
+				{
+					for (int i = 0; i < 52;i++)
+					if (world->exit[i].orientation.Compare(command2)
+						&& world->exit[i].origin.Compare(world->room[*player_pos].name.C_str()))
+					{
+						world->exit[i].Look();
+						break;
+					}
+				}
 			}
+
+
+
 
 			else if (command1.Compare("go"))
 			{
 				if (command2.Empty())
 					printf("Where do you want to go?\n");
-					scanf_s("%s", command2);
+				scanf_s("%s", command2);
 
-					world->player->Go(command2);
+				//	world->player->Go(command2);
 			}
-			
-			else printf("%s", "You have entered an invalid command.\n");
 
+			else if (player_input.Compare("help"))
+				printf("Welcome to Maldity!\nUse the command 'look' for receive a description of the current room.\nCombine it with 'north', 'south', 'east' and 'west' to receive descriptions \nof the exits.	\nUse 'go' and 'north', 'south', 'east' and 'west' to move between rooms. \nUse 'open door' if you find a closed door, or 'close door' if you want to close it.\nUse 'help' to see the controls and 'quit' if you want to finish the game.");
+
+			else printf("You can't do that.\n");
+
+			
 			fflush(stdin);
 
 		}
@@ -204,5 +227,6 @@ int main(){
 	*/
 	}
 
+	
 	return 0;
 }
