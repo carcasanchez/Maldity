@@ -21,6 +21,7 @@ public:
 
 	//void Look(const char *command1, const char *command2);
 	void CreateWorld()const;
+	void Look()const;
 	
 };
 

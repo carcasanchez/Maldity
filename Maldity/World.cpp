@@ -16,10 +16,11 @@ World::~World()
 	delete[] exit;
 	delete[] room;
 }
-/*
-void World::Look(const char *command1, const char *command2){
 
-	if (strcmp(command2, "empty") == 0)
+void World::Look()const{
+
+	printf("%s", room[player->position].description);
+	/*if (strcmp(command2, "empty") == 0)
 		printf("%s", room[player->position].description);
 
 	else for (int i = 0; i <= 52; i++){
@@ -45,94 +46,94 @@ void World::Look(const char *command1, const char *command2){
 
 		break;
 	}
-
-}
 */
+}
+
 void World::CreateWorld()const
 {
-	/*
+	
 	for (int i = 0; i < 52;i++){
 		exit[i].door = false;
 		exit[i].open = true;
-	}*/
+	}
 	
 	//Forest
-	String a = "forest";
-
-	room[0].name= a;
-	room[0].description= "You are in a forest. \nAt south, you see that the road drives to a city. \nAt west, a high hill. \nAt north, the road vanishes in the distance. \nAt east, only the sea.\n";
-	/*
-	strcpy_s(exit[0].orientation, 10, "north");
-	strcpy_s(exit[1].orientation, 10, "south");
-	strcpy_s(exit[2].orientation, 10, "east");
-	strcpy_s(exit[3].orientation, 10, "west");
 	
-	strcpy_s(exit[0].origin, 10, "Forest");
-	strcpy_s(exit[1].origin, 10, "Forest");
-	strcpy_s(exit[2].origin, 10, "Forest");
-	strcpy_s(exit[3].origin, 10, "Forest");
 
-	strcpy_s(exit[0].destination, 10, "empty");
-	strcpy_s(exit[1].destination, 10, "Road");
-	strcpy_s(exit[2].destination, 10, "empty");
-	strcpy_s(exit[3].destination, 10, "empty");
+	room[0].name = "forest";
+	room[0].description= "You are in a forest. \nAt south, you see that the road drives to a city. \nAt west, a high hill. \nAt north, the road vanishes in the distance. \nAt east, only the sea.\n";
+	
+	exit[0].orientation="north";
+	exit[1].orientation= "south";
+	exit[2].orientation= "east";
+	exit[3].orientation= "west";
+	
+	exit[0].origin= "Forest";
+	exit[1].origin = "Forest";
+	exit[2].origin = "Forest";
+	exit[3].origin = "Forest";
 
-	strcpy_s(exit[0].description, 300, "The road vanishes in the distance.\nBetter no to follow it.\n");
-	strcpy_s(exit[1].description, 300, "The road follows the coast and approaches to the village.\n");
-	strcpy_s(exit[2].description, 300, "The sea looks grey and unpeaceful.\n");
-	strcpy_s(exit[3].description, 300, "You can't go on that direction.\nThe hill is too high.\n");
+	exit[0].destination= "";
+	exit[1].destination= "Road";
+	exit[2].destination= "";
+	exit[3].destination= "";
+	
+	exit[0].description= "The road vanishes in the distance.\nBetter no to follow it.\n";
+	exit[1].description= "The road follows the coast and approaches to the village.\n";
+	exit[2].description= "The sea looks grey and unpeaceful.\n";
+	exit[3].description= "You can't go on that direction.\nThe hill is too high.\n";
 
 
 	//Road
-	strcpy_s(room[1].name, 10, "Road");
-	strcpy_s(room[1].description, 300, "You are in a high road. \nAt north, there's a mass of gothic buildings. \nAt south, the sea, and a small beach. \nAt west, a way to a big dock. \nAt east, the road that drives to the forest\n");
+	room[1].name= "Road";
+	room[1].description= "You are in a high road. \nAt north, there's a mass of gothic buildings. \nAt south, the sea, and a small beach. \nAt west, a way to a big dock. \nAt east, the road that drives to the forest\n";
 	
-	strcpy_s(exit[4].orientation, 10, "north");
-	strcpy_s(exit[5].orientation, 10, "south");
-	strcpy_s(exit[6].orientation, 10, "east");
-	strcpy_s(exit[7].orientation, 10, "west");
+	exit[4].orientation= "north";
+	exit[5].orientation= "south";
+	exit[6].orientation= "east";
+	exit[7].orientation= "west";
 
-	strcpy_s(exit[4].origin, 10, "Road");
-	strcpy_s(exit[5].origin, 10, "Road");
-	strcpy_s(exit[6].origin, 10, "Road");
-	strcpy_s(exit[7].origin, 10, "Road");
+	exit[4].origin= "Road";
+	exit[5].origin= "Road";
+	exit[6].origin = "Road";
+	exit[7].origin = "Road";
 
-	strcpy_s(exit[4].destination, 10, "Center");
-	strcpy_s(exit[5].destination, 10, "Beach");
-	strcpy_s(exit[6].destination, 10, "Forest");
-	strcpy_s(exit[7].destination, 10, "Dock");
+	exit[4].destination= "Center";
+	exit[5].destination= "Beach";
+	exit[6].destination= "Forest";
+	exit[7].destination= "Dock";
 
-	strcpy_s(exit[4].description, 300, "The alleys seem to drive to the city center.\n");
-	strcpy_s(exit[5].description, 300, "Narrow stairs sculpted in rock descends to the beach.\n");
-	strcpy_s(exit[6].description, 300, "The road leaves the city and follows the coast.\n");
-	strcpy_s(exit[7].description, 300, "At the distance, you can see numerous boat masts.\n");
+	exit[4].description= "The alleys seem to drive to the city center.\n";
+	exit[5].description= "Narrow stairs sculpted in rock descends to the beach.\n";
+	exit[6].description= "The road leaves the city and follows the coast.\n";
+	exit[7].description= "At the distance, you can see numerous boat masts.\n";
 
 
 	//Beach
-	strcpy_s(room[2].name, 10, "Beach");
-	strcpy_s(room[2].description, 300, "The beach is small and it's full of rocks\nYou can only see the main road, at north, and the wide open sea, at south.\n");
+	room[2].name= "Beach";
+	room[2].description= "The beach is small and it's full of rocks\nYou can only see the main road, at north, and the wide open sea, at south.\n";
 	
-	strcpy_s(exit[8].orientation, 10, "north");
-	strcpy_s(exit[9].orientation, 10, "south");
-	strcpy_s(exit[10].orientation, 10, "east");
-	strcpy_s(exit[11].orientation, 10, "west");
+	exit[8].orientation= "north";
+	exit[9].orientation= "south";
+	exit[10].orientation= "east";
+	exit[11].orientation= "west";
 
-	strcpy_s(exit[8].origin, 10, "Beach");
-	strcpy_s(exit[9].origin, 10, "Beach");
-	strcpy_s(exit[10].origin, 10, "Beach");
-	strcpy_s(exit[11].origin, 10, "Beach");
+	exit[8].origin= "Beach";
+	exit[9].origin= "Beach";
+	exit[10].origin= "Beach";
+	exit[11].origin= "Beach";
 
-	strcpy_s(exit[8].destination, 10, "Road");
-	strcpy_s(exit[9].destination, 10, "empty");
-	strcpy_s(exit[10].destination, 10, "empty");
-	strcpy_s(exit[11].destination, 10, "empty");
+	exit[8].destination= "Road";
+	exit[9].destination= "";
+	exit[10].destination= "";
+	exit[11].destination= "";
 
-	strcpy_s(exit[8].description, 300, "The stairs go back to the road\n");
-	strcpy_s(exit[9].description, 300, "You look at the sea. The horizon is cloudy, and the water, grey.\nYou feel a little relief for stay in land,\nbut the cold and ferocious wind spreads it.\n");
-	strcpy_s(exit[10].description, 300, "The rocks are too abrupt to walk over them.\n");
-	strcpy_s(exit[11].description, 300, "The rocks are too abrupt to walk over them.\n");
+	exit[8].description= "The stairs go back to the road\n";
+	exit[9].description= "You look at the sea. The horizon is cloudy, and the water, grey.\nYou feel a little relief for stay in land,\nbut the cold and ferocious wind spreads it.\n";
+	exit[10].description= "The rocks are too abrupt to walk over them.\n";
+	exit[11].description= "The rocks are too abrupt to walk over them.\n";
 	
-
+	/*
 	//Dock
 	strcpy_s(room[3].name, 10, "Dock");
 	strcpy_s(room[3].description, 300, "The dock is really impressive.\nThere are enourmous woody ships in all directions except for the east.\n");
@@ -392,8 +393,8 @@ void World::CreateWorld()const
 	strcpy_s(exit[48].description, 300, "The only exit is the door at the west.\n");
 	strcpy_s(exit[50].description, 300, "The only exit is the door at the west.\n");
 	strcpy_s(exit[51].description, 300, "You can see the city center from the interior of the shop.\n");
-	
+	*/
 	player->position = 0;
-	player->name = "Jasna";*/
+	player->name = "Jasna";
 }
 

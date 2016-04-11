@@ -54,14 +54,14 @@ bool String::Empty()const
 bool String::Compare(const char* str)const
 {
 
-	return (strcmp(buffer, str) == 0);
+	return (_strcmpi(buffer, str) == 0);
 
 }
 
 bool String::Compare(const String& str)const
 {
 
-	return (strcmp(buffer, str.buffer) == 0);
+	return (_strcmpi(buffer, str.buffer) == 0);
 
 }
 

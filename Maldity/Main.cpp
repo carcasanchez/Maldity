@@ -5,12 +5,52 @@ int main(){
 	World* world = nullptr;
 	world = new World;
 
+	int *player_pos = &world->player->position;
+	String player_input;
+	String command1;
+	String command2;
+	String command3;
+	String command4;
+
+
 	world->CreateWorld();
 
-	printf("%s", world->room[0].description.C_str());
+	
+	while (player_input.Compare("quit")==false)
+	{
+		printf("%s", world->room[*player_pos].description.C_str());
+	
+		while (1)
+		{	
+			printf("\n");
+			scanf_s("%s", player_input);  ///NEEDS REVISION
+			
+			command1 = player_input.Strtok(' ', 1);
+			command2 = player_input.Strtok(' ', 2);
+			command3 = player_input.Strtok(' ', 3);
+			command4 = player_input.Strtok(' ', 4);
 
-	getchar();
+			if (player_input.Compare("quit") && command2.Empty())
+				break;
 
+			else if (command1.Compare("look"))
+			{ 
+				if(command2.Empty());
+				world->Look();
+			}
+
+			else if (command1.Compare("go"))
+			{
+
+			}
+			
+			else printf("%s", "You have entered an invalid command.\n");
+
+			fflush(stdin);
+
+		}
+
+		
 	/*
 
 	char command1[10] = "empty";
@@ -154,4 +194,7 @@ int main(){
 	}
 
 	*/
+	}
+
+	return 0;
 }
