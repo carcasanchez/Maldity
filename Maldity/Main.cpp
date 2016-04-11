@@ -68,7 +68,7 @@ int main(){
 					printf("Where do you want to go?\n");
 				scanf_s("%s", command2);
 
-				//	world->player->Go(command2);
+				world->player->Go(command2);
 			}
 
 			else if (player_input.Compare("help"))

@@ -9,7 +9,7 @@ public:
 	int position;
 	
 	
-	//void Go(const String& dest);
+	void Go(const String& dest);
 
 
 };

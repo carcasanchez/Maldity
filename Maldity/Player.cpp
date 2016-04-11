@@ -1,4 +1,4 @@
-/*#include "World.h"
+#include "World.h"
 #include "Player.h"
 
 
@@ -16,4 +16,4 @@ void Player::Go(const String& dest)
 			}
 		}
 
-}*/
+}
