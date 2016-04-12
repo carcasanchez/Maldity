@@ -21,33 +21,7 @@ World::~World()
 void World::Look()const{
 
 	printf("%s", room[player->position].description);
-	/*if (strcmp(command2, "empty") == 0)
-		printf("%s", room[player->position].description);
-
-	else for (int i = 0; i <= 52; i++){
-
-		if (i == 52){
-			printf("You can't do that\n");
-			break;
-		}
-
-		if ((strcmp(command2, exit[i].orientation) != 0) || (strcmp(room[player->position].name, exit[i].origin) != 0)){
-			continue;
-
-		}
-
-		printf("%s", exit[i].description);
-
-		if (exit[i].door)
-		{
-			if (exit[i].open)
-				printf("The door is open.\n");
-			else printf("The door is closed.\n");
-		}
-
-		break;
-	}
-*/
+	
 }
 
 void World::CreateWorld()const
@@ -188,8 +162,8 @@ void World::CreateWorld()const
 	exit[19].open = false;
 
 	//Alley
-	room[5].name, 10, "Alley";
-	room[5].description, 300, "The narrow alley goes up from the city center.\nThere's a small door that have a 'Tavern' placard at your left.\nThe alley continues ascending to the north.\n";
+	room[5].name= "Alley";
+	room[5].description= "The narrow alley goes up from the city center.\nThere's a small door that have a 'Tavern' placard at your left.\nThe alley continues ascending to the north.\n";
 	
 	exit[20].orientation= "north";
 	exit[21].orientation = "south";
@@ -272,9 +246,9 @@ void World::CreateWorld()const
 	room[8].description = "The fells are surrounded by dark trees. The enourmous statue rises over them.";
 
 	exit[32].orientation = "north";
-	exit[33].orientation, 10, "south";
-	exit[34].orientation, 10, "east";
-	exit[35].orientation, 10, "west";
+	exit[33].orientation = "south";
+	exit[34].orientation = "east";
+	exit[35].orientation = "west";
 
 	exit[32].origin = "Fells";
 	exit[33].origin = "Fells";
@@ -357,10 +331,10 @@ void World::CreateWorld()const
 	exit[46].origin = "House";
 	exit[47].origin = "House";
 
-	exit[44].destination = "empty";
-	exit[45].destination = "empty";
+	exit[44].destination = "";
+	exit[45].destination = "";
 	exit[46].destination = "Center";
-	exit[47].destination = "empty";
+	exit[47].destination = "";
 
 	exit[44].description = "The only exit is the door at the east.\n";
 	exit[45].description = "The only exit is the door at the east.\n";
@@ -372,8 +346,8 @@ void World::CreateWorld()const
 
 
 	//Shop
-	room[12].name, 10, "Shop";
-	room[12].description, 300, "Compared to the rest of the city, the shop looks miserable.\nIt's impossible to determine what is sold here.\n";
+	room[12].name = "Shop";
+	room[12].description = "Compared to the rest of the city, the shop looks miserable.\nIt's impossible to determine what is sold here.\n";
 	
 	exit[48].orientation = "north";
 	exit[49].orientation = "south";
@@ -385,9 +359,9 @@ void World::CreateWorld()const
 	exit[50].origin = "Shop";
 	exit[51].origin = "Shop";
 
-	exit[48].destination =  "empty";
-	exit[49].destination = "empty";
-	exit[50].destination = "empty";
+	exit[48].destination =  "";
+	exit[49].destination = "";
+	exit[50].destination = "";
 	exit[51].destination = "Center";
 
 	exit[48].description = "The only exit is the door at the west.\n";

@@ -1,9 +1,10 @@
 #include "World.h"
 #include "Player.h"
 
+World* world = nullptr;
 
 int main(){
-	World* world = nullptr;
+	
 	world = new World;
 
 	int *player_pos = &world->player->position;
@@ -36,11 +37,11 @@ int main(){
 
 			
 
-
+			//QUIT
 			if (player_input.Compare("quit"))
 				break;
 			
-
+			//LOOK
 			else if (command1.Compare("look"))
 			{ 
 				//Look the room
@@ -49,31 +50,77 @@ int main(){
 				//Look the exits
 				else if (command3.Empty())
 				{
-					for (int i = 0; i < 52;i++)
-					if (world->exit[i].orientation.Compare(command2)
-						&& world->exit[i].origin.Compare(world->room[*player_pos].name.C_str()))
-					{
-						world->exit[i].Look();
-						break;
-					}
+					int i;
+					for (i = 0; i < 52;i++)
+						if (world->exit[i].orientation.Compare(command2)
+							&& world->exit[i].origin.Compare(world->room[*player_pos].name.C_str()))
+						{
+							world->exit[i].Look();
+							break;
+						}
+					if (i == 52)
+						printf("You can't do that.\n");
+					
 				}
 			}
 
 
 
-
-			else if (command1.Compare("go"))
+			//GO
+			else if (command1.Compare("go") && command3.Empty())
 			{
 				if (command2.Empty())
+				{
 					printf("Where do you want to go?\n");
-				scanf_s("%s", command2);
+					scanf_s("%s", command2);
+				}
+					
+				if (world->player->Go(command2))
+					break;
+				
+			}
+			//OPEN
+			else if (command1.Compare("open") && command3.Empty())
+			{
+				if (command2.Empty())
+				{ 
+					printf("What do you want to open?\n");
+					scanf_s("%s", command2);
+				}	
 
-				world->player->Go(command2);
+				if (command2.Compare("door"))
+				{
+					
+					world->exit[*player_pos].Open();
+				}
+
+				else printf("You can't do that.\n");
 			}
 
-			else if (player_input.Compare("help"))
-				printf("Welcome to Maldity!\nUse the command 'look' for receive a description of the current room.\nCombine it with 'north', 'south', 'east' and 'west' to receive descriptions \nof the exits.	\nUse 'go' and 'north', 'south', 'east' and 'west' to move between rooms. \nUse 'open door' if you find a closed door, or 'close door' if you want to close it.\nUse 'help' to see the controls and 'quit' if you want to finish the game.");
 
+			//CLOSE
+			else if (command1.Compare("close") && command3.Empty())
+			{
+				if (command2.Empty())
+				{
+					printf("What do you want to close?\n");
+					scanf_s("%s", command2);
+				}
+
+				if (command2.Compare("door"))
+				{
+
+					world->exit[*player_pos].Close();
+				}
+
+				else printf("You can't do that.\n");
+			}
+
+			//HELP
+			else if (player_input.Compare("help"))
+				printf("Welcome to Maldity!\nUse the command 'look' for receive a description of the current room.\nCombine it with 'north', 'south', 'east' and 'west' to receive descriptions \nof the exits.	\nUse 'go' and 'north', 'south', 'east' and 'west' to move between rooms. \nUse 'open door' if you find a closed door, or 'close door' if you want to close it.\nUse 'help' to see the controls and 'quit' if you want to finish the game.\n");
+
+			//INVALID COMMAND
 			else printf("You can't do that.\n");
 
 			
@@ -81,7 +128,7 @@ int main(){
 
 		}
 
-		
+		system("cls");
 	/*
 
 	char command1[10] = "empty";
