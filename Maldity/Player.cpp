@@ -35,3 +35,56 @@ bool Player::Go(const String& dest)
 		printf("You can't do that.\n");
 		return false;
 }
+
+
+void Player::Open(const String& direction)
+{
+	int i;
+	for (i = 0; i < 52;i++)
+		if (world->exit[i]->origin.Compare(world->room[position]->name.C_str())
+			&& world->exit[i]->orientation.Compare(direction))
+		{	
+			if (world->exit[i]->door == false)
+				printf("There's no door on that direction.\n");
+
+			else if (world->exit[i]->open)
+				printf("The door is already open.\n");
+
+			else if (world->exit[i]->open == false)
+			{ 
+				printf("You open the door at %s.\n", direction.C_str());
+				world->exit[i]->open = true;
+			}	
+			break;
+		}
+
+	if (i==52) printf("That's not a direction.\n");
+
+}
+
+void Player::Close(const String& direction)
+{
+	int i;
+	for (i = 0; i < 52; i++)
+		if (world->exit[i]->origin.Compare(world->room[position]->name.C_str())
+			&& world->exit[i]->orientation.Compare(direction))
+		{
+			if (world->exit[i]->door == false)
+				printf("There's no door on that direction.\n");
+
+			else if (world->exit[i]->open==false)
+				printf("The door is already closed.\n");
+
+			else if (world->exit[i]->open)
+			{
+				printf("You close the door at %s.\n", direction.C_str());
+				world->exit[i]->open = false;
+			}
+			break;
+		}
+
+	if (i == 52) printf("That's not a direction.\n");
+
+
+
+}

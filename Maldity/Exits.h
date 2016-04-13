@@ -11,8 +11,7 @@ public:
 	bool door, open;
 	
 	void Look()const;
-    void Open();
-	void Close();
+
 
 };
 #endif

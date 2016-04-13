@@ -10,7 +10,8 @@ public:
 	
 	
 	bool Go(const String& dest);
-
+	void Open(const String& direction);
+	void Close(const String& direction);
 
 };
 

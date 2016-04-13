@@ -13,16 +13,3 @@ void Exits::Look()const
 	
 }
 
-void Exits::Open()
-{
-
-
-
-}
-
-void Exits::Close()
-{
-
-
-
-}

@@ -151,11 +151,14 @@ void World::CreateWorld()
 
 	exit[16]->description = "The northern alley leaves the square between buildings. It seems to ascend.\n";
 	exit[17]->description = "You can see the main road, near the sea.\n";
-	exit[18]->description = "A little door is widely open. It seems to be a shop.\n";
+	exit[18]->description = "It seems to be the entrance a shop.\n";
 	exit[19]->description = "It seems to be a door to a house.\n";
 
+	exit[18]->door = true;
+	exit[18]->open = false;
 	exit[19]->door = true;
 	exit[19]->open = false;
+
 
 	//Alley
 

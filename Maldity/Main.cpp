@@ -35,10 +35,10 @@ int main(){
 			command3 = player_input.Strtok(' ', 3);
 			command4 = player_input.Strtok(' ', 4);
 
-			
+			if (player_input.Empty()){}
 
 			//QUIT
-			if (player_input.Compare("quit"))
+			else if (player_input.Compare("quit"))
 				break;
 			
 			//LOOK
@@ -80,38 +80,56 @@ int main(){
 				
 			}
 			//OPEN
-			else if (command1.Compare("open") && command3.Empty())
+			else if (command1.Compare("open") && command4.Empty())
 			{
 				if (command2.Empty())
 				{ 
 					printf("What do you want to open?\n");
 					scanf_s("%s", command2);
+					
 				}	
 
 				if (command2.Compare("door"))
 				{
+					printf("Where is the door do you want to open?\n");
+
+					scanf_s("%s", command3);
 					
-					world->exit[*player_pos]->Open();
+
+					world->player->Open(command3);
 				}
+				else if (command3.Compare("door"))
+					world->player->Open(command2);
+
+
 
 				else printf("You can't do that.\n");
 			}
 
 
 			//CLOSE
-			else if (command1.Compare("close") && command3.Empty())
+			else if (command1.Compare("close") && command4.Empty())
 			{
 				if (command2.Empty())
 				{
 					printf("What do you want to close?\n");
 					scanf_s("%s", command2);
+
 				}
 
 				if (command2.Compare("door"))
 				{
+					printf("Where is the door do you want to close?\n");
 
-					world->exit[*player_pos]->Close();
+					scanf_s("%s", command3);
+
+
+					world->player->Close(command3);
 				}
+				else if (command3.Compare("door"))
+					world->player->Close(command2);
+
+
 
 				else printf("You can't do that.\n");
 			}
