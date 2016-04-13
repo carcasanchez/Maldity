@@ -6,6 +6,13 @@ class Room:public Entity{
 public:
 	String name;
 	String description;
+
+	
+	Room(const char* str1, const char* str2)
+	{
+		name = str1;
+		description = str2;
+	}
 };
 
 #endif

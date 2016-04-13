@@ -21,7 +21,7 @@ int main(){
 	
 	while (player_input.Compare("quit")==false)
 	{
-		printf("%s", world->room[*player_pos].description.C_str());
+		printf("%s", world->room[*player_pos]->description.C_str());
 	
 		while (1)
 		{	
@@ -52,10 +52,10 @@ int main(){
 				{
 					int i;
 					for (i = 0; i < 52;i++)
-						if (world->exit[i].orientation.Compare(command2)
-							&& world->exit[i].origin.Compare(world->room[*player_pos].name.C_str()))
+						if (world->exit[i]->orientation.Compare(command2)
+							&& world->exit[i]->origin.Compare(world->room[*player_pos]->name.C_str()))
 						{
-							world->exit[i].Look();
+							world->exit[i]->Look();
 							break;
 						}
 					if (i == 52)
@@ -91,7 +91,7 @@ int main(){
 				if (command2.Compare("door"))
 				{
 					
-					world->exit[*player_pos].Open();
+					world->exit[*player_pos]->Open();
 				}
 
 				else printf("You can't do that.\n");
@@ -110,7 +110,7 @@ int main(){
 				if (command2.Compare("door"))
 				{
 
-					world->exit[*player_pos].Close();
+					world->exit[*player_pos]->Close();
 				}
 
 				else printf("You can't do that.\n");

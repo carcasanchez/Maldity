@@ -4,24 +4,24 @@
 
 #include <string.h>
 #include <iostream>
+
+#include "MyString.h"
+#include "Vector.h"
 #include "Rooms.h"
 #include "Exits.h"
-#include "MyString.h"
-
 
 class Player;
-
 
 class World{
 public:
 		
-	Room* room = nullptr;
-	Exits* exit = nullptr;
-	Player* player = nullptr;
+	Vector <Room*> room;
+	Vector <Exits*> exit;
+	Player* player;
 	World();
 	~World();
 
-	void CreateWorld()const;
+	void CreateWorld();
 	void Look()const;
 	
 };
