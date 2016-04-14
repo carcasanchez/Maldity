@@ -10,6 +10,7 @@ public:
 	String orientation;
 	bool door, open;
 	
+	//Exits() :Entity(){}
 	void Look()const;
 
 

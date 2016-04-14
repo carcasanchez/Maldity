@@ -1,6 +1,7 @@
 #ifndef __WORLD_H__
 #define __WORLD_H__
 
+#define MAX_ITEMS 3;
 
 #include <string.h>
 #include <iostream>
@@ -9,6 +10,7 @@
 #include "Vector.h"
 #include "Rooms.h"
 #include "Exits.h"
+#include "Items.h"
 
 class Player;
 
@@ -17,6 +19,7 @@ public:
 		
 	Vector <Room*> room;
 	Vector <Exits*> exit;
+	Vector <Item*> item;
 	Player* player;
 	World();
 	~World();

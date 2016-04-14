@@ -183,7 +183,7 @@ char* String::Strtok(const char character, const int num_word)const
 
 
 	temp = new char[j + 1];
-	//temp[0] = '\0';
+
 
 	for (i = 0, j = 0, num_char = 0; i < len; i++)
 	{

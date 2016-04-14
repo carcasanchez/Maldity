@@ -20,6 +20,7 @@
   <ItemGroup>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Exits.h" />
+    <ClInclude Include="Items.h" />
     <ClInclude Include="MyString.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rooms.h" />

@@ -8,7 +8,7 @@ public:
 	String description;
 
 	
-	Room(const char* str1, const char* str2)
+	Room(const char* str1, const char* str2) //:Entity(name, description)
 	{
 		name = str1;
 		description = str2;

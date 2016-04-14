@@ -36,8 +36,7 @@ bool Player::Go(const String& dest)
 		return false;
 }
 
-
-void Player::Open(const String& direction)
+void Player::Open(const String& direction)const
 {
 	int i;
 	for (i = 0; i < 52;i++)
@@ -62,7 +61,7 @@ void Player::Open(const String& direction)
 
 }
 
-void Player::Close(const String& direction)
+void Player::Close(const String& direction)const
 {
 	int i;
 	for (i = 0; i < 52; i++)
@@ -87,4 +86,40 @@ void Player::Close(const String& direction)
 
 
 
+}
+
+void Player::Take(const String& item_name)const
+{
+	int i;
+
+	for ( i = 0; i < 3; i++)
+	{
+		if (world->item[i]->name.Compare(item_name.C_str())&&
+			world->item[i]->location.Compare(world->room[position]->name.C_str()))
+		{
+			
+			printf("You picked the %s.\n", world->item[i]->name.C_str());
+			world->item[i]->location = "Inventory";
+			break;
+		}
+
+	}
+
+	if (i == 3) printf("There's nothing like that here.\n");
+}
+
+void Player::Drop(const String& item_name)const
+{
+	int i;
+	for (i = 0; i < 3; i++)
+	{
+		if (world->item[i]->location.Compare("inventory") && world->item[i]->name.Compare(item_name.C_str()))
+		{ 
+			world->item[i]->location = world->room[position]->name.C_str();
+			printf("You dropped the %s.\n", world->item[i]->name.C_str());
+			break;
+		}	
+	}
+
+	if (i == 3) printf("You have no %s in your inventory.\n", item_name.C_str());
 }

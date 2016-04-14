@@ -7,7 +7,14 @@ public:
 	String name;
 	String description;
 
+	//Entity(){};
 
+	/*Entity(const char* str1, char* str2)
+	{
+		name = str1;
+		description = str2;
+
+	}*/
 	
 	virtual void Look(){};
 	

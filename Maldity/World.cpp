@@ -19,7 +19,11 @@ World::~World()
 void World::Look()const{
 
 	printf("%s", room[player->position]->description.C_str());
-	
+	for (int i = 0; i < 3; i++)
+	{
+		if (item[i]->location.Compare(room[player->position]->name.C_str()))
+			printf("There's a %s in the floor.\n", item[i]->name.C_str());
+	}
 }
 
 void World::CreateWorld()
@@ -29,6 +33,10 @@ void World::CreateWorld()
 		exit[i]->door = false;
 		exit[i]->open = true;
 	}
+
+	item.PushBack(new Item("Key", "It's a old, little, rusty key.\n", "Forest"));
+	item.PushBack(new Item("Rope", "A piece of rope. Very used.\n", "Forest"));
+	item.PushBack(new Item("Coin", "A very old coin. It seems to be made in gold.\n", "Road"));
 	
 	//Forest
 	
@@ -311,7 +319,7 @@ void World::CreateWorld()
 	exit[43]->destination = "Statue";
 
 	exit[40]->description = "The mountains look so terrfying";
-	exit[41]->description = "The gothic city is placed between the feets of the mountains and the grey sea.\nIt looks like a phantom village\n.";
+	exit[41]->description = "The gothic city is placed between the feets of the mountains and the grey sea.\nIt looks like a phantom village.\n";
 	exit[42]->description = "You can see a little road at the bottom of the fells.\nOne of its sides goes to the city.\nThe other, vanishes in the distance.\n";
 	exit[43]->description = "That stairs are the only way to go down the balcony.\n";
 
