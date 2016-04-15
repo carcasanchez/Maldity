@@ -1,6 +1,8 @@
 #ifndef __VECTOR_H__
 #define __VECTOR_H__
 
+#include <assert.h>
+
 
 template <typename type>
 class Vector
@@ -51,6 +53,15 @@ public:
 	type operator[](int pos) const
 	{
 
+		//assert(num_elements<pos);
+		return elements[pos];
+
+	}
+
+	type& operator[](int pos)
+	{
+
+		//assert(num_elements<pos);
 		return elements[pos];
 
 	}
@@ -116,6 +127,33 @@ public:
 	void Clean()
 	{
 		num_elements = 0;
+	}
+
+	bool PopBack(type& value)
+	{
+		if (num_elements > 0)
+		{
+			num_elements--;
+			value = elements[num_elements];
+
+		}
+
+		else return false;
+	}
+
+	void Shrink_to_fit()
+	{
+		type* temp;
+		temp = new type[num_elements];
+		mem = num_elements;
+
+		for (int i = 0; i < num_elements; i++)
+			temp[i] = elements[i];
+
+		delete[] elements;
+		elements = temp;
+
+
 	}
 
 

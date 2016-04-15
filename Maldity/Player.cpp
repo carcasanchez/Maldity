@@ -92,7 +92,7 @@ void Player::Take(const String& item_name)const
 {
 	int i;
 
-	for ( i = 0; i < 3; i++)
+	for ( i = 0; i < MAX_ITEMS; i++)
 	{
 		if (world->item[i]->name.Compare(item_name.C_str())&&
 			world->item[i]->location.Compare(world->room[position]->name.C_str()))
@@ -108,10 +108,45 @@ void Player::Take(const String& item_name)const
 	if (i == 3) printf("There's nothing like that here.\n");
 }
 
+void Player::Take(const String& what, const String& from)const
+{
+	int i, j;
+
+	for (i = 0; i < MAX_ITEMS; i++)
+	{
+		if (world->item[i]->name.Compare(from) && (world->item[i]->location.Compare(world->room[position]->name.C_str()) || world->item[i]->location.Compare("inventory")))
+		{
+			if (world->item[i]->capacity == 0)
+				printf("You can't do that!");
+
+			else if (world->item[i]->num_items == 0)
+				printf("The %s is empty.\n", world->item[i]->name.C_str());
+
+			else for (j = 0; j < MAX_ITEMS;j++)
+			{ 
+			
+				if (world->item[j]->name.Compare(what) && world->item[j]->location.Compare(from))
+				{
+					printf("You picked the %s.\n", world->item[j]->name.C_str());
+					world->item[j]->location = "Inventory";
+					world->item[i]->num_items--;
+					break;
+				}
+			
+			}
+			
+			break;
+		}
+
+	}
+
+	if (i == MAX_ITEMS) printf("There's nothing like that here.\n");
+}
+
 void Player::Drop(const String& item_name)const
 {
 	int i;
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < MAX_ITEMS; i++)
 	{
 		if (world->item[i]->location.Compare("inventory") && world->item[i]->name.Compare(item_name.C_str()))
 		{ 
@@ -122,4 +157,10 @@ void Player::Drop(const String& item_name)const
 	}
 
 	if (i == 3) printf("You have no %s in your inventory.\n", item_name.C_str());
+}
+
+void Player::ShowStats()
+{
+	printf("-----Jasna's Status        Sanity at %i%\n", sanity);
+	printf("Atk: %i\nDef:%i\n", atk, def);
 }

@@ -35,11 +35,34 @@ int main(){
 			command3 = player_input.Strtok(' ', 3);
 			command4 = player_input.Strtok(' ', 4);
 
+			//MOVE USING n/s/e/w
+			if (player_input.Compare("n"))
+			{
+				command1 = "go"; command2 = "north"; command3.Clean();
+			}
+			else if (player_input.Compare("s"))
+			{
+				command1 = "go"; command2 = "south"; command3.Clean();
+			}
+			else if (player_input.Compare("e"))
+			{
+				command1 = "go"; command2 = "east"; command3.Clean();
+			}
+			else if (player_input.Compare("w"))
+			{
+				command1 = "go"; command2 = "west"; command3.Clean();
+			}
+			
+
+
+
+
 			if (player_input.Empty()){}
 
 			//QUIT
 			else if (player_input.Compare("quit"))
 				break;
+			
 			
 			//LOOK
 			else if (command1.Compare("look"))
@@ -50,7 +73,7 @@ int main(){
 				//Look the exits
 				else if (command3.Empty())
 				{
-					int i;
+					int i, j;
 					for (i = 0; i < 52;i++)
 						if (world->exit[i]->orientation.Compare(command2)
 							&& world->exit[i]->origin.Compare(world->room[*player_pos]->name.C_str()))
@@ -58,8 +81,14 @@ int main(){
 							world->exit[i]->Look();
 							break;
 						}
+					//Look the items
 					if (i == 52)
-						printf("You can't do that.\n");
+						for (j = 0; j < MAX_ITEMS; j++)
+						{
+							if (world->item[j]->name.Compare(command2))
+								world->item[j]->Look();
+
+						}
 					
 				}
 			}
@@ -144,7 +173,18 @@ int main(){
 				}
 					
 				world->player->Take(command2);
+
 			}
+
+			//TAKE FROM
+			else if ((command1.Compare("take") || command1.Compare("pick")) && (command3.Compare("from")) && (command2.Empty() == false) && (command4.Empty() == false))
+			{
+				
+				world->player->Take(command2, command4);
+
+			}
+
+
 
 			//DROP
 
@@ -164,13 +204,19 @@ int main(){
 			{
 				int i;
 				printf("\n-----Jasna's inventory:\n");
-				for (i = 0; i < 3; i++)
+				for (i = 0; i < MAX_ITEMS; i++)
 					if (world->item[i]->location.Compare("inventory"))
 						printf("%s\n", world->item[i]->name.C_str());
 
 				
 			}
+			
+			//STATS
 
+			else if (command1.Compare("stats") && command2.Empty())
+				{
+					world->player->ShowStats();
+				}
 
 			//HELP
 			else if (player_input.Compare("help"))

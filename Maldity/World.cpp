@@ -34,9 +34,9 @@ void World::CreateWorld()
 		exit[i]->open = true;
 	}
 
-	item.PushBack(new Item("Key", "It's a old, little, rusty key.\n", "Forest"));
-	item.PushBack(new Item("Rope", "A piece of rope. Very used.\n", "Forest"));
-	item.PushBack(new Item("Coin", "A very old coin. It seems to be made in gold.\n", "Road"));
+	item.PushBack(new Item("Key", "It's a old, little, rusty key.\n", "Forest", 0, 0));
+	item.PushBack(new Item("Box", "An old wooden box. You can put objects into it.\n", "Forest", 5, 1));
+	item.PushBack(new Item("Coin", "A very old coin. It seems to be made in gold.\n", "Box", 0, 0));
 	
 	//Forest
 	
@@ -377,7 +377,6 @@ void World::CreateWorld()
 	exit[50]->description = "The only exit is the door at the west.\n";
 	exit[51]->description = "You can see the city center from the interior of the shop.\n";
 	
-	player->position = 0;
-	player->name = "Jasna";
+	
 }
 
