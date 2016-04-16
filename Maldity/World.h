@@ -1,7 +1,7 @@
 #ifndef __WORLD_H__
 #define __WORLD_H__
 
-#define MAX_ITEMS 3
+#define MAX_ITEMS 5
 
 #include <string.h>
 #include <iostream>

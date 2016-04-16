@@ -90,9 +90,12 @@ void Player::Close(const String& direction)const
 
 void Player::Take(const String& item_name)const
 {
-	int i;
+	int i=0;
 
-	for ( i = 0; i < MAX_ITEMS; i++)
+	if (num_items == capacity)
+		printf("Your inventory is full.\n");
+
+	else for ( i = 0; i < MAX_ITEMS; i++)
 	{
 		if (world->item[i]->name.Compare(item_name.C_str())&&
 			world->item[i]->location.Compare(world->room[position]->name.C_str()))
@@ -100,47 +103,56 @@ void Player::Take(const String& item_name)const
 			
 			printf("You picked the %s.\n", world->item[i]->name.C_str());
 			world->item[i]->location = "Inventory";
-			break;
-		}
-
-	}
-
-	if (i == 3) printf("There's nothing like that here.\n");
-}
-
-void Player::Take(const String& what, const String& from)const
-{
-	int i, j;
-
-	for (i = 0; i < MAX_ITEMS; i++)
-	{
-		if (world->item[i]->name.Compare(from) && (world->item[i]->location.Compare(world->room[position]->name.C_str()) || world->item[i]->location.Compare("inventory")))
-		{
-			if (world->item[i]->capacity == 0)
-				printf("You can't do that!");
-
-			else if (world->item[i]->num_items == 0)
-				printf("The %s is empty.\n", world->item[i]->name.C_str());
-
-			else for (j = 0; j < MAX_ITEMS;j++)
-			{ 
-			
-				if (world->item[j]->name.Compare(what) && world->item[j]->location.Compare(from))
-				{
-					printf("You picked the %s.\n", world->item[j]->name.C_str());
-					world->item[j]->location = "Inventory";
-					world->item[i]->num_items--;
-					break;
-				}
-			
-			}
-			
+	//TODO	num_items++;
 			break;
 		}
 
 	}
 
 	if (i == MAX_ITEMS) printf("There's nothing like that here.\n");
+}
+
+void Player::Take(const String& what, const String& from)const
+{
+	int i=0, j=0;
+
+	if (num_items == capacity)
+		printf("Your inventory is full.\n");
+
+	else if (what.Compare(from))
+		printf("You can't take an object from itself!\n");
+	
+
+	else for (i = 0; i < MAX_ITEMS; i++)
+	{
+		if (world->item[i]->name.Compare(from.C_str()))
+		{
+			if (world->item[i]->capacity == 0)
+				printf("You can't take nothing from a %s!\n", world->item[i]->name.C_str());
+
+			else for (j = 0; j < MAX_ITEMS; j++)
+			{
+
+				if (world->item[j]->name.Compare(what.C_str()) && world->item[j]->location.Compare(from.C_str()))
+				{
+					printf("You picked the %s from the %s.\n", what.C_str(), from.C_str());
+					world->item[j]->location = "inventory";
+					world->item[i]->num_items--;
+			 //TODO num_items++;
+					break;
+				}
+
+				
+			}
+
+			if (j == MAX_ITEMS)
+				printf("There's nothing like a %s inside the %s.\n", what.C_str(), from.C_str());
+			break;
+		}
+
+	}
+
+	if (i == MAX_ITEMS) printf("There's nothing like a %s here.\n", from.C_str());
 }
 
 void Player::Drop(const String& item_name)const
@@ -152,11 +164,60 @@ void Player::Drop(const String& item_name)const
 		{ 
 			world->item[i]->location = world->room[position]->name.C_str();
 			printf("You dropped the %s.\n", world->item[i]->name.C_str());
+		//TODO	num_items--;
 			break;
 		}	
 	}
 
 	if (i == 3) printf("You have no %s in your inventory.\n", item_name.C_str());
+}
+
+void Player::PutIn(const String& what, const String& in)const
+{
+	int i=0, j=0;
+	
+	if (what.Compare(in))
+		printf("You can't put an object into itself!\n");
+
+	else for (i = 0; i < MAX_ITEMS; i++)
+	{
+		if (world->item[i]->name.Compare(what.C_str()) && world->item[i]->location.Compare("inventory"))
+		{
+			for (j = 0; j < MAX_ITEMS; j++)
+			{
+
+				if (world->item[j]->name.Compare(in.C_str()) && (world->item[j]->location.Compare(world->room[position]->name.C_str()) || world->item[j]->location.Compare("inventory")))
+				{
+					if (world->item[j]->capacity == 0)
+						printf("You can't put nothing in the %s!\n", world->item[j]->name.C_str());
+
+					else if (world->item[j]->capacity == world->item[j]->num_items)
+						printf("The %s its full. You can't put more items in it.\n", world->item[j]->name.C_str());
+
+					else
+					{
+					printf("You put the %s in the %s.\n", what.C_str(), in.C_str());
+					world->item[i]->location = world->item[j]->name.C_str();
+					world->item[j]->num_items++;
+					//TODO	num_items--;
+					}
+
+					break;
+				}
+
+				
+			}
+
+			if (j == MAX_ITEMS)
+				printf("There's nothing like a %s here", in.C_str());
+			break;
+		}
+
+	}
+
+	if (i == MAX_ITEMS) printf("You have no %s in your inventory.\n", what.C_str());
+
+
 }
 
 void Player::ShowStats()

@@ -17,7 +17,10 @@ public:
 		sanity = 100;
 		atk = 2;
 		def = 5;
+		capacity = 5;
+		num_items = 0;
 	}
+
 	//Player() :Entity(){}
 
 	bool Go(const String& dest);
@@ -26,6 +29,7 @@ public:
 	void Take(const String& item)const;
 	void Take(const String& what, const String& from)const;
 	void Drop(const String& item)const;
+	void PutIn(const String& what, const String& on)const;
 	void ShowStats();
 
 };

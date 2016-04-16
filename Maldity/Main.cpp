@@ -8,7 +8,7 @@ int main(){
 	world = new World;
 
 	int *player_pos = &world->player->position;
-	char temp[20];
+	char temp[40];
 	String player_input;
 	String command1;
 	String command2;
@@ -26,7 +26,7 @@ int main(){
 		while (1)
 		{	
 			printf("\n");
-			gets_s(temp, 20);  ///NEEDS REVISION
+			gets_s(temp, 40);  
 		
 			player_input = temp;
 
@@ -70,6 +70,7 @@ int main(){
 				//Look the room
 				if(command2.Empty())
 					world->Look();
+
 				//Look the exits
 				else if (command3.Empty())
 				{
@@ -86,10 +87,14 @@ int main(){
 						for (j = 0; j < MAX_ITEMS; j++)
 						{
 							if (world->item[j]->name.Compare(command2))
+							{ 
 								world->item[j]->Look();
+								break;
+							}
 
 						}
-					
+					if (j == MAX_ITEMS)
+						printf("There's nothing like a %s here.\n", command2.C_str());
 				}
 			}
 
@@ -177,7 +182,7 @@ int main(){
 			}
 
 			//TAKE FROM
-			else if ((command1.Compare("take") || command1.Compare("pick")) && (command3.Compare("from")) && (command2.Empty() == false) && (command4.Empty() == false))
+			else if ((command1.Compare("take") || command1.Compare("pick")) && (command3.Compare("from")) && (command4.Empty() == false))
 			{
 				
 				world->player->Take(command2, command4);
@@ -197,6 +202,15 @@ int main(){
 				}
 
 				world->player->Drop(command2);
+			}
+
+			//PUT iN
+
+			else if ( command1.Compare("put") && command3.Compare("in") && command4.Empty()==false )
+			{
+				world->player->PutIn(command2, command4);
+
+
 			}
 
 			//INVENTORY

@@ -8,6 +8,7 @@ class Entity{
 public:
 	String name;
 	String description;
+
 	int capacity;
 	int num_items;
 	//Entity(){};

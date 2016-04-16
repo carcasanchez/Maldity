@@ -19,7 +19,7 @@ World::~World()
 void World::Look()const{
 
 	printf("%s", room[player->position]->description.C_str());
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < MAX_ITEMS; i++)
 	{
 		if (item[i]->location.Compare(room[player->position]->name.C_str()))
 			printf("There's a %s in the floor.\n", item[i]->name.C_str());
@@ -35,9 +35,11 @@ void World::CreateWorld()
 	}
 
 	item.PushBack(new Item("Key", "It's a old, little, rusty key.\n", "Forest", 0, 0));
-	item.PushBack(new Item("Box", "An old wooden box. You can put objects into it.\n", "Forest", 5, 1));
+	item.PushBack(new Item("Box", "An old wooden box. You can put objects into it.\n", "Forest", 3, 2));
 	item.PushBack(new Item("Coin", "A very old coin. It seems to be made in gold.\n", "Box", 0, 0));
-	
+	item.PushBack(new Item("Totem", "A strange totem, made in wood.\n", "Forest", 0, 0));
+	item.PushBack(new Item("Sword", "It's a short sword, very sharpen.\n", "Box", 0, 0));
+
 	//Forest
 	
 	room.PushBack(new Room("Forest", "You are in a forest. \nAt south, you see that the road drives to a city. \nAt west, a high hill. \nAt north, the road vanishes in the distance. \nAt east, only the sea.\n"));
