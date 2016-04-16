@@ -160,7 +160,7 @@ void Player::Drop(const String& item_name)const
 	int i;
 	for (i = 0; i < MAX_ITEMS; i++)
 	{
-		if (world->item[i]->location.Compare("inventory") && world->item[i]->name.Compare(item_name.C_str()))
+		if ((world->item[i]->location.Compare("inventory") || world->item[i]->location.Compare("equipped")) && world->item[i]->name.Compare(item_name.C_str()))
 		{ 
 			world->item[i]->location = world->room[position]->name.C_str();
 			printf("You dropped the %s.\n", world->item[i]->name.C_str());
@@ -169,7 +169,7 @@ void Player::Drop(const String& item_name)const
 		}	
 	}
 
-	if (i == 3) printf("You have no %s in your inventory.\n", item_name.C_str());
+	if (i == MAX_ITEMS) printf("You have no %s in your inventory.\n", item_name.C_str());
 }
 
 void Player::PutIn(const String& what, const String& in)const
@@ -223,5 +223,71 @@ void Player::PutIn(const String& what, const String& in)const
 void Player::ShowStats()
 {
 	printf("-----Jasna's Status        Sanity at %i%\n", sanity);
-	printf("Atk: %i\nDef:%i\n", atk, def);
+	printf("Health: %i \nAtk: %i\nDef: %i\n", health, atk, def);
+
+	for (int i = 0; i < MAX_ITEMS; i++)
+	{
+		if (world->item[i]->location.Compare("equipped"))
+			printf("%s equipped.\n", world->item[i]->name.C_str());
+
+	}
+	
+}
+
+bool Player::Unequip()
+{
+	
+	for ( int i = 0; i < MAX_ITEMS; i++)
+	{
+		if (world->item[i]->location.Compare("equipped"))
+		{
+			world->item[i]->location = "inventory";
+			health -= world->item[i]->bonus_hp;
+			def -= world->item[i]->bonus_def;
+			atk -= world->item[i]->bonus_atk;
+
+			printf("You unequip the %s.\n", world->item[i]->name.C_str());
+			return true;
+			
+		}
+	}
+
+	return false;
+}
+
+void Player::Equip(const String& item)
+{
+	int i = 0;
+
+	
+	
+
+
+	for (i = 0; i < MAX_ITEMS; i++)
+	{
+
+		if (world->item[i]->name.Compare(item.C_str()) && world->item[i]->location.Compare("inventory"))
+		{
+
+			if (world->item[i]->equippable)
+			{ 
+
+			Unequip();
+
+			printf("You equip the %s.\n", world->item[i]->name.C_str());
+			world->item[i]->location = "equipped";
+
+			health += world->item[i]->bonus_hp;
+			atk += world->item[i]->bonus_atk;
+			def += world->item[i]->bonus_def;
+
+			}
+			else printf("You can't equip that!\n");
+
+			break;
+		}
+
+		if (i == MAX_ITEMS) printf("You have nothing like that in your inventory.\n");
+	}
+
 }

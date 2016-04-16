@@ -204,7 +204,7 @@ int main(){
 				world->player->Drop(command2);
 			}
 
-			//PUT iN
+			//PUT IN
 
 			else if ( command1.Compare("put") && command3.Compare("in") && command4.Empty()==false )
 			{
@@ -213,6 +213,28 @@ int main(){
 
 			}
 
+			//EQUIP
+			else if (command1.Compare("equip") && command3.Empty())
+			{
+				if (command2.Empty())
+				{
+					printf("What do you want to equip?\n");
+					scanf_s("%s", command2);
+				}
+
+				world->player->Equip(command2);
+
+
+			}
+
+			//UNEQUIP
+			else if (command1.Compare("unequip") && command2.Empty())
+			{ 
+				if (world->player->Unequip() == false)
+					printf("You have nothing equipped.\n");
+					
+				
+			}
 			//INVENTORY
 			else if ((command1.Compare("inventory") || command1.Compare("i")) && command2.Empty())
 			{

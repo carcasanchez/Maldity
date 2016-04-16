@@ -10,15 +10,17 @@ public:
 	int sanity;
 	int atk;
 	int def;
+	int health;
 
-	Player(){
-		position = 0;
-		name = "Jasna";
-		sanity = 100;
-		atk = 2;
-		def = 5;
-		capacity = 5;
-		num_items = 0;
+	Player(int pos, char* n, int san, int a, int d, int cap, int num, int hp){
+		position = pos;
+		name = n;
+		sanity = san;
+		atk = a;
+		def = d;
+		capacity = cap;
+		num_items = num;
+		health = hp;
 	}
 
 	//Player() :Entity(){}
@@ -31,6 +33,9 @@ public:
 	void Drop(const String& item)const;
 	void PutIn(const String& what, const String& on)const;
 	void ShowStats();
+	bool Unequip();
+	void Equip(const String& item);
+	
 
 };
 

@@ -6,7 +6,7 @@
 void Item::Look()
 {
 
-	if (location.Compare(world->room[world->player->position]->name.C_str()) || location.Compare("inventory"))
+	if (location.Compare(world->room[world->player->position]->name.C_str()) || location.Compare("inventory")|| location.Compare("equipped"))
 	{ 
 	printf("%s", description);
 

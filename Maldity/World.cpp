@@ -7,7 +7,7 @@ World::World()
 	for (int i = 0; i < 52; i++)
 		exit.PushBack(new Exits);
 
-	player = new Player;
+	player = new Player(0, "Jasna", 100, 2, 5, 5, 0, 20);
 
 }
 
@@ -34,11 +34,20 @@ void World::CreateWorld()
 		exit[i]->open = true;
 	}
 
-	item.PushBack(new Item("Key", "It's a old, little, rusty key.\n", "Forest", 0, 0));
-	item.PushBack(new Item("Box", "An old wooden box. You can put objects into it.\n", "Forest", 3, 2));
-	item.PushBack(new Item("Coin", "A very old coin. It seems to be made in gold.\n", "Box", 0, 0));
-	item.PushBack(new Item("Totem", "A strange totem, made in wood.\n", "Forest", 0, 0));
-	item.PushBack(new Item("Sword", "It's a short sword, very sharpen.\n", "Box", 0, 0));
+	item.PushBack(new Item("Key", "It's a old, little, rusty key.\n", "Shop", 0, 0));
+	item.PushBack(new Item("Coffer", "An old wooden box. You can put objects into it.\n", "Center", 3, 2));
+	item.PushBack(new Item("Coin", "A very old coin. It seems to be made in gold.\n", "Coffer", 0, 0));
+	item.PushBack(new Item("Totem", "A strange totem, made in wood.\n", "Statue", 0, 0));
+	item.PushBack(new Item("Sword", "It's a short sword, very sharpen.\n", "Coffer", 0, 0));
+	item.PushBack(new Item("Armor", "A strange, shiny armor that covers the chest.\n", "Coffer", 0, 0));
+
+
+	item[4]->bonus_atk = 5;
+	item[5]->bonus_def = 5;
+
+	item[1]->equippable = false;
+
+
 
 	//Forest
 	
