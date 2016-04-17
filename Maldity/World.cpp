@@ -2,12 +2,20 @@
 #include "Player.h"
 
 
-World::World()
+World::World()// : exit(52)//TODO 5: make the exits constructor correctly
 {
 	for (int i = 0; i < 52; i++)
-		exit.PushBack(new Exits);
+		exit.PushBack(new Exits);  
 
-	player = new Player(0, "Jasna", 100, 2, 5, 5, 0, 20);
+	player = new Player(0, "Jasna");
+
+	player->sanity = 100;
+	player->atk = 2;
+	player->def = 5;
+	player->capacity = 5;
+	player->num_items = 0;
+	player->health = 20;
+
 
 }
 
@@ -33,14 +41,19 @@ void World::CreateWorld()
 		exit[i]->door = false;
 		exit[i]->open = true;
 	}
+	
 
 	item.PushBack(new Item("Key", "It's a old, little, rusty key.\n", "Shop", 0, 0));
-	item.PushBack(new Item("Coffer", "An old wooden box. You can put objects into it.\n", "Center", 3, 2));
-	item.PushBack(new Item("Coin", "A very old coin. It seems to be made in gold.\n", "Coffer", 0, 0));
-	item.PushBack(new Item("Totem", "A strange totem, made in wood.\n", "Statue", 0, 0));
-	item.PushBack(new Item("Sword", "It's a short sword, very sharpen.\n", "Coffer", 0, 0));
+	item.PushBack(new Item("Coffer", "An old wooden box. You can put objects into it.\n", "House", 4, 4));
+	item.PushBack(new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", "Coffer", 0, 0));
+	item.PushBack(new Item("Totem", "A strange totem, made in wood.\nIt's impossible to determine what it represents...\n", "Statue", 0, 0));
+    item.PushBack(new Item("Sword", "It's a short sword, very sharpen.\n", "Coffer", 0, 0));
 	item.PushBack(new Item("Armor", "A strange, shiny armor that covers the chest.\n", "Coffer", 0, 0));
-
+	item.PushBack(new Item("Map", "The old map of a sailor. It doesn't represent any continent recognizable...\n", "Dock" , 0, 0));
+	item.PushBack(new Item("Fang", "It seems to be the fang of a sea creature.\nBut any sea creature known has that fangs...\n", "Beach", 0, 0));
+	item.PushBack(new Item("Rope", "A simple piece of rope. Nothing strange.\n", "Shop", 0, 0));
+	item.PushBack(new Item("Swordcase", "Very useful case, perfect for keep a sword inside.\n", "Coffer", 1, 0));
+	item.PushBack(new Item("Vial", "A cristal bottle, with a dark, red sustance in it. Maybe blood?\n", "Tavern", 0, 0));
 
 	item[4]->bonus_atk = 5;
 	item[5]->bonus_def = 5;
@@ -76,7 +89,7 @@ void World::CreateWorld()
 
 	//Road
 
-	room.PushBack(new Room("Road", "You are in a high road. \nAt north, there's a mass of gothic buildings. \nAt south, the sea, and a small beach. \nAt west, a way to a big dock. \nAt east, the road that drives to the forest\n"));
+	room.PushBack(new Room("Road", "You are in a high road. \nAt north, there's a mass of gothic buildings. \nAt south, the sea, and a small beach. \nAt west, a way to a big dock. \nAt east, the road that drives to the forest.\n"));
 
 	exit[4]->orientation = "north";
 	exit[5]->orientation = "south";
@@ -261,7 +274,7 @@ void World::CreateWorld()
 
 	//Fells
 
-	room.PushBack(new Room("Fells","The fells are surrounded by dark trees. The enourmous statue rises over them."));
+	room.PushBack(new Room("Fells","The fells are surrounded by dark trees. The enourmous statue rises over them.\n"));
 
 	exit[32]->orientation = "north";
 	exit[33]->orientation = "south";
@@ -329,7 +342,7 @@ void World::CreateWorld()
 	exit[42]->destination = "";
 	exit[43]->destination = "Statue";
 
-	exit[40]->description = "The mountains look so terrfying";
+	exit[40]->description = "The mountains look so terrfying.\n";
 	exit[41]->description = "The gothic city is placed between the feets of the mountains and the grey sea.\nIt looks like a phantom village.\n";
 	exit[42]->description = "You can see a little road at the bottom of the fells.\nOne of its sides goes to the city.\nThe other, vanishes in the distance.\n";
 	exit[43]->description = "That stairs are the only way to go down the balcony.\n";
@@ -384,7 +397,7 @@ void World::CreateWorld()
 	exit[51]->destination = "Center";
 
 	exit[48]->description = "The only exit is the door at the west.\n";
-	exit[48]->description = "The only exit is the door at the west.\n";
+	exit[49]->description = "The only exit is the door at the west.\n";
 	exit[50]->description = "The only exit is the door at the west.\n";
 	exit[51]->description = "You can see the city center from the interior of the shop.\n";
 	

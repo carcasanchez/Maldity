@@ -28,6 +28,7 @@ public:
 
 		elements= new type[num];
 
+
 	}
 
 	Vector(const Vector<type>& other)

@@ -12,18 +12,12 @@ public:
 	int def;
 	int health;
 
-	Player(int pos, char* n, int san, int a, int d, int cap, int num, int hp){
+	Player(int pos, char* n){
 		position = pos;
 		name = n;
-		sanity = san;
-		atk = a;
-		def = d;
-		capacity = cap;
-		num_items = num;
-		health = hp;
 	}
 
-	//Player() :Entity(){}
+	//Player() :Entity(){} TODO 2: inherit entity constructor
 
 	bool Go(const String& dest);
 	void Open(const String& direction)const;

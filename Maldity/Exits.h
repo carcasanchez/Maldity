@@ -10,7 +10,7 @@ public:
 	String orientation;
 	bool door, open;
 	
-	//Exits() :Entity(){}
+	//Exits() :Entity(){} TODO 2: inherit entity constructor
 	void Look()const;
 
 

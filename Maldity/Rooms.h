@@ -8,7 +8,7 @@ public:
 	String description;
 
 	
-	Room(const char* str1, const char* str2) //:Entity(name, description)
+	Room(const char* str1, const char* str2) //:Entity(name, description) TODO 2: inherit entity constructor
 	{
 		name = str1;
 		description = str2;

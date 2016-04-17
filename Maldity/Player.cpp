@@ -103,7 +103,7 @@ void Player::Take(const String& item_name)const
 			
 			printf("You picked the %s.\n", world->item[i]->name.C_str());
 			world->item[i]->location = "Inventory";
-	//TODO	num_items++;
+	    world->player->num_items++;//TODO    num_items++;
 			break;
 		}
 
@@ -138,7 +138,7 @@ void Player::Take(const String& what, const String& from)const
 					printf("You picked the %s from the %s.\n", what.C_str(), from.C_str());
 					world->item[j]->location = "inventory";
 					world->item[i]->num_items--;
-			 //TODO num_items++;
+					world->player->num_items++;
 					break;
 				}
 
@@ -165,6 +165,7 @@ void Player::Drop(const String& item_name)const
 			world->item[i]->location = world->room[position]->name.C_str();
 			printf("You dropped the %s.\n", world->item[i]->name.C_str());
 		//TODO	num_items--;
+			world->player->num_items--;
 			break;
 		}	
 	}
@@ -192,14 +193,14 @@ void Player::PutIn(const String& what, const String& in)const
 						printf("You can't put nothing in the %s!\n", world->item[j]->name.C_str());
 
 					else if (world->item[j]->capacity == world->item[j]->num_items)
-						printf("The %s its full. You can't put more items in it.\n", world->item[j]->name.C_str());
+						printf("The %s its full. You can't put more items in it.\n", in.C_str());
 
 					else
 					{
 					printf("You put the %s in the %s.\n", what.C_str(), in.C_str());
 					world->item[i]->location = world->item[j]->name.C_str();
 					world->item[j]->num_items++;
-					//TODO	num_items--;
+					world->player->num_items--;
 					}
 
 					break;
@@ -209,7 +210,7 @@ void Player::PutIn(const String& what, const String& in)const
 			}
 
 			if (j == MAX_ITEMS)
-				printf("There's nothing like a %s here", in.C_str());
+				printf("There's nothing like a %s here.\n", in.C_str());
 			break;
 		}
 
@@ -247,6 +248,7 @@ bool Player::Unequip()
 			atk -= world->item[i]->bonus_atk;
 
 			printf("You unequip the %s.\n", world->item[i]->name.C_str());
+			world->player->num_items++;
 			return true;
 			
 		}
@@ -276,6 +278,7 @@ void Player::Equip(const String& item)
 
 			printf("You equip the %s.\n", world->item[i]->name.C_str());
 			world->item[i]->location = "equipped";
+			world->player->num_items--;
 
 			health += world->item[i]->bonus_hp;
 			atk += world->item[i]->bonus_atk;

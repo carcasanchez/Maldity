@@ -11,7 +11,7 @@ int main(){
 	char temp[40];
 	String player_input;
 	String command1;
-	String command2;
+	String command2;  //TODO 1: make the commands a vector
 	String command3;
 	String command4;
 
@@ -106,7 +106,7 @@ int main(){
 				if (command2.Empty())
 				{
 					printf("Where do you want to go?\n");
-					scanf_s("%s", command2);
+					scanf_s("%s", command2); //TODO 4: revise the scanf's to Strings 
 				}
 					
 				if (world->player->Go(command2))
@@ -259,7 +259,7 @@ int main(){
 				printf("Welcome to Maldity!\nUse the command 'look' for receive a description of the current room.\nCombine it with 'north', 'south', 'east' and 'west' to receive descriptions \nof the exits.	\nUse 'go' and 'north', 'south', 'east' and 'west' to move between rooms. \nUse 'open door' if you find a closed door, or 'close door' if you want to close it.\nUse 'help' to see the controls and 'quit' if you want to finish the game.\n");
 
 			//INVALID COMMAND
-			else printf("You can't do that.\n");
+			else printf("You have entered an invalid command.\n");
 
 			
 			fflush(stdin);
