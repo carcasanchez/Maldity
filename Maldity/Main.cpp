@@ -1,24 +1,29 @@
+#include "MemLeaks.h"
 #include "World.h"
 #include "Player.h"
 
 World* world = nullptr;
 
 int main(){
-	
+	ReportMemoryLeaks();
+
 	world = new World;
+	world->CreateWorld();
 
 	int *player_pos = &world->player->position;
 	char temp[40];
+
 	String player_input;
 	String command1;
-	String command2;  //TODO 1: make the commands a vector
+	String command2;  
 	String command3;
 	String command4;
 
 
-	world->CreateWorld();
 	
 	
+	printf("				MALDITY\n\n");
+
 	while (player_input.Compare("quit")==false)
 	{
 		world->Look();
@@ -101,84 +106,39 @@ int main(){
 
 
 			//GO
-			else if (command1.Compare("go") && command3.Empty())
+			else if (command1.Compare("go") && command2.Empty() == false && command3.Empty())
 			{
-				if (command2.Empty())
-				{
-					printf("Where do you want to go?\n");
-					scanf_s("%s", command2); //TODO 4: revise the scanf's to Strings 
-				}
-					
 				if (world->player->Go(command2))
 					break;
-				
 			}
+
 			//OPEN
-			else if (command1.Compare("open") && command4.Empty())
+			else if (command1.Compare("open") && command3.Empty() == false && command4.Empty())
 			{
-				if (command2.Empty())
-				{ 
-					printf("What do you want to open?\n");
-					scanf_s("%s", command2);
-					
-				}	
+				
 
-				if (command2.Compare("door"))
-				{
-					printf("Where is the door do you want to open?\n");
-
-					scanf_s("%s", command3);
-					
-
-					world->player->Open(command3);
-				}
-				else if (command3.Compare("door"))
+				if (command3.Compare("door"))
 					world->player->Open(command2);
-
-
 
 				else printf("You can't do that.\n");
 			}
 
 
 			//CLOSE
-			else if (command1.Compare("close") && command4.Empty())
+			else if (command1.Compare("close") && command3.Empty() == false && command4.Empty())
 			{
-				if (command2.Empty())
-				{
-					printf("What do you want to close?\n");
-					scanf_s("%s", command2);
 
-				}
-
-				if (command2.Compare("door"))
-				{
-					printf("Where is the door do you want to close?\n");
-
-					scanf_s("%s", command3);
-
-
-					world->player->Close(command3);
-				}
-				else if (command3.Compare("door"))
+				if (command3.Compare("door"))
 					world->player->Close(command2);
-
 
 
 				else printf("You can't do that.\n");
 			}
 
 			//TAKE
-			else if ((command1.Compare("take") || command1.Compare("pick"))&&(command3.Empty()))
+			else if ((command1.Compare("take") || command1.Compare("pick")) && (command2.Empty() == false) && (command3.Empty()))
 			{
-				if (command2.Empty())
-				{
-					printf("What do you want to %s?\n", command1);
-					scanf_s("%s", command2);
-				}
-					
 				world->player->Take(command2);
-
 			}
 
 			//TAKE FROM
@@ -214,17 +174,9 @@ int main(){
 			}
 
 			//EQUIP
-			else if (command1.Compare("equip") && command3.Empty())
+			else if (command1.Compare("equip") && command3.Empty() && command2.Empty() == false)
 			{
-				if (command2.Empty())
-				{
-					printf("What do you want to equip?\n");
-					scanf_s("%s", command2);
-				}
-
 				world->player->Equip(command2);
-
-
 			}
 
 			//UNEQUIP
@@ -235,6 +187,8 @@ int main(){
 					
 				
 			}
+
+
 			//INVENTORY
 			else if ((command1.Compare("inventory") || command1.Compare("i")) && command2.Empty())
 			{
@@ -243,7 +197,6 @@ int main(){
 				for (i = 0; i < MAX_ITEMS; i++)
 					if (world->item[i]->location.Compare("inventory"))
 						printf("%s\n", world->item[i]->name.C_str());
-
 				
 			}
 			
@@ -256,7 +209,7 @@ int main(){
 
 			//HELP
 			else if (player_input.Compare("help"))
-				printf("Welcome to Maldity!\nUse the command 'look' for receive a description of the current room.\nCombine it with 'north', 'south', 'east' and 'west' to receive descriptions \nof the exits.	\nUse 'go' and 'north', 'south', 'east' and 'west' to move between rooms. \nUse 'open door' if you find a closed door, or 'close door' if you want to close it.\nUse 'help' to see the controls and 'quit' if you want to finish the game.\n");
+				printf("Welcome to Maldity!\nUse the command 'look' for receive a description of the current room.\nCombine it with 'north', 'south', 'east' and 'west' to receive descriptions \nof the exits.	\nUse 'go' and 'north', 'south', 'east' and 'west' to move between rooms. \nUse 'open <orientation> door' if you find a closed door, or \n'close <orientation> door' if you want to close it.\nSee your inventory whit 'inventory' or 'i'.\nCheck your status with 'Stats'.\nUse 'take' or 'pick' to take objects.\nUse 'take <item> from <item>' and 'put <item> in <item>' to take and put in \nother items.\nAlso, you can look at items.\nYou can equip objects to increase your stats. Use 'unequip' to unequip them.\nUse 'help' to see the controls and 'quit' if you want to finish the game.\n");
 
 			//INVALID COMMAND
 			else printf("You have entered an invalid command.\n");

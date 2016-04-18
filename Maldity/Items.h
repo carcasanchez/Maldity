@@ -15,16 +15,12 @@ public:
 	int bonus_hp = 0;
 	bool equippable = true;
 
-	Item(const char* n, const char* d, const char* l, int cap, int num)
+	Item(const char* n, const char* d, const char* l, int cap, int num) : Entity(n, d)
 	{
-
-		name = n;
-		description = d;
 		location = l;
 		capacity = cap;
 		num_items = num;
-
-	}// :Entity(name, description){}  TODO 2: inherit entity constructor
+	}
 
 	void Look();
 	

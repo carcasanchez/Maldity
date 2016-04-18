@@ -103,7 +103,7 @@ void Player::Take(const String& item_name)const
 			
 			printf("You picked the %s.\n", world->item[i]->name.C_str());
 			world->item[i]->location = "Inventory";
-	    world->player->num_items++;//TODO    num_items++;
+		    world->player->num_items++;
 			break;
 		}
 
@@ -164,7 +164,6 @@ void Player::Drop(const String& item_name)const
 		{ 
 			world->item[i]->location = world->room[position]->name.C_str();
 			printf("You dropped the %s.\n", world->item[i]->name.C_str());
-		//TODO	num_items--;
 			world->player->num_items--;
 			break;
 		}	
@@ -290,7 +289,10 @@ void Player::Equip(const String& item)
 			break;
 		}
 
-		if (i == MAX_ITEMS) printf("You have nothing like that in your inventory.\n");
+		
 	}
+
+	if (i == MAX_ITEMS)
+		printf("You have nothing like that in your inventory.\n");
 
 }

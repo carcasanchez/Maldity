@@ -97,7 +97,7 @@ void String::operator=(const char* str)
 
 }
 
-char* String::operator+(const char* str)const
+char* String::operator+(const char* str)const//const String&
 {
 	char* new_string;
 
@@ -107,7 +107,7 @@ char* String::operator+(const char* str)const
 	strcpy_s(new_string, len, buffer);
 	strcat_s(new_string, len, str);
 
-	return new_string;
+	return new_string;//return (*this)
 }
 
 char* String::operator+(const String& str)const

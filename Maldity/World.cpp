@@ -2,12 +2,10 @@
 #include "Player.h"
 
 
-World::World()// : exit(52)//TODO 5: make the exits constructor correctly
+World::World()
 {
-	for (int i = 0; i < 52; i++)
-		exit.PushBack(new Exits);  
-
-	player = new Player(0, "Jasna");
+	
+	player = new Player("Jasna", "", 0);
 
 	player->sanity = 100;
 	player->atk = 2;
@@ -22,6 +20,15 @@ World::World()// : exit(52)//TODO 5: make the exits constructor correctly
 World::~World()
 {
 	delete player;
+	for (int i = 0; i < 13; i++)
+		delete room[i];
+
+	for (int i = 0; i < MAX_ITEMS; i++)
+		delete item[i];
+
+	for (int i = 0; i < 52; i++)
+		delete exit[i];
+
 }
 
 void World::Look()const{
@@ -37,10 +44,7 @@ void World::Look()const{
 void World::CreateWorld()
 {
 	
-	for (int i = 0; i < 52;i++){
-		exit[i]->door = false;
-		exit[i]->open = true;
-	}
+	
 	
 
 	item.PushBack(new Item("Key", "It's a old, little, rusty key.\n", "Shop", 0, 0));
@@ -57,9 +61,18 @@ void World::CreateWorld()
 
 	item[4]->bonus_atk = 5;
 	item[5]->bonus_def = 5;
+	item[7]->bonus_atk = 3;
 
 	item[1]->equippable = false;
 
+
+	for (int i = 0; i < 52; i++)
+		exit.PushBack(new Exits);
+
+	for (int i = 0; i < 52; i++){
+		exit[i]->door = false;
+		exit[i]->open = true;
+	}
 
 
 	//Forest

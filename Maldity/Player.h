@@ -12,12 +12,9 @@ public:
 	int def;
 	int health;
 
-	Player(int pos, char* n){
+	Player(const char* name, const char* desc, int pos) :Entity(name, desc){
 		position = pos;
-		name = n;
 	}
-
-	//Player() :Entity(){} TODO 2: inherit entity constructor
 
 	bool Go(const String& dest);
 	void Open(const String& direction)const;

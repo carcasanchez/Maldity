@@ -4,15 +4,10 @@
 
 class Room:public Entity{
 public:
-	String name;
-	String description;
-
 	
-	Room(const char* str1, const char* str2) //:Entity(name, description) TODO 2: inherit entity constructor
-	{
-		name = str1;
-		description = str2;
-	}
+
+	Room(const char* str1, const char* str2) :Entity(str1, str2) {}
+	~Room(){};
 };
 
 #endif
