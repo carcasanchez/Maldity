@@ -66,92 +66,39 @@ void World::CreateWorld()
 	item[1]->equippable = false;
 
 
-	for (int i = 0; i < 52; i++)
-		exit.PushBack(new Exits);
-
-	for (int i = 0; i < 52; i++){
-		exit[i]->door = false;
-		exit[i]->open = true;
-	}
-
-
 	//Forest
 	
-	room.PushBack(new Room("Forest", "You are in a forest. \nAt south, you see that the road drives to a city. \nAt west, a high hill. \nAt north, the road vanishes in the distance. \nAt east, only the sea.\n"));
+	room.PushBack(new Room("Forest","You are in a forest. \nAt south, you see that the road drives to a city. \nAt west, a high hill. \nAt north, the road vanishes in the distance. \nAt east, only the sea.\n"));
 
-	exit[0]->orientation="north";
-	exit[1]->orientation= "south";
-	exit[2]->orientation= "east";
-	exit[3]->orientation= "west";
+	exit.PushBack(new Exit("", "The road vanishes in the distance.\nBetter no to follow it.\n", "Forest", "", "north", false, true));
+	exit.PushBack(new Exit("", "The road follows the coast and approaches to the village.\n", "Forest", "Road", "south", false, true));
+	exit.PushBack(new Exit("", "The sea looks grey and unpeaceful.\n", "Forest", "", "east", false, true));
+	exit.PushBack(new Exit("", "You can't go on that direction.\nThe hill is too high.\n", "Forest", "", "west", false, true));
 	
-	exit[0]->origin = "Forest";
-	exit[1]->origin = "Forest";
-	exit[2]->origin = "Forest";
-	exit[3]->origin = "Forest";
-
-	exit[0]->destination = "";
-	exit[1]->destination = "Road";
-	exit[2]->destination = "";
-	exit[3]->destination = "";
-	
-	exit[0]->description = "The road vanishes in the distance.\nBetter no to follow it.\n";
-	exit[1]->description = "The road follows the coast and approaches to the village.\n";
-	exit[2]->description = "The sea looks grey and unpeaceful.\n";
-	exit[3]->description = "You can't go on that direction.\nThe hill is too high.\n";
-
 
 	//Road
 
 	room.PushBack(new Room("Road", "You are in a high road. \nAt north, there's a mass of gothic buildings. \nAt south, the sea, and a small beach. \nAt west, a way to a big dock. \nAt east, the road that drives to the forest.\n"));
 
-	exit[4]->orientation = "north";
-	exit[5]->orientation = "south";
-	exit[6]->orientation = "east";
-	exit[7]->orientation = "west";
+	exit.PushBack(new Exit("", "The alleys seem to drive to the city center.\n", "Road", "Center", "north", false, true));
+	exit.PushBack(new Exit("", "Narrow stairs sculpted in rock descends to the beach.\n", "Road", "Beach", "south", false, true));
+	exit.PushBack(new Exit("", "The road leaves the city and follows the coast.\n", "Road", "Forest", "east", false, true));
+	exit.PushBack(new Exit("", "At the distance, you can see numerous boat masts.\n", "Road", "Dock", "west", false, true));
 
-	exit[4]->origin = "Road";
-	exit[5]->origin = "Road";
-	exit[6]->origin = "Road";
-	exit[7]->origin = "Road";
-
-	exit[4]->destination = "Center";
-	exit[5]->destination= "Beach";
-	exit[6]->destination = "Forest";
-	exit[7]->destination = "Dock";
-
-	exit[4]->description = "The alleys seem to drive to the city center.\n";
-	exit[5]->description = "Narrow stairs sculpted in rock descends to the beach.\n";
-	exit[6]->description = "The road leaves the city and follows the coast.\n";
-	exit[7]->description = "At the distance, you can see numerous boat masts.\n";
-
-
+	
 	//Beach
 
 	room.PushBack(new Room("Beach", "The beach is small and it's full of rocks\nYou can only see the main road, at north, and the wide open sea, at south.\n"));
 	
-	exit[8]->orientation = "north";
-	exit[9]->orientation = "south";
-	exit[10]->orientation = "east";
-	exit[11]->orientation = "west";
 
-	exit[8]->origin = "Beach";
-	exit[9]->origin = "Beach";
-	exit[10]->origin = "Beach";
-	exit[11]->origin = "Beach";
+	exit.PushBack(new Exit("", "The stairs go back to the road\n", "Beach", "Road", "north", false, true));
+	exit.PushBack(new Exit("", "You look at the sea. The horizon is cloudy, and the water, grey.\nYou feel a little relief for stay in land,\nbut the cold and ferocious wind spreads it.\n", "Beach", "", "south", false, true));
+	exit.PushBack(new Exit("", "The rocks are too abrupt to walk over them.\n", "Beach", "", "east", false, true));
+	exit.PushBack(new Exit("", "The rocks are too abrupt to walk over them.\n", "Beach", "", "west", false, true));
 
-	exit[8]->destination = "Road";
-	exit[9]->destination = "";
-	exit[10]->destination = "";
-	exit[11]->destination = "";
-
-	exit[8]->description = "The stairs go back to the road\n";
-	exit[9]->description = "You look at the sea. The horizon is cloudy, and the water, grey.\nYou feel a little relief for stay in land,\nbut the cold and ferocious wind spreads it.\n";
-	exit[10]->description = "The rocks are too abrupt to walk over them.\n";
-	exit[11]->description = "The rocks are too abrupt to walk over them.\n";
-	
 	
 	//Dock
-
+/*
 	room.PushBack(new Room("Dock", "The dock is really impressive.\nThere are enourmous woody ships in all directions except for the east.\n"));
 
 	exit[12]->orientation = "north";
@@ -414,6 +361,6 @@ void World::CreateWorld()
 	exit[50]->description = "The only exit is the door at the west.\n";
 	exit[51]->description = "You can see the city center from the interior of the shop.\n";
 	
-	
+	*/
 }
 

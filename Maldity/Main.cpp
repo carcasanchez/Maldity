@@ -22,7 +22,7 @@ int main(){
 
 	
 	
-	printf("				MALDITY\n\n");
+	printf("\n				MALDITY\n\n");
 
 	while (player_input.Compare("quit")==false)
 	{

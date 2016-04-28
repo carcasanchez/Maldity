@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "World.h"
 
-void Exits::Look()const
+void Exit::Look()const
 {
 	printf("%s", description.C_str());
 	if (door)

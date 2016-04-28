@@ -19,7 +19,7 @@ class World{
 public:
 		
 	Vector <Room*> room;
-	Vector <Exits*> exit;
+	Vector <Exit*> exit;
 	Vector <Item*> item;
 	Player* player;
 	World();
