@@ -6,7 +6,7 @@ class Room:public Entity{
 public:
 	
 
-	Room(const char* str1, const char* str2) :Entity(str1, str2) {}
+	Room(const char* str1, const char* str2) :Entity(str1, str2, ROOM) {}
 	~Room(){};
 };
 

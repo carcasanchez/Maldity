@@ -13,16 +13,16 @@ public:
 	int bonus_atk = 0;
 	int bonus_def = 0;
 	int bonus_hp = 0;
-	bool equippable = true;
+	int limit;
 
-	Item(const char* n, const char* d, const char* l, int cap, int num) : Entity(n, d)
+	//TODO: item location and stats
+	Item(const char* name, const char* description, const char* l, Tipus type, int limit) : Entity(name, description, type), limit(limit)
 	{
 		location = l;
-		capacity = cap;
-		num_items = num;
+
 	}
 
-	void Look();
+	void Look() const;
 	
 };
 

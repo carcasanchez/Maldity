@@ -19,6 +19,7 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Double-Linked List.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Exits.h" />
     <ClInclude Include="Items.h" />
@@ -26,7 +27,6 @@
     <ClInclude Include="MyString.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rooms.h" />
-    <ClInclude Include="Vector.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

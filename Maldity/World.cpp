@@ -10,36 +10,28 @@ World::World()
 	player->sanity = 100;
 	player->atk = 2;
 	player->def = 5;
-	player->capacity = 5;
-	player->num_items = 0;
 	player->health = 20;
 
 
 }
 
 World::~World()
-{
-	delete player;
-	for (int i = 0; i < 13; i++)
-		delete room[i];
-
-	for (int i = 0; i < MAX_ITEMS; i++)
-		delete item[i];
-
-	for (int i = 0; i < 52; i++)
-		delete exit[i];
-
-}
+{}
 
 void World::Look()const{
 
-	printf("%s", room[player->position]->description.C_str());
-	for (int i = 0; i < MAX_ITEMS; i++)
+	printf("%s", player->position->data->description.C_str());
+
+	List <Item*> ::Node* n = player->position->data->inside.first;
+
+	while (n != nullptr)
 	{
-		if (item[i]->location.Compare(room[player->position]->name.C_str()))
-			printf("There's a %s in the floor.\n", item[i]->name.C_str());
+		printf("There's a %s in the floor.\n", n->data->name.C_str);
+		n = n->next;
 	}
 }
+
+
 
 void World::CreateWorld()
 {
@@ -47,23 +39,22 @@ void World::CreateWorld()
 	
 	
 
-	item.PushBack(new Item("Key", "It's a old, little, rusty key.\n", "Shop", 0, 0));
-	item.PushBack(new Item("Coffer", "An old wooden box. You can put objects into it.\n", "House", 4, 4));
-	item.PushBack(new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", "Coffer", 0, 0));
-	item.PushBack(new Item("Totem", "A strange totem, made in wood.\nIt's impossible to determine what it represents...\n", "Statue", 0, 0));
-    item.PushBack(new Item("Sword", "It's a short sword, very sharpen.\n", "Coffer", 0, 0));
-	item.PushBack(new Item("Armor", "A strange, shiny armor that covers the chest.\n", "Coffer", 0, 0));
-	item.PushBack(new Item("Map", "The old map of a sailor. It doesn't represent any continent recognizable...\n", "Dock" , 0, 0));
-	item.PushBack(new Item("Fang", "It seems to be the fang of a sea creature.\nBut any sea creature known has that fangs...\n", "Beach", 0, 0));
-	item.PushBack(new Item("Rope", "A simple piece of rope. Nothing strange.\n", "Shop", 0, 0));
-	item.PushBack(new Item("Swordcase", "Very useful case, perfect for keep a sword inside.\n", "Coffer", 1, 0));
-	item.PushBack(new Item("Vial", "A cristal bottle, with a dark, red sustance in it. Maybe blood?\n", "Tavern", 0, 0));
+	item.PushBack(new Item("Key", "It's a old, little, rusty key.\n", "Shop", EQUIP_ITEM, 0));
+	item.PushBack(new Item("Coffer", "An old wooden box. You can put objects into it.\n", "House",  NON_EQUIP_ITEM, 3));
+	item.PushBack(new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", "Coffer", EQUIP_ITEM, 0));
+	item.PushBack(new Item("Totem", "A strange totem, made in wood.\nIt's impossible to determine what it represents...\n", "Statue", EQUIP_ITEM, 0));
+	item.PushBack(new Item("Sword", "It's a short sword, very sharpen.\n", "Coffer", EQUIP_ITEM, 0));
+	item.PushBack(new Item("Armor", "A strange, shiny armor that covers the chest.\n", "Coffer", EQUIP_ITEM, 0));
+	item.PushBack(new Item("Map", "The old map of a sailor. It doesn't represent any continent recognizable...\n", "Dock", EQUIP_ITEM, 0));
+	item.PushBack(new Item("Fang", "It seems to be the fang of a sea creature.\nBut any sea creature known has that fangs...\n", "Beach", EQUIP_ITEM, 0));
+	item.PushBack(new Item("Rope", "A simple piece of rope. Nothing strange.\n", "Shop", EQUIP_ITEM, 0));
+	item.PushBack(new Item("Swordcase", "Very useful case, perfect for keep a sword inside.\n", "Coffer", EQUIP_ITEM, 1));
+	item.PushBack(new Item("Vial", "A cristal bottle, with a dark, red sustance in it. Maybe blood?\n", "Tavern", EQUIP_ITEM, 0));
 
 	item[4]->bonus_atk = 5;
 	item[5]->bonus_def = 5;
 	item[7]->bonus_atk = 3;
 
-	item[1]->equippable = false;
 
 
 	//Forest

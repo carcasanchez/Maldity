@@ -10,7 +10,10 @@ int main(){
 	world = new World;
 	world->CreateWorld();
 
-	int *player_pos = &world->player->position;
+
+	List <Room*> ::Node *player_pos = world->player->position;
+	
+
 	char temp[40];
 
 	String player_input;
@@ -19,7 +22,7 @@ int main(){
 	String command3;
 	String command4;
 
-
+	
 	
 	
 	printf("\n				MALDITY\n\n");
@@ -79,14 +82,19 @@ int main(){
 				//Look the exits
 				else if (command3.Empty())
 				{
-					int i, j;
-					for (i = 0; i < 52;i++)
-						if (world->exit[i]->orientation.Compare(command2)
-							&& world->exit[i]->origin.Compare(world->room[*player_pos]->name.C_str()))
+					List <Exit*> ::Node *it = nullptr;
+					it = world->exit.first;
+
+					while (it != nullptr)
+					{
+						if (command2.Compare(it->data->orientation.C_str()) && player_pos->data->name.Compare(it->data->origin.C_str()))
 						{
-							world->exit[i]->Look();
+							it->data->Look();
 							break;
 						}
+
+						it = it->next;
+					}
 					//Look the items
 					if (i == 52)
 						for (j = 0; j < MAX_ITEMS; j++)

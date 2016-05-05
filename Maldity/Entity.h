@@ -1,8 +1,9 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 #include "MyString.h"
-#include "Vector.h"
+#include "Double-Linked List.h"
 
+enum Tipus{ROOM, EQUIP_ITEM, NON_EQUIP_ITEM, PLAYER, EXIT};
 
 class Entity{
 
@@ -10,21 +11,21 @@ public:
 
 	String name;
 	String description;
+	Tipus type;
+	
 
-
-	int capacity;
-	int num_items;
+	List <Item*> inside;
 
 	Entity(){};
 
-	Entity(const char* str1, const char* str2) : name(str1), description(str2)
-	{
-
-	}
+	Entity(const char* str1, const char* str2, Tipus type) : name(str1), description(str2), type(type){}
 
 	virtual ~Entity(){};
 
-	virtual void Look(){};
+	virtual void Look()
+	{
+		printf("%s",  description.C_str());
+	};
 	
 
 };

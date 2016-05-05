@@ -53,13 +53,13 @@
     <ClInclude Include="Entity.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vector.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
     <ClInclude Include="Items.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MemLeaks.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Double-Linked List.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>

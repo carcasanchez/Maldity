@@ -11,7 +11,7 @@ public:
 	String orientation;
 	bool door, open;
 	
-	Exit(const char* name, const char* description, const char* origin, const char* destination, const char* orientation, bool door, bool open) :Entity(name, description), origin(origin), destination(destination), orientation(orientation), door(door), open(open){};
+	Exit(const char* name, const char* description, const char* origin, const char* destination, const char* orientation, bool door, bool open) :Entity(name, description, EXIT), origin(origin), destination(destination), orientation(orientation), door(door), open(open){};
 	void Look()const;
 
 

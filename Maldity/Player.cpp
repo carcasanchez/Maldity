@@ -1,6 +1,6 @@
 #include "World.h"
 #include "Player.h"
-
+#include "Double-Linked List.h"
 
 bool Player::Go(const String& dest)
 {
@@ -259,11 +259,7 @@ bool Player::Unequip()
 void Player::Equip(const String& item)
 {
 	int i = 0;
-
 	
-	
-
-
 	for (i = 0; i < MAX_ITEMS; i++)
 	{
 
@@ -294,5 +290,28 @@ void Player::Equip(const String& item)
 
 	if (i == MAX_ITEMS)
 		printf("You have nothing like that in your inventory.\n");
+
+}
+
+bool Player::Move(Entity& source, Entity& destination, String name)
+{
+	List <Item*> ::Node* n = source.inside.first;
+
+
+	while (n != nullptr)
+	{
+		List <Item*> ::Node* tmp = n->next;
+
+		if (n->data->name.Compare(name))
+		{
+			destination.inside.PushBack(n->data);
+			source.inside.Erase(n);
+			return true;
+		}
+
+		n = tmp;
+	}
+
+	return false;
 
 }

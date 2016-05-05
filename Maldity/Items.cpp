@@ -3,7 +3,7 @@
 #include "Player.h"
 #include <iostream>
 
-void Item::Look()
+void Item::Look()const
 {
 
 	if (location.Compare(world->room[world->player->position]->name.C_str()) || location.Compare("inventory")|| location.Compare("equipped"))
