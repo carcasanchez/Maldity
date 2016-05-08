@@ -200,11 +200,17 @@ int main(){
 			//INVENTORY
 			else if ((command1.Compare("inventory") || command1.Compare("i")) && command2.Empty())
 			{
-				int i;
+				List <Item*> ::Node *it = world->player->inside.first;
 				printf("\n-----Jasna's inventory:\n");
-				for (i = 0; i < MAX_ITEMS; i++)
-					if (world->item[i]->location.Compare("inventory"))
-						printf("%s\n", world->item[i]->name.C_str());
+
+				if (it == nullptr)
+					printf("The inventory is empty.\n");
+				
+				while (it != nullptr)
+				{
+					printf("%s", it->data->description.C_str());
+					it = it->next;
+				}
 				
 			}
 			
