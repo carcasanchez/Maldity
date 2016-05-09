@@ -8,11 +8,9 @@
 
 #include "MyString.h"
 #include "Double-Linked List.h"
-#include "Vector.h"
 #include "Rooms.h"
 #include "Exits.h"
 #include "Items.h"
-#include "Creature.h"
 
 class Player;
 
@@ -20,11 +18,10 @@ class Player;
 class World{
 public:
 		
-
-	Vector <Entity*> entity;
-	
-	Creature* player;
-
+	List <Room*> room;
+	List <Exit*> exit;
+	List <Item*> item;
+	Player* player;
 	World();
 	~World();
 

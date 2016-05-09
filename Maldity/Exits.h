@@ -3,17 +3,15 @@
 #include"Entity.h"
 
 
-enum Cardinal{N, S, E, W};
 
-class Exit:public Entity
-{
+class Exit:public Entity{
 public:
-	Room* origin;
-	Room* destination;
-	Cardinal orientation;
+	String origin;
+	String destination;
+	String orientation;
 	bool door, open;
 	
-	Exit(const char* name, const char* description, Room* origin, Room* destination, Cardinal orientation, bool door, bool open) :Entity(name, description, EXIT), origin(origin), destination(destination), orientation(orientation), door(door), open(open){};
+	Exit(const char* name, const char* description, const char* origin, const char* destination, const char* orientation, bool door, bool open) :Entity(name, description, EXIT), origin(origin), destination(destination), orientation(orientation), door(door), open(open){};
 	void Look()const;
 
 

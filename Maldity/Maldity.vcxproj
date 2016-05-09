@@ -19,16 +19,14 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Creature.h" />
     <ClInclude Include="Double-Linked List.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Exits.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="MyString.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Rooms.h" />
-    <ClInclude Include="Stats.h" />
-    <ClInclude Include="Vector.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

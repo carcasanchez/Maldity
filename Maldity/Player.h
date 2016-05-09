@@ -9,7 +9,7 @@ public:
 
 	List <Room*> ::Node* position;
 	int sanity;
-	int atk;    
+	int atk;    //TODO: Constructor of player: stats
 	int def;
 	int health;
 

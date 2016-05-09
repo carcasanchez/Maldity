@@ -3,7 +3,7 @@
 #include "MyString.h"
 #include "Double-Linked List.h"
 
-enum Tipus{ ROOM, EQUIP_ITEM, NON_EQUIP_ITEM, NPC, PLAYER,  EXIT };
+enum Tipus{ROOM, EQUIP_ITEM, NON_EQUIP_ITEM, PLAYER, EXIT};
 
 class Entity{
 
@@ -14,7 +14,7 @@ public:
 	Tipus type;
 	
 
-	List <Entity*> inside;
+	List <Item*> inside;
 
 	Entity(){};
 

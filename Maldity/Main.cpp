@@ -11,7 +11,7 @@ int main(){
 	world->CreateWorld();
 
 
-	Room* player_pos = world->player->position;
+	List <Room*> ::Node *player_pos = world->player->position;
 	
 
 	char temp[40];
