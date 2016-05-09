@@ -3,26 +3,16 @@
 
 
 World::World()
-{
-	
-	player = new Player("Jasna", "", 0);
-
-	player->sanity = 100;
-	player->atk = 2;
-	player->def = 5;
-	player->health = 20;
-
-
-}
+{}
 
 World::~World()
 {}
 
 void World::Look()const{
 
-	printf("%s", player->position->data->description.C_str());
+	printf("%s", player->position->description.C_str());
 
-	List <Item*> ::Node* n = player->position->data->inside.first;
+	List <Entity*> ::Node* n = player->position->inside.first;
 
 	while (n != nullptr)
 	{
@@ -35,57 +25,47 @@ void World::Look()const{
 
 void World::CreateWorld()
 {
+	Room* forest = nullptr;
+	Room* road = nullptr;
+	Room* beach = nullptr;
+	Room* dock = nullptr;
+	Room* center = nullptr;
+	Room* shop = nullptr;
+	Room* house = nullptr;
+	Room* alley = nullptr;
+	Room* tavern = nullptr;
+	Room* top = nullptr;
+	Room* fells = nullptr;
+	Room* statue = nullptr;
+	Room* balcony = nullptr;
+
+
 	
-	
-	
-
-	item.PushBack(new Item("Key", "It's a old, little, rusty key.\n", "Shop", EQUIP_ITEM, 0));
-	item.PushBack(new Item("Coffer", "An old wooden box. You can put objects into it.\n", "House",  NON_EQUIP_ITEM, 3));
-	item.PushBack(new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", "Coffer", EQUIP_ITEM, 0));
-	item.PushBack(new Item("Totem", "A strange totem, made in wood.\nIt's impossible to determine what it represents...\n", "Statue", EQUIP_ITEM, 0));
-	item.PushBack(new Item("Sword", "It's a short sword, very sharpen.\n", "Coffer", EQUIP_ITEM, 0));
-	item.PushBack(new Item("Armor", "A strange, shiny armor that covers the chest.\n", "Coffer", EQUIP_ITEM, 0));
-	item.PushBack(new Item("Map", "The old map of a sailor. It doesn't represent any continent recognizable...\n", "Dock", EQUIP_ITEM, 0));
-	item.PushBack(new Item("Fang", "It seems to be the fang of a sea creature.\nBut any sea creature known has that fangs...\n", "Beach", EQUIP_ITEM, 0));
-	item.PushBack(new Item("Rope", "A simple piece of rope. Nothing strange.\n", "Shop", EQUIP_ITEM, 0));
-	item.PushBack(new Item("Swordcase", "Very useful case, perfect for keep a sword inside.\n", "Coffer", EQUIP_ITEM, 1));
-	item.PushBack(new Item("Vial", "A cristal bottle, with a dark, red sustance in it. Maybe blood?\n", "Tavern", EQUIP_ITEM, 0));
-
-	item[4]->bonus_atk = 5;
-	item[5]->bonus_def = 5;
-	item[7]->bonus_atk = 3;
-
-
-
 	//Forest
-	
-	room.PushBack(new Room("Forest","You are in a forest. \nAt south, you see that the road drives to a city. \nAt west, a high hill. \nAt north, the road vanishes in the distance. \nAt east, only the sea.\n"));
+	entity.PushBack(forest = new Room("Forest","You are in a forest. \nAt south, you see that the road drives to a city. \nAt west, a high hill. \nAt north, the road vanishes in the distance. \nAt east, only the sea.\n"));
 
-	exit.PushBack(new Exit("", "The road vanishes in the distance.\nBetter no to follow it.\n", "Forest", "", "north", false, true));
-	exit.PushBack(new Exit("", "The road follows the coast and approaches to the village.\n", "Forest", "Road", "south", false, true));
-	exit.PushBack(new Exit("", "The sea looks grey and unpeaceful.\n", "Forest", "", "east", false, true));
-	exit.PushBack(new Exit("", "You can't go on that direction.\nThe hill is too high.\n", "Forest", "", "west", false, true));
+	entity.PushBack(new Exit("", "The road vanishes in the distance.\nBetter no to follow it.\n", forest, nullptr, N, false, true));
+	entity.PushBack(new Exit("", "The road follows the coast and approaches to the village.\n", forest, road, S, false, true));
+	entity.PushBack(new Exit("", "The sea looks grey and unpeaceful.\n", forest, nullptr, E, false, true));
+	entity.PushBack(new Exit("", "You can't go on that direction.\nThe hill is too high.\n", forest, nullptr, W, false, true));
 	
 
 	//Road
+	entity.PushBack(road = new Room("Road", "You are in a high road. \nAt north, there's a mass of gothic buildings. \nAt south, the sea, and a small beach. \nAt west, a way to a big dock. \nAt east, the road that drives to the forest.\n"));
 
-	room.PushBack(new Room("Road", "You are in a high road. \nAt north, there's a mass of gothic buildings. \nAt south, the sea, and a small beach. \nAt west, a way to a big dock. \nAt east, the road that drives to the forest.\n"));
-
-	exit.PushBack(new Exit("", "The alleys seem to drive to the city center.\n", "Road", "Center", "north", false, true));
-	exit.PushBack(new Exit("", "Narrow stairs sculpted in rock descends to the beach.\n", "Road", "Beach", "south", false, true));
-	exit.PushBack(new Exit("", "The road leaves the city and follows the coast.\n", "Road", "Forest", "east", false, true));
-	exit.PushBack(new Exit("", "At the distance, you can see numerous boat masts.\n", "Road", "Dock", "west", false, true));
+	entity.PushBack(new Exit("", "The alleys seem to drive to the city center.\n", road, center, N, false, true));
+	entity.PushBack(new Exit("", "Narrow stairs sculpted in rock descends to the beach.\n", road, beach, S, false, true));
+	entity.PushBack(new Exit("", "The road leaves the city and follows the coast.\n", road, forest, E, false, true));
+	entity.PushBack(new Exit("", "At the distance, you can see numerous boat masts.\n", road , dock, W, false, true));
 
 	
 	//Beach
+	entity.PushBack(beach = new Room("Beach", "The beach is small and it's full of rocks\nYou can only see the main road, at north, and the wide open sea, at south.\n"));
 
-	room.PushBack(new Room("Beach", "The beach is small and it's full of rocks\nYou can only see the main road, at north, and the wide open sea, at south.\n"));
-	
-
-	exit.PushBack(new Exit("", "The stairs go back to the road\n", "Beach", "Road", "north", false, true));
-	exit.PushBack(new Exit("", "You look at the sea. The horizon is cloudy, and the water, grey.\nYou feel a little relief for stay in land,\nbut the cold and ferocious wind spreads it.\n", "Beach", "", "south", false, true));
-	exit.PushBack(new Exit("", "The rocks are too abrupt to walk over them.\n", "Beach", "", "east", false, true));
-	exit.PushBack(new Exit("", "The rocks are too abrupt to walk over them.\n", "Beach", "", "west", false, true));
+	entity.PushBack(new Exit("", "The stairs go back to the road\n", beach, road, N, false, true));
+	entity.PushBack(new Exit("", "You look at the sea. The horizon is cloudy, and the water, grey.\nYou feel a little relief for stay in land,\nbut the cold and ferocious wind spreads it.\n", beach, nullptr, S, false, true));
+	entity.PushBack(new Exit("", "The rocks are too abrupt to walk over them.\n", beach, nullptr, E, false, true));
+	entity.PushBack(new Exit("", "The rocks are too abrupt to walk over them.\n", beach, nullptr, W, false, true));
 
 	
 	//Dock
@@ -353,5 +333,46 @@ void World::CreateWorld()
 	exit[51]->description = "You can see the city center from the interior of the shop.\n";
 	
 	*/
+
+
+Stats Jasna_stats(20, 2, 5, 100);
+
+
+entity.PushBack(player = new Creature("Jasna", "", forest, PLAYER, Jasna_stats));
+
+
+Stats non_bonus(0, 0, 0, 0);
+Stats sword_bonus(0, 5, 0, 0);
+Stats armor_bonus(0, 0, 3, 0);
+Stats fang_bonus(0, 2, 0, 0);
+
+
+Item* key = nullptr;
+Item* coffer = nullptr;
+Item* coin = nullptr;
+Item* totem = nullptr;
+Item* sword = nullptr;
+Item* armor = nullptr;
+Item* map = nullptr;
+Item* fang = nullptr;
+Item* rope = nullptr;
+Item* swordcase = nullptr;
+Item* vial = nullptr;
+
+
+
+entity.PushBack(key = new Item("Key", "It's a old, little, rusty key.\n", forest, EQUIP_ITEM, non_bonus, 0));
+entity.PushBack(coffer = new Item("Coffer", "An old wooden box. You can put objects into it.\n", house, NON_EQUIP_ITEM, non_bonus, 3));
+entity.PushBack(coin = new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", coffer, EQUIP_ITEM, non_bonus, 0));
+entity.PushBack(totem = new Item("Totem", "A strange totem, made in wood.\nIt's impossible to determine what it represents...\n", statue, EQUIP_ITEM, non_bonus, 0));
+entity.PushBack(sword = new Item("Sword", "It's a short sword, very sharpen.\n", coffer, EQUIP_ITEM, sword_bonus, 0));
+entity.PushBack(armor = new Item("Armor", "A strange, shiny armor that covers the chest.\n", coffer, EQUIP_ITEM, armor_bonus, 0));
+entity.PushBack(map = new Item("Map", "The old map of a sailor. It doesn't represent any continent recognizable...\n", dock, EQUIP_ITEM, non_bonus, 0));
+entity.PushBack(fang = new Item("Fang", "It seems to be the fang of a sea creature.\nBut any sea creature known has that fangs...\n", beach, EQUIP_ITEM, fang_bonus, 0));
+entity.PushBack(rope = new Item("Rope", "A simple piece of rope. Nothing strange.\n", shop, EQUIP_ITEM, non_bonus, 0));
+entity.PushBack(swordcase = new Item("Swordcase", "Very useful case, perfect for keep a sword inside.\n", coffer, EQUIP_ITEM, non_bonus, 1));
+entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sustance in it. Maybe blood?\n", tavern, EQUIP_ITEM, non_bonus, 0));
+
+
 }
 

@@ -2,24 +2,28 @@
 #define __ITEMS_H__
 
 #include "Entity.h"
-
+#include "Stats.h"
 
 class Item:public Entity
 {
 
 public:
 	
-	String location;
+	Entity* location;
+
+	int bonus_hp = 0;
 	int bonus_atk = 0;
 	int bonus_def = 0;
-	int bonus_hp = 0;
+	int bonus_sanity = 0;
 	int limit;
 
-	//TODO: item location and stats
-	Item(const char* name, const char* description, const char* l, Tipus type, int limit) : Entity(name, description, type), limit(limit)
-	{
-		location = l;
 
+	Item(const char* name, const char* description, Entity* location, Tipus type, Stats bonus, int limit) : Entity(name, description, type), location(location), limit(limit)
+	{
+		bonus_atk = bonus.atk;
+		bonus_hp = bonus.hp;
+		bonus_def = bonus.hp;
+		bonus_sanity = bonus.sanity;
 	}
 
 	void Look() const;
