@@ -1,24 +1,26 @@
-#ifndef __PLAYER_H__
-#define __PLAYER_H_
-
+#ifndef __CREATURE_H__
+#define __CREATURE_H__
 #include "Entity.h"
+#include "World.h"
 
-
-class Player: public Entity{	
+class Creature:public Entity
+{
 public:
-
-	List <Room*> ::Node* position;
+	Room* position;
 	int sanity;
-	int atk;    
+	int atk;
 	int def;
 	int health;
 
-	Player(const char* name, const char* desc, int pos) :Entity(name, desc, PLAYER){
-		position = world->room.first;
+	Creature(const char* name, const char* desc, Room* pos, Tipus type, Stats stats) :Entity(name, desc, type), position(pos)
+	{
+		atk = stats.atk;
+		health = stats.hp;
+		def = stats.hp;
+		sanity = stats.sanity;
 	}
 
 	bool Move(Entity& source, Entity& destination, String name);
-
 	bool Go(const String& dest);
 	void Open(const String& direction)const;
 	void Close(const String& direction)const;
@@ -30,8 +32,7 @@ public:
 	bool Unequip();
 	void Equip(const String& item);
 
-	
-
 };
 
-#endif 
+
+#endif
