@@ -1,5 +1,5 @@
 #include "World.h"
-#include "Player.h"
+#include "Creature.h"
 
 
 World::World()
@@ -11,13 +11,27 @@ World::~World()
 void World::Look()const{
 
 	printf("%s", player->position->description.C_str());
+	List<Entity*>::Node* it;
 
-	List <Entity*> ::Node* n = player->position->inside.first;
 
-	while (n != nullptr)
+	for (int i = 0; i < entity.Size(); i++)
 	{
-		printf("There's a %s in the floor.\n", n->data->name.C_str);
-		n = n->next;
+		if (entity[i] == player->position)
+		{
+			it = entity[i]->inside.first;
+			
+			while (it != nullptr)
+			{
+				if (it->data->type == NON_EQUIP_ITEM || it->data->type == EQUIP_ITEM)
+					printf("There's a %s here.\n", it->data->name.C_str());
+
+				else if (it->data->type == NPC)
+					printf("%s is here.\n", it->data->name.C_str());
+
+				it = it->next;
+			}
+			break;
+		}	
 	}
 }
 
@@ -25,19 +39,6 @@ void World::Look()const{
 
 void World::CreateWorld()
 {
-	Room* forest = nullptr;
-	Room* road = nullptr;
-	Room* beach = nullptr;
-	Room* dock = nullptr;
-	Room* center = nullptr;
-	Room* shop = nullptr;
-	Room* house = nullptr;
-	Room* alley = nullptr;
-	Room* tavern = nullptr;
-	Room* top = nullptr;
-	Room* fells = nullptr;
-	Room* statue = nullptr;
-	Room* balcony = nullptr;
 
 
 	
@@ -347,32 +348,24 @@ Stats armor_bonus(0, 0, 3, 0);
 Stats fang_bonus(0, 2, 0, 0);
 
 
-Item* key = nullptr;
-Item* coffer = nullptr;
-Item* coin = nullptr;
-Item* totem = nullptr;
-Item* sword = nullptr;
-Item* armor = nullptr;
-Item* map = nullptr;
-Item* fang = nullptr;
-Item* rope = nullptr;
-Item* swordcase = nullptr;
-Item* vial = nullptr;
+
+
+entity.PushBack(key = new Item("Key", "It's a old, little, rusty key.\n", EQUIP_ITEM, non_bonus, 0));
+entity.PushBack(coffer = new Item("Coffer", "An old wooden box. You can put objects into it.\n", NON_EQUIP_ITEM, non_bonus, 3));
+entity.PushBack(coin = new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", EQUIP_ITEM, non_bonus, 0));
+entity.PushBack(totem = new Item("Totem", "A strange totem, made in wood.\nIt's impossible to determine what it represents...\n", EQUIP_ITEM, non_bonus, 0));
+entity.PushBack(sword = new Item("Sword", "It's a short sword, very sharpen.\n", EQUIP_ITEM, sword_bonus, 0));
+entity.PushBack(armor = new Item("Armor", "A strange, shiny armor that covers the chest.\n", EQUIP_ITEM, armor_bonus, 0));
+entity.PushBack(map = new Item("Map", "The old map of a sailor. It doesn't represent any continent recognizable...\n",  EQUIP_ITEM, non_bonus, 0));
+entity.PushBack(fang = new Item("Fang", "It seems to be the fang of a sea creature.\nBut any sea creature known has that fangs...\n", EQUIP_ITEM, fang_bonus, 0));
+entity.PushBack(rope = new Item("Rope", "A simple piece of rope. Nothing strange.\n", EQUIP_ITEM, non_bonus, 0));
+entity.PushBack(swordcase = new Item("Swordcase", "Very useful case, perfect for keep a sword inside.\n", EQUIP_ITEM, non_bonus, 1));
+entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sustance in it. Maybe blood?\n", EQUIP_ITEM, non_bonus, 0));
 
 
 
-entity.PushBack(key = new Item("Key", "It's a old, little, rusty key.\n", forest, EQUIP_ITEM, non_bonus, 0));
-entity.PushBack(coffer = new Item("Coffer", "An old wooden box. You can put objects into it.\n", house, NON_EQUIP_ITEM, non_bonus, 3));
-entity.PushBack(coin = new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", coffer, EQUIP_ITEM, non_bonus, 0));
-entity.PushBack(totem = new Item("Totem", "A strange totem, made in wood.\nIt's impossible to determine what it represents...\n", statue, EQUIP_ITEM, non_bonus, 0));
-entity.PushBack(sword = new Item("Sword", "It's a short sword, very sharpen.\n", coffer, EQUIP_ITEM, sword_bonus, 0));
-entity.PushBack(armor = new Item("Armor", "A strange, shiny armor that covers the chest.\n", coffer, EQUIP_ITEM, armor_bonus, 0));
-entity.PushBack(map = new Item("Map", "The old map of a sailor. It doesn't represent any continent recognizable...\n", dock, EQUIP_ITEM, non_bonus, 0));
-entity.PushBack(fang = new Item("Fang", "It seems to be the fang of a sea creature.\nBut any sea creature known has that fangs...\n", beach, EQUIP_ITEM, fang_bonus, 0));
-entity.PushBack(rope = new Item("Rope", "A simple piece of rope. Nothing strange.\n", shop, EQUIP_ITEM, non_bonus, 0));
-entity.PushBack(swordcase = new Item("Swordcase", "Very useful case, perfect for keep a sword inside.\n", coffer, EQUIP_ITEM, non_bonus, 1));
-entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sustance in it. Maybe blood?\n", tavern, EQUIP_ITEM, non_bonus, 0));
-
+forest->inside.PushBack(player);
+player->position = forest;
 
 }
 

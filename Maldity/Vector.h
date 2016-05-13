@@ -157,6 +157,10 @@ public:
 
 	}
 
+	int Size()const
+	{
+		return num_elements;
+	}
 
 };
 

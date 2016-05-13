@@ -1,6 +1,7 @@
 #include "MemLeaks.h"
 #include "World.h"
-#include "Player.h"
+#include "Creature.h"
+#include "Move.h"
 
 World* world = nullptr;
 
@@ -12,7 +13,6 @@ int main(){
 
 
 	Room* player_pos = world->player->position;
-	
 
 	char temp[40];
 
@@ -22,7 +22,7 @@ int main(){
 	String command3;
 	String command4;
 
-	
+	Cardinal orient = NONE;
 	
 	
 	printf("\n				MALDITY\n\n");
@@ -44,9 +44,10 @@ int main(){
 			command4 = player_input.Strtok(' ', 4);
 
 			//MOVE USING n/s/e/w
+			
 			if (player_input.Compare("n"))
 			{
-				command1 = "go"; command2 = "north"; command3.Clean();
+				command1 = "go"; command2 = "north"; command3.Clean(); 
 			}
 			else if (player_input.Compare("s"))
 			{
@@ -60,6 +61,17 @@ int main(){
 			{
 				command1 = "go"; command2 = "west"; command3.Clean();
 			}
+
+
+			//TRANSLATE THE ORIENTATION COMMAND INTO CARDINAL
+			if (command2.Compare("north"))
+				orient = N;
+			else if (command2.Compare("south"))
+				orient = S;
+			else if (command2.Compare("east"))
+				orient = E;
+			else if (command2.Compare("west"))
+				orient = W;
 			
 
 
@@ -82,12 +94,25 @@ int main(){
 				//Look the exits
 				else if (command3.Empty())
 				{
-					List <Exit*> ::Node *it = nullptr;
-					it = world->exit.first;
+					List<Entity*>::Node* it = player_pos->inside.first;
 
-					while (it != nullptr)
+					if (orient != NONE) for (int i = 0; i < world->entity.Size(); i++)
 					{
-						if (command2.Compare(it->data->orientation.C_str()) && player_pos->data->name.Compare(it->data->origin.C_str()))
+						if (world->entity[i]->type == EXIT)
+							if (((Exit*)world->entity[i])->orientation == N && ((Exit*)world->entity[i])->origin == player_pos)
+							{
+								((Exit*)world->entity[i])->Look();
+								break;
+							}
+					}
+
+
+					else while (it != nullptr)
+					{
+						if (it->data->name.Compare(command3) &&
+							(it->data->type == NON_EQUIP_ITEM ||
+							it->data->type == EQUIP_ITEM ||
+							it->data->type == NPC))
 						{
 							it->data->Look();
 							break;
@@ -95,19 +120,7 @@ int main(){
 
 						it = it->next;
 					}
-					//Look the items
-					if (i == 52)
-						for (j = 0; j < MAX_ITEMS; j++)
-						{
-							if (world->item[j]->name.Compare(command2))
-							{ 
-								world->item[j]->Look();
-								break;
-							}
 
-						}
-					if (j == MAX_ITEMS)
-						printf("There's nothing like a %s here.\n", command2.C_str());
 				}
 			}
 
@@ -116,11 +129,12 @@ int main(){
 			//GO
 			else if (command1.Compare("go") && command2.Empty() == false && command3.Empty())
 			{
-				if (world->player->Go(command2))
+				if (world->player->Go(orient))
 					break;
+
 			}
 
-			//OPEN
+		/*	//OPEN
 			else if (command1.Compare("open") && command3.Empty() == false && command4.Empty())
 			{
 				
@@ -194,13 +208,13 @@ int main(){
 					printf("You have nothing equipped.\n");
 					
 				
-			}
+			}*/
 
 
 			//INVENTORY
 			else if ((command1.Compare("inventory") || command1.Compare("i")) && command2.Empty())
 			{
-				List <Item*> ::Node *it = world->player->inside.first;
+				List <Entity*> ::Node *it = world->player->inside.first;
 				printf("\n-----Jasna's inventory:\n");
 
 				if (it == nullptr)

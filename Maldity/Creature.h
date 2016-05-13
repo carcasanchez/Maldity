@@ -20,17 +20,18 @@ public:
 		sanity = stats.sanity;
 	}
 
-	bool Move(Entity& source, Entity& destination, String name);
-	bool Go(const String& dest);
-	void Open(const String& direction)const;
-	void Close(const String& direction)const;
-	void Take(const String& item)const;
-	void Take(const String& what, const String& from)const;
-	void Drop(const String& item)const;
-	void PutIn(const String& what, const String& on)const;
+	//bool Move(Entity& source, Entity& destination, String name);
+
+
+	bool Go(Cardinal orientation);
+	//void Close(const String& direction)const;
+//	void Take(const String& item)const;
+	//void Take(const String& what, const String& from)const;
+	//void Drop(const String& item)const;
+	//void PutIn(const String& what, const String& on)const;
 	void ShowStats();
-	bool Unequip();
-	void Equip(const String& item);
+//	bool Unequip();
+//	void Equip(const String& item);
 
 };
 

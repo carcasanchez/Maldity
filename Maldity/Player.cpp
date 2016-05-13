@@ -1,41 +1,44 @@
 #include "World.h"
-#include "Player.h"
+#include "Creature.h"
 #include "Double-Linked List.h"
 
-bool Player::Go(const String& dest)
+bool Creature::Go(Cardinal dest)
 {
+	int i;
 
-		for (int i = 0; i < 52; i++)
+		for ( i = 0; i < world->entity.Size(); i++)
 		{
-			
-			if (world->exit[i]->orientation.Compare(dest.C_str()) && world->exit[i]->origin.Compare(world->room[position]->name.C_str()))
+			if (world->entity[i]->type == EXIT)
 			{
-				if ((world->exit[i]->door) && (world->exit[i]->open == false))
-					{ 
-					printf("You can't go on that direction. The door is closed.\n");
-					return false;
-					}
 
-				if (world->exit[i]->destination.Empty())
+				if (((Exit*)world->entity[i])->orientation && ((Exit*)world->entity[i])->origin == position)
+				{
+
+					if (((Exit*)world->entity[i])->open == false)
 					{
-					printf("%s", world->exit[i]->description.C_str());
+						if(type==PLAYER)
+							printf("You can't go in that direction. The door is closed.\n");
+										
 						return false;
 					}
 
+					position = ((Exit*)(world->entity[i]))->destination;
 
-				for (int j = 0; j < 13; j++)
-				if (world->room[j]->name.Compare(world->exit[i]->destination.C_str()))
-					{
 
-						position = j;
-						return true;
-					}					
+
+					return true;
+				}
 			}
+				
 		}
-		printf("You can't do that.\n");
+		
+		
+		if (type == PLAYER)
+			printf("%s", world->entity[i]->description.C_str());
+
 		return false;
 }
-
+/*
 void Player::Open(const String& direction)const
 {
 	int i;
@@ -219,22 +222,14 @@ void Player::PutIn(const String& what, const String& in)const
 
 
 }
-
-void Player::ShowStats()
+*/
+void Creature::ShowStats()
 {
-	printf("-----Jasna's Status        Sanity at %i%\n", sanity);
-	printf("Health: %i \nAtk: %i\nDef: %i\n", health, atk, def);
-
-	for (int i = 0; i < MAX_ITEMS; i++)
-	{
-		if (world->item[i]->location.Compare("equipped"))
-			printf("%s equipped.\n", world->item[i]->name.C_str());
-
-	}
-	
+	printf("-----%s's Status        Sanity at %i%\n", name.C_str(), sanity);
+	printf("Health: %i \nAtk: %i\nDef: %i\n", health, atk, def);	
 }
 
-bool Player::Unequip()
+/*bool Player::Unequip()
 {
 	
 	for ( int i = 0; i < MAX_ITEMS; i++)
@@ -314,4 +309,4 @@ bool Player::Move(Entity& source, Entity& destination, String name)
 
 	return false;
 
-}
+}*/

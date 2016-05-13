@@ -1,9 +1,10 @@
 #ifndef __EXITS_H__
 #define __EXITS_H__
 #include"Entity.h"
+#include "Rooms.h"
 
 
-enum Cardinal{N, S, E, W};
+
 
 class Exit:public Entity
 {

@@ -14,7 +14,7 @@
 #include "Items.h"
 #include "Creature.h"
 
-class Player;
+
 
 
 class World{
@@ -24,6 +24,34 @@ public:
 	Vector <Entity*> entity;
 	
 	Creature* player;
+
+	Room* forest = nullptr;
+	Room* road = nullptr;
+	Room* beach = nullptr;
+	Room* dock = nullptr;
+	Room* center = nullptr;
+	Room* shop = nullptr;
+	Room* house = nullptr;
+	Room* alley = nullptr;
+	Room* tavern = nullptr;
+	Room* top = nullptr;
+	Room* fells = nullptr;
+	Room* statue = nullptr;
+	Room* balcony = nullptr;
+
+
+	Item* key = nullptr;
+	Item* coffer = nullptr;
+	Item* coin = nullptr;
+	Item* totem = nullptr;
+	Item* sword = nullptr;
+	Item* armor = nullptr;
+	Item* map = nullptr;
+	Item* fang = nullptr;
+	Item* rope = nullptr;
+	Item* swordcase = nullptr;
+	Item* vial = nullptr;
+
 
 	World();
 	~World();

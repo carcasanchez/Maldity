@@ -2,8 +2,10 @@
 #define __ENTITY_H__
 #include "MyString.h"
 #include "Double-Linked List.h"
+#include <iostream>
 
 enum Tipus{ ROOM, EQUIP_ITEM, NON_EQUIP_ITEM, NPC, PLAYER,  EXIT };
+enum Cardinal{ NONE, N, S, E, W };
 
 class Entity{
 
@@ -12,7 +14,6 @@ public:
 	String name;
 	String description;
 	Tipus type;
-	
 
 	List <Entity*> inside;
 
