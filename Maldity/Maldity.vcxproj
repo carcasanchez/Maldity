@@ -15,7 +15,7 @@
     <ClCompile Include="Items.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MyString.cpp" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Creature.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -25,7 +25,6 @@
     <ClInclude Include="Exits.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="MemLeaks.h" />
-    <ClInclude Include="Move.h" />
     <ClInclude Include="MyString.h" />
     <ClInclude Include="Rooms.h" />
     <ClInclude Include="Stats.h" />

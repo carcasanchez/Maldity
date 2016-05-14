@@ -28,6 +28,7 @@ void World::Look()const{
 				else if (it->data->type == NPC)
 					printf("%s is here.\n", it->data->name.C_str());
 
+
 				it = it->next;
 			}
 			break;
@@ -42,61 +43,52 @@ void World::CreateWorld()
 
 
 	
-	//Forest
-	entity.PushBack(forest = new Room("Forest","You are in a forest. \nAt south, you see that the road drives to a city. \nAt west, a high hill. \nAt north, the road vanishes in the distance. \nAt east, only the sea.\n"));
+	//Rooms
 
+	entity.PushBack(forest = new Room("Forest","You are in a forest. \nAt south, you see that the road drives to a city. \nAt west, a high hill. \nAt north, the road vanishes in the distance. \nAt east, only the sea.\n"));
+	entity.PushBack(road = new Room("Road", "You are in a high road. \nAt north, there's a mass of gothic buildings. \nAt south, the sea, and a small beach. \nAt west, a way to a big dock. \nAt east, the road that drives to the forest.\n"));
+	entity.PushBack(beach = new Room("Beach", "The beach is small and it's full of rocks\nYou can only see the main road, at north, and the wide open sea, at south.\n"));
+	entity.PushBack(dock = new Room("Dock", "The dock is really impressive.\nThere are enourmous woody ships in all directions except for the east.\n"));
+	entity.PushBack(center = new Room("Center", "Gothic buildings are all around of a narrow square.\nYou can see the main road at south, and a couple of sinister alleys that go \ndeeper into the city.\nOnly the alley of the north seems a little bit safer.\nYou can see two doors, at west and at east.\n"));
+	entity.PushBack(alley = new Room("Alley", "The narrow alley goes up from the city center.\nThere's a small door that have a 'Tavern' placard at your left.\nThe alley continues ascending to the north.\n"));
+	entity.PushBack(tavern = new Room("Tavern", "The house seems to be an old tavern, with the door oriented at east.\n"));
+	entity.PushBack(top = new Room("Top", "You are in the elevated district of the city.\nYou can see a little alley at south and a enormous statue at east, beyond the\nfells.\n"));
+	entity.PushBack(fells = new Room("Fells", "The fells are surrounded by dark trees. The enourmous statue rises over them.\n"));
+
+
+	//Forest exits
 	entity.PushBack(new Exit("", "The road vanishes in the distance.\nBetter no to follow it.\n", forest, nullptr, N, false, true));
 	entity.PushBack(new Exit("", "The road follows the coast and approaches to the village.\n", forest, road, S, false, true));
 	entity.PushBack(new Exit("", "The sea looks grey and unpeaceful.\n", forest, nullptr, E, false, true));
 	entity.PushBack(new Exit("", "You can't go on that direction.\nThe hill is too high.\n", forest, nullptr, W, false, true));
 	
 
-	//Road
-	entity.PushBack(road = new Room("Road", "You are in a high road. \nAt north, there's a mass of gothic buildings. \nAt south, the sea, and a small beach. \nAt west, a way to a big dock. \nAt east, the road that drives to the forest.\n"));
-
+	//Road exits
 	entity.PushBack(new Exit("", "The alleys seem to drive to the city center.\n", road, center, N, false, true));
 	entity.PushBack(new Exit("", "Narrow stairs sculpted in rock descends to the beach.\n", road, beach, S, false, true));
 	entity.PushBack(new Exit("", "The road leaves the city and follows the coast.\n", road, forest, E, false, true));
 	entity.PushBack(new Exit("", "At the distance, you can see numerous boat masts.\n", road , dock, W, false, true));
 
 	
-	//Beach
-	entity.PushBack(beach = new Room("Beach", "The beach is small and it's full of rocks\nYou can only see the main road, at north, and the wide open sea, at south.\n"));
-
+	//Beach exits
 	entity.PushBack(new Exit("", "The stairs go back to the road\n", beach, road, N, false, true));
 	entity.PushBack(new Exit("", "You look at the sea. The horizon is cloudy, and the water, grey.\nYou feel a little relief for stay in land,\nbut the cold and ferocious wind spreads it.\n", beach, nullptr, S, false, true));
 	entity.PushBack(new Exit("", "The rocks are too abrupt to walk over them.\n", beach, nullptr, E, false, true));
 	entity.PushBack(new Exit("", "The rocks are too abrupt to walk over them.\n", beach, nullptr, W, false, true));
 
 	
-	//Dock
+	//Dock exits
+
+	entity.PushBack(new Exit("", "The big boats seems old and abandoned. Better not try to go into.\n", dock, nullptr, N, false, true));
+	entity.PushBack(new Exit("", "The big boats seems old and abandoned. Better not try to go into.\n", dock, nullptr, S, false, true));
+	entity.PushBack(new Exit("", "Between the gigant boats, you can see the road.\n", dock, road, E, false, true));
+	entity.PushBack(new Exit("", "The big boats seems old and abandoned. Better not try to go into.\n", dock, nullptr, W, false, true));
+
+
+
 /*
-	room.PushBack(new Room("Dock", "The dock is really impressive.\nThere are enourmous woody ships in all directions except for the east.\n"));
-
-	exit[12]->orientation = "north";
-	exit[13]->orientation = "south";
-	exit[14]->orientation = "east";
-	exit[15]->orientation = "west";
-
-	exit[12]->origin = "Dock";
-	exit[13]->origin = "Dock";
-	exit[14]->origin = "Dock";
-	exit[15]->origin = "Dock";
-
-	exit[12]->destination = "";
-	exit[13]->destination = "";
-	exit[14]->destination = "Road";
-	exit[15]->destination = "";
-
-	exit[12]->description = "The big boats seems old and abandoned. Better not try to go into.\n";
-	exit[13]->description = "The big boats seems old and abandoned. Better not try to go into.\n";
-	exit[14]->description = "Between the gigant boats, you can see the road.\n";
-	exit[15]->description = "The big boats seems old and abandoned. Better not try to go into.\n";
-
-
 	//Center
 
-	room.PushBack(new Room("Center","Gothic buildings are all around of a narrow square.\nYou can see the main road at south, and a couple of sinister alleys that go \ndeeper into the city.\nOnly the alley of the north seems a little bit safer.\nYou can see two doors, at west and at east.\n"));
 
 	exit[16]->orientation = "north";
 	exit[17]->orientation = "south";
@@ -126,7 +118,6 @@ void World::CreateWorld()
 
 	//Alley
 
-	room.PushBack(new Room("Alley", "The narrow alley goes up from the city center.\nThere's a small door that have a 'Tavern' placard at your left.\nThe alley continues ascending to the north.\n"));
 
 	exit[20]->orientation = "north";
 	exit[21]->orientation = "south";
@@ -154,7 +145,6 @@ void World::CreateWorld()
 
 	//Tavern
 
-	room.PushBack(new Room("Tavern","The house seems to be an old tavern, with the door oriented at east.\n"));
 
 	exit[24]->orientation = "north";
 	exit[25]->orientation = "south";
@@ -181,7 +171,6 @@ void World::CreateWorld()
 
 	//Top Disctrict
 
-	room.PushBack(new Room("Top","You are in the elevated district of the city.\nYou can see a little alley at south and a enormous statue at east, beyond the\nfells.\n"));
 
 	exit[28]->orientation = "north";
 	exit[29]->orientation = "south";
@@ -206,7 +195,6 @@ void World::CreateWorld()
 
 	//Fells
 
-	room.PushBack(new Room("Fells","The fells are surrounded by dark trees. The enourmous statue rises over them.\n"));
 
 	exit[32]->orientation = "north";
 	exit[33]->orientation = "south";
@@ -335,12 +323,8 @@ void World::CreateWorld()
 	
 	*/
 
-
+//Create stats struct
 Stats Jasna_stats(20, 2, 5, 100);
-
-
-entity.PushBack(player = new Creature("Jasna", "", forest, PLAYER, Jasna_stats));
-
 
 Stats non_bonus(0, 0, 0, 0);
 Stats sword_bonus(0, 5, 0, 0);
@@ -348,8 +332,13 @@ Stats armor_bonus(0, 0, 3, 0);
 Stats fang_bonus(0, 2, 0, 0);
 
 
+//Create creatures
+entity.PushBack(player = new Creature("Jasna", "", forest, PLAYER, Jasna_stats));
 
 
+
+
+//Creates items
 entity.PushBack(key = new Item("Key", "It's a old, little, rusty key.\n", EQUIP_ITEM, non_bonus, 0));
 entity.PushBack(coffer = new Item("Coffer", "An old wooden box. You can put objects into it.\n", NON_EQUIP_ITEM, non_bonus, 3));
 entity.PushBack(coin = new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", EQUIP_ITEM, non_bonus, 0));

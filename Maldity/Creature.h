@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "World.h"
 
+
 class Creature:public Entity
 {
 public:
@@ -20,7 +21,7 @@ public:
 		sanity = stats.sanity;
 	}
 
-	//bool Move(Entity& source, Entity& destination, String name);
+	
 
 
 	bool Go(Cardinal orientation);

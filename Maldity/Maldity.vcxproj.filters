@@ -30,7 +30,7 @@
     <ClCompile Include="Items.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="Creature.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -66,9 +66,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vector.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Move.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>

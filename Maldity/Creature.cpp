@@ -2,6 +2,28 @@
 #include "Creature.h"
 #include "Double-Linked List.h"
 
+//This move enttities from one list to another
+void Move(Entity* source, Entity* destination, const Entity* entity)
+{
+	List <Entity*> ::Node* n = source->inside.first;
+
+
+	while (n != nullptr)
+	{
+		List <Entity*> ::Node* tmp = n->next;
+
+		if (n->data == entity)
+		{
+			destination->inside.PushBack(n->data);
+			source->inside.Erase(n);
+		}
+
+		n = tmp;
+	}
+
+
+}
+
 bool Creature::Go(Cardinal dest)
 {
 	int i;
@@ -11,8 +33,10 @@ bool Creature::Go(Cardinal dest)
 			if (world->entity[i]->type == EXIT)
 			{
 
-				if (((Exit*)world->entity[i])->orientation && ((Exit*)world->entity[i])->origin == position)
+				if (((Exit*)world->entity[i])->orientation == dest && ((Exit*)world->entity[i])->origin == position)
 				{
+					if (((Exit*)world->entity[i])->destination == nullptr)
+						break;
 
 					if (((Exit*)world->entity[i])->open == false)
 					{
@@ -22,10 +46,12 @@ bool Creature::Go(Cardinal dest)
 						return false;
 					}
 
+
+
+					Move(position, ((Exit*)(world->entity[i]))->destination, this);
+
 					position = ((Exit*)(world->entity[i]))->destination;
-
-
-
+										
 					return true;
 				}
 			}
@@ -288,25 +314,4 @@ void Player::Equip(const String& item)
 
 }
 
-bool Player::Move(Entity& source, Entity& destination, String name)
-{
-	List <Item*> ::Node* n = source.inside.first;
-
-
-	while (n != nullptr)
-	{
-		List <Item*> ::Node* tmp = n->next;
-
-		if (n->data->name.Compare(name))
-		{
-			destination.inside.PushBack(n->data);
-			source.inside.Erase(n);
-			return true;
-		}
-
-		n = tmp;
-	}
-
-	return false;
-
-}*/
+*/

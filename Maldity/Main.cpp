@@ -1,7 +1,7 @@
 #include "MemLeaks.h"
 #include "World.h"
 #include "Creature.h"
-#include "Move.h"
+
 
 World* world = nullptr;
 
@@ -91,25 +91,27 @@ int main(){
 				if(command2.Empty())
 					world->Look();
 
-				//Look the exits
+				
 				else if (command3.Empty())
 				{
 					List<Entity*>::Node* it = player_pos->inside.first;
-
+					
+					
+					//Look the exits
 					if (orient != NONE) for (int i = 0; i < world->entity.Size(); i++)
 					{
 						if (world->entity[i]->type == EXIT)
-							if (((Exit*)world->entity[i])->orientation == N && ((Exit*)world->entity[i])->origin == player_pos)
+							if (((Exit*)world->entity[i])->orientation == orient && ((Exit*)world->entity[i])->origin == player_pos)
 							{
 								((Exit*)world->entity[i])->Look();
 								break;
 							}
 					}
 
-
+					//Else, look entities
 					else while (it != nullptr)
 					{
-						if (it->data->name.Compare(command3) &&
+						if (it->data->name.Compare(command2) &&
 							(it->data->type == NON_EQUIP_ITEM ||
 							it->data->type == EQUIP_ITEM ||
 							it->data->type == NPC))
@@ -120,6 +122,9 @@ int main(){
 
 						it = it->next;
 					}
+
+					if (it == nullptr)
+						printf("There's nothing like a %s here.\n", command2.C_str());
 
 				}
 			}
