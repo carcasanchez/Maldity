@@ -23,7 +23,7 @@ void World::Look()const{
 			while (it != nullptr)
 			{
 				if (it->data->type == NON_EQUIP_ITEM || it->data->type == EQUIP_ITEM)
-					printf("There's a %s here.\n", it->data->name.C_str());
+					printf("There's a %s in the floor.\n", it->data->name.C_str());
 
 				else if (it->data->type == NPC)
 					printf("%s is here.\n", it->data->name.C_str());
@@ -54,6 +54,10 @@ void World::CreateWorld()
 	entity.PushBack(tavern = new Room("Tavern", "The house seems to be an old tavern, with the door oriented at east.\n"));
 	entity.PushBack(top = new Room("Top", "You are in the elevated district of the city.\nYou can see a little alley at south and a enormous statue at east, beyond the\nfells.\n"));
 	entity.PushBack(fells = new Room("Fells", "The fells are surrounded by dark trees. The enourmous statue rises over them.\n"));
+	entity.PushBack(statue = new Room("Statue", "The enormous statue seems to be a Virgin.\nIt looks like she has a balcony on her top.\nThe dark mass of trees looks you from the west.\nThere are stairs that go up inside the statue.\nAt south, a little road goes down the fells.\n"));
+	entity.PushBack(house = new Room("House", "You are in the hall of an old house. The building looks like a gothic palace,\nbut it's dusty and seems abandoned.\n"));
+	entity.PushBack(balcony = new Room("Balcony", "The head of the virgin is sculpted as a balcony. You can see the whole village \nfrom here.\n"));
+	entity.PushBack(shop = new Room("Shop", "Compared to the rest of the city, the shop looks miserable.\nIt's impossible to determine what is sold here.\n"));
 
 
 	//Forest exits
@@ -86,63 +90,24 @@ void World::CreateWorld()
 
 
 
+
+	//Center exits
+
+	entity.PushBack(new Exit("", "The northern alley leaves the square between buildings. It seems to ascend.\n", center, alley, N, false, true));
+	entity.PushBack(new Exit("", "You can see the main road, near the sea.\n", center, road, S, false, true));
+	entity.PushBack(new Exit("", "It seems to be the entrance a shop.\n", center, shop, E, true, false));
+	entity.PushBack(new Exit("", "It seems to be a door to a house.\n", center, house, W, true, false));
+	
+
+	//Alley exits
+
+	entity.PushBack(new Exit("", "The alley continues ascending.\n", alley, top, N, false, true));
+	entity.PushBack(new Exit("", "The alley descends to the city center.\n", alley, center, S, false, true));
+	entity.PushBack(new Exit("", "The gothic buildings looks impressive, and the rest of the alleys,\ntoo dark to go into.\n", alley, nullptr, E, false, true));
+	entity.PushBack(new Exit("", "It seems to be the door of a tavern.\n", alley, tavern, W, true, false));
+
+
 /*
-	//Center
-
-
-	exit[16]->orientation = "north";
-	exit[17]->orientation = "south";
-	exit[18]->orientation = "east";
-	exit[19]->orientation = "west";
-
-	exit[16]->origin = "Center";
-	exit[17]->origin = "Center";
-	exit[18]->origin = "Center";
-	exit[19]->origin = "Center";
-
-	exit[16]->destination = "Alley";
-	exit[17]->destination = "Road";
-	exit[18]->destination = "Shop";
-	exit[19]->destination = "House";
-
-	exit[16]->description = "The northern alley leaves the square between buildings. It seems to ascend.\n";
-	exit[17]->description = "You can see the main road, near the sea.\n";
-	exit[18]->description = "It seems to be the entrance a shop.\n";
-	exit[19]->description = "It seems to be a door to a house.\n";
-
-	exit[18]->door = true;
-	exit[18]->open = false;
-	exit[19]->door = true;
-	exit[19]->open = false;
-
-
-	//Alley
-
-
-	exit[20]->orientation = "north";
-	exit[21]->orientation = "south";
-	exit[22]->orientation = "east";
-	exit[23]->orientation = "west";
-
-	exit[20]->origin = "Alley";
-	exit[21]->origin = "Alley";
-	exit[22]->origin = "Alley";
-	exit[23]->origin = "Alley";
-
-	exit[20]->destination = "Top";
-	exit[21]->destination = "Center";
-	exit[22]->destination = "";
-	exit[23]->destination = "Tavern";
-
-	exit[20]->description = "The alley continues ascending.\n";
-	exit[21]->description = "The alley descends to the city center.\n";
-	exit[22]->description = "The gothic buildings looks impressive, and the rest of the alleys,\ntoo dark to go into.\n";
-	exit[23]->description = "It seems to be the door of a tavern.\n";
-
-	exit[23]->door = true;
-	exit[23]->open = false;
-
-
 	//Tavern
 
 
@@ -220,7 +185,6 @@ void World::CreateWorld()
 
 	//Statue
 
-	room.PushBack(new Room("Statue", "The enormous statue seems to be a Virgin.\nIt looks like she has a balcony on her top.\nThe dark mass of trees looks you from the west.\nThere are stairs that go up inside the statue.\nAt south, a little road goes down the fells.\n"));
 
 	exit[36]->orientation = "north";
 	exit[37]->orientation = "south";
@@ -245,7 +209,6 @@ void World::CreateWorld()
 
 	//Balcony
 
-	room.PushBack(new Room("Balcony","The head of the virgin is sculpted as a balcony. You can see the whole village \nfrom here.\n"));
 
 	exit[40]->orientation = "north";
 	exit[41]->orientation = "south";
@@ -270,7 +233,6 @@ void World::CreateWorld()
 
 	//House
 
-	room.PushBack(new Room("House", "You are in the hall of an old house. The building looks like a gothic palace,\nbut it's dusty and seems abandoned.\n"));
 
 
 	exit[44]->orientation = "north";
@@ -299,7 +261,6 @@ void World::CreateWorld()
 
 	//Shop
 
-	room.PushBack(new Room("Shop", "Compared to the rest of the city, the shop looks miserable.\nIt's impossible to determine what is sold here.\n"));
 
 	exit[48]->orientation = "north";
 	exit[49]->orientation = "south";
@@ -333,13 +294,13 @@ Stats fang_bonus(0, 2, 0, 0);
 
 
 //Create creatures
-entity.PushBack(player = new Creature("Jasna", "", forest, PLAYER, Jasna_stats));
+entity.PushBack(player = new Creature("Jasna", "", forest, PLAYER, Jasna_stats, 5));
 
 
 
 
 //Creates items
-entity.PushBack(key = new Item("Key", "It's a old, little, rusty key.\n", EQUIP_ITEM, non_bonus, 0));
+entity.PushBack(key = new Item("Key", "It's an old, little, rusty key.\n", EQUIP_ITEM, non_bonus, 0));
 entity.PushBack(coffer = new Item("Coffer", "An old wooden box. You can put objects into it.\n", NON_EQUIP_ITEM, non_bonus, 3));
 entity.PushBack(coin = new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", EQUIP_ITEM, non_bonus, 0));
 entity.PushBack(totem = new Item("Totem", "A strange totem, made in wood.\nIt's impossible to determine what it represents...\n", EQUIP_ITEM, non_bonus, 0));
@@ -352,9 +313,14 @@ entity.PushBack(swordcase = new Item("Swordcase", "Very useful case, perfect for
 entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sustance in it. Maybe blood?\n", EQUIP_ITEM, non_bonus, 0));
 
 
-
+//Locates creatures and items
 forest->inside.PushBack(player);
+forest->inside.PushBack(coffer);
+coffer->inside.PushBack(key);
+
 player->position = forest;
+
+
 
 }
 

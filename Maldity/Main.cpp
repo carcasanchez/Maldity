@@ -12,7 +12,7 @@ int main(){
 	world->CreateWorld();
 
 
-	Room* player_pos = world->player->position;
+	Room* player_pos = nullptr;
 
 	char temp[40];
 
@@ -29,8 +29,9 @@ int main(){
 
 	while (player_input.Compare("quit")==false)
 	{
+		player_pos = world->player->position;
 		world->Look();
-	
+
 		while (1)
 		{	
 			printf("\n");
@@ -94,7 +95,7 @@ int main(){
 				
 				else if (command3.Empty())
 				{
-					List<Entity*>::Node* it = player_pos->inside.first;
+					
 					
 					
 					//Look the exits
@@ -109,23 +110,44 @@ int main(){
 					}
 
 					//Else, look entities
-					else while (it != nullptr)
+					else
 					{
-						if (it->data->name.Compare(command2) &&
-							(it->data->type == NON_EQUIP_ITEM ||
-							it->data->type == EQUIP_ITEM ||
-							it->data->type == NPC))
+						//In the room
+						List<Entity*>::Node* it = player_pos->inside.first;
+						while (it != nullptr)
 						{
-							it->data->Look();
-							break;
+							if (it->data->name.Compare(command2) &&
+								(it->data->type == NON_EQUIP_ITEM ||
+								it->data->type == EQUIP_ITEM ||
+								it->data->type == NPC))
+							{
+								it->data->Look();
+								break;
+							}
+
+							it = it->next;
 						}
 
-						it = it->next;
+						//In the inventory
+						if (it == nullptr){
+							it = world->player->inside.first;
+							while (it != nullptr)
+							{
+								if (it->data->name.Compare(command2) &&
+									(it->data->type == NON_EQUIP_ITEM ||
+									it->data->type == EQUIP_ITEM))
+								{
+									it->data->Look();
+									break;
+								}
+
+								it = it->next;
+							}
+						}
+
+						if (it == nullptr)
+							printf("There's nothing like a %s here.\n", command2.C_str());
 					}
-
-					if (it == nullptr)
-						printf("There's nothing like a %s here.\n", command2.C_str());
-
 				}
 			}
 
@@ -139,28 +161,27 @@ int main(){
 
 			}
 
-		/*	//OPEN
+			//OPEN
 			else if (command1.Compare("open") && command3.Empty() == false && command4.Empty())
 			{
-				
 
 				if (command3.Compare("door"))
-					world->player->Open(command2);
+					world->player->Open(orient);
 
 				else printf("You can't do that.\n");
 			}
-
 
 			//CLOSE
 			else if (command1.Compare("close") && command3.Empty() == false && command4.Empty())
 			{
 
 				if (command3.Compare("door"))
-					world->player->Close(command2);
+					world->player->Close(orient);
 
 
 				else printf("You can't do that.\n");
 			}
+
 
 			//TAKE
 			else if ((command1.Compare("take") || command1.Compare("pick")) && (command2.Empty() == false) && (command3.Empty()))
@@ -168,7 +189,7 @@ int main(){
 				world->player->Take(command2);
 			}
 
-			//TAKE FROM
+		//TAKE FROM
 			else if ((command1.Compare("take") || command1.Compare("pick")) && (command3.Compare("from")) && (command4.Empty() == false))
 			{
 				
@@ -176,9 +197,9 @@ int main(){
 
 			}
 
+/*
 
-
-			//DROP
+				//DROP
 
 			else if (command1.Compare("drop") && command3.Empty())
 			{
@@ -227,7 +248,7 @@ int main(){
 				
 				while (it != nullptr)
 				{
-					printf("%s", it->data->description.C_str());
+					printf("%s\n", it->data->name.C_str());
 					it = it->next;
 				}
 				

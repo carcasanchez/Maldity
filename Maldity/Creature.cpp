@@ -40,18 +40,11 @@ bool Creature::Go(Cardinal dest)
 
 					if (((Exit*)world->entity[i])->open == false)
 					{
-						if(type==PLAYER)
-							printf("You can't go in that direction. The door is closed.\n");
-										
-						return false;
+						break;
 					}
 
-
-
 					Move(position, ((Exit*)(world->entity[i]))->destination, this);
-
-					position = ((Exit*)(world->entity[i]))->destination;
-										
+					position = ((Exit*)(world->entity[i]))->destination;										
 					return true;
 				}
 			}
@@ -60,131 +53,163 @@ bool Creature::Go(Cardinal dest)
 		
 		
 		if (type == PLAYER)
+		{
 			printf("%s", world->entity[i]->description.C_str());
+			
+			if (((Exit*)(world->entity[i]))->open==false)
+				printf("The door is closed.\n");
+
+		}
+			
 
 		return false;
 }
-/*
-void Player::Open(const String& direction)const
+
+void Creature::Open(Cardinal orient)const
 {
 	int i;
-	for (i = 0; i < 52;i++)
-		if (world->exit[i]->origin.Compare(world->room[position]->name.C_str())
-			&& world->exit[i]->orientation.Compare(direction))
+	for (i = 0; i < world->entity.Size();i++)
+
+		if (((Exit*)world->entity[i])->orientation == orient && ((Exit*)world->entity[i])->origin == world->player->position)
 		{	
-			if (world->exit[i]->door == false)
+			if (((Exit*)world->entity[i])->door == false)
 				printf("There's no door on that direction.\n");
 
-			else if (world->exit[i]->open)
+			else if (((Exit*)world->entity[i])->open)
 				printf("The door is already open.\n");
 
-			else if (world->exit[i]->open == false)
+			else if (((Exit*)world->entity[i])->open == false)
 			{ 
-				printf("You open the door at %s.\n", direction.C_str());
-				world->exit[i]->open = true;
+				printf("You open the door.\n");
+				((Exit*)world->entity[i])->open = true;
 			}	
 			break;
 		}
-
-	if (i==52) printf("That's not a direction.\n");
-
 }
 
-void Player::Close(const String& direction)const
+void Creature::Close(Cardinal orient)const
 {
 	int i;
-	for (i = 0; i < 52; i++)
-		if (world->exit[i]->origin.Compare(world->room[position]->name.C_str())
-			&& world->exit[i]->orientation.Compare(direction))
+	for (i = 0; i < world->entity.Size(); i++)
+
+		if (((Exit*)world->entity[i])->orientation == orient && ((Exit*)world->entity[i])->origin == world->player->position)
 		{
-			if (world->exit[i]->door == false)
+			if (((Exit*)world->entity[i])->door == false)
 				printf("There's no door on that direction.\n");
 
-			else if (world->exit[i]->open==false)
+			else if (((Exit*)world->entity[i])->open==false)
 				printf("The door is already closed.\n");
 
-			else if (world->exit[i]->open)
+			else if (((Exit*)world->entity[i])->open)
 			{
-				printf("You close the door at %s.\n", direction.C_str());
-				world->exit[i]->open = false;
+				printf("You close the door.\n");
+				((Exit*)world->entity[i])->open = false;
 			}
 			break;
 		}
-
-	if (i == 52) printf("That's not a direction.\n");
-
-
-
 }
 
-void Player::Take(const String& item_name)const
+
+bool Creature::Take(const String& item_name)const
 {
-	int i=0;
 
-	if (num_items == capacity)
-		printf("Your inventory is full.\n");
+	List<Entity*>::Node* it = position->inside.first;
 
-	else for ( i = 0; i < MAX_ITEMS; i++)
+
+	if (inside.Size() == limit)
 	{
-		if (world->item[i]->name.Compare(item_name.C_str())&&
-			world->item[i]->location.Compare(world->room[position]->name.C_str()))
+		printf("Your inventory is full.\n");
+		return false;
+	}
+
+	while (it != nullptr)
+	{
+		if ((it->data->type == EQUIP_ITEM || it->data->type == NON_EQUIP_ITEM) && it->data->name.Compare(item_name))
 		{
 			
-			printf("You picked the %s.\n", world->item[i]->name.C_str());
-			world->item[i]->location = "Inventory";
-		    world->player->num_items++;
-			break;
+			Move(position, (Entity*)this, it->data);
+			printf("You pick the %s.\n", item_name.C_str());
+			return true;
 		}
 
+		it = it->next;
 	}
-
-	if (i == MAX_ITEMS) printf("There's nothing like that here.\n");
-}
-
-void Player::Take(const String& what, const String& from)const
-{
-	int i=0, j=0;
-
-	if (num_items == capacity)
-		printf("Your inventory is full.\n");
-
-	else if (what.Compare(from))
-		printf("You can't take an object from itself!\n");
 	
-
-	else for (i = 0; i < MAX_ITEMS; i++)
+	if (it == nullptr)
 	{
-		if (world->item[i]->name.Compare(from.C_str()))
+		printf("There's nothing like a %s here.\n", item_name.C_str());
+		return false;
+	}
+
+}
+
+bool Creature::Take(const String& what, const String& from)const
+{	
+	List<Entity*>::Node* iterator = position->inside.first;
+	List<Entity*>::Node* it = nullptr;
+
+
+	if (inside.Size() == limit)
+	{
+		printf("Your inventory is full.\n");
+		return false;
+	}
+
+	//Check in the room
+	while (iterator != nullptr)
+	{
+		if (iterator->data->name.Compare(from))
 		{
-			if (world->item[i]->capacity == 0)
-				printf("You can't take nothing from a %s!\n", world->item[i]->name.C_str());
-
-			else for (j = 0; j < MAX_ITEMS; j++)
-			{
-
-				if (world->item[j]->name.Compare(what.C_str()) && world->item[j]->location.Compare(from.C_str()))
-				{
-					printf("You picked the %s from the %s.\n", what.C_str(), from.C_str());
-					world->item[j]->location = "inventory";
-					world->item[i]->num_items--;
-					world->player->num_items++;
-					break;
-				}
-
-				
-			}
-
-			if (j == MAX_ITEMS)
-				printf("There's nothing like a %s inside the %s.\n", what.C_str(), from.C_str());
+			it = iterator->data->inside.first;
 			break;
+		}
+		iterator = iterator->next;
+	}
+
+	//Else, check in the inventory
+	if (iterator == nullptr)
+	{
+		iterator = inside.first;
+
+		while (iterator != nullptr)
+		{
+			if (iterator->data->name.Compare(from))
+			{
+				it = iterator->data->inside.first;
+				break;
+			}
+			iterator = iterator->next;
 		}
 
 	}
+	
+	if (iterator == nullptr)
+	{
+		printf("There's nothing like a %s here.\n", from.C_str());
+		return false;
+	}
+			
+	while (it != nullptr)
+	{
+		if ((it->data->type == EQUIP_ITEM || it->data->type == NON_EQUIP_ITEM) && it->data->name.Compare(what))
+		{
+			Move(iterator->data, (Entity*)this, it->data);
+			printf("You pick the %s.\n", what.C_str());
+			return true;
+		}
 
-	if (i == MAX_ITEMS) printf("There's nothing like a %s here.\n", from.C_str());
+		it = it->next;
+	}
+
+	if (it == nullptr)
+	{
+		printf("There's nothing like a %s inside the %s.\n", what.C_str(), from.C_str());
+		return false;
+	}
+
 }
 
-void Player::Drop(const String& item_name)const
+/*void Player::Drop(const String& item_name)const
 {
 	int i;
 	for (i = 0; i < MAX_ITEMS; i++)

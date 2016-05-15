@@ -12,8 +12,9 @@ public:
 	int atk;
 	int def;
 	int health;
+	int limit;
 
-	Creature(const char* name, const char* desc, Room* pos, Tipus type, Stats stats) :Entity(name, desc, type), position(pos)
+	Creature(const char* name, const char* desc, Room* pos, Tipus type, Stats stats, int limit) :Entity(name, desc, type), position(pos), limit(limit)
 	{
 		atk = stats.atk;
 		health = stats.hp;
@@ -25,9 +26,10 @@ public:
 
 
 	bool Go(Cardinal orientation);
-	//void Close(const String& direction)const;
-//	void Take(const String& item)const;
-	//void Take(const String& what, const String& from)const;
+	void Open(Cardinal orientation)const;
+	void Close(Cardinal orientation)const;
+	bool Take(const String& item)const;
+	bool Take(const String& what, const String& from)const;
 	//void Drop(const String& item)const;
 	//void PutIn(const String& what, const String& on)const;
 	void ShowStats();

@@ -14,6 +14,7 @@ public:
 	String name;
 	String description;
 	Tipus type;
+	
 
 	List <Entity*> inside;
 
@@ -25,7 +26,13 @@ public:
 
 	virtual void Look()
 	{
+
 		printf("%s",  description.C_str());
+		if (type==NON_EQUIP_ITEM ||type==EQUIP_ITEM)
+			for (List<Entity*>::Node *it = inside.first; it != nullptr; it = it->next)
+			{
+				printf("It has a %s inside.\n", it->data->name.C_str());
+			}
 	};
 	
 

@@ -24,8 +24,6 @@ public:
 		bonus_def = bonus.hp;
 		bonus_sanity = bonus.sanity;
 	}
-
-	void Look() const;
 	
 };
 
