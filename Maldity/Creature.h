@@ -13,6 +13,7 @@ public:
 	int def;
 	int health;
 	int limit;
+	Entity* equipped_item = nullptr;
 
 	Creature(const char* name, const char* desc, Room* pos, Tipus type, Stats stats, int limit) :Entity(name, desc, type), position(pos), limit(limit)
 	{
@@ -33,8 +34,8 @@ public:
 	void Drop(const String& item);
 	bool PutIn(const String& what, const String& on);
 	void ShowStats();
-//	bool Unequip();
-//	void Equip(const String& item);
+	bool Unequip();
+	bool Equip(const String& item);
 
 };
 

@@ -217,7 +217,7 @@ int main(){
 
 			}
 
-	/*		//EQUIP
+			//EQUIP
 			else if (command1.Compare("equip") && command3.Empty() && command2.Empty() == false)
 			{
 				world->player->Equip(command2);
@@ -226,11 +226,8 @@ int main(){
 			//UNEQUIP
 			else if (command1.Compare("unequip") && command2.Empty())
 			{ 
-				if (world->player->Unequip() == false)
-					printf("You have nothing equipped.\n");
-					
-				
-			}*/
+				world->player->Unequip();
+			}
 
 
 			//INVENTORY

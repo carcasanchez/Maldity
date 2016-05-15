@@ -14,7 +14,7 @@ public:
 	int bonus_def = 0;
 	int bonus_sanity = 0;
 	int limit;
-	bool equipped = false;
+
 
 
 	Item(const char* name, const char* description, Tipus type, Stats bonus, int limit) : Entity(name, description, type), limit(limit)

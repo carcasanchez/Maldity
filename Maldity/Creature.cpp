@@ -219,6 +219,8 @@ void Creature::Drop(const String& item_name)
 		{
 			Move(this, position, it->data);
 			printf("You drop the %s.\n", item_name.C_str());
+			if (it->data == equipped_item)
+				equipped_item = nullptr;
 			break;
 		}
 
@@ -311,65 +313,58 @@ void Creature::ShowStats()
 {
 	printf("-----%s's Status        Sanity at %i%\n", name.C_str(), sanity);
 	printf("Health: %i \nAtk: %i\nDef: %i\n", health, atk, def);	
+
+	if (equipped_item != nullptr)
+	{
+		printf("%s equipped\n", equipped_item->name.C_str());
+	}
 }
 
-/*bool Player::Unequip()
-{
-	
-	for ( int i = 0; i < MAX_ITEMS; i++)
-	{
-		if (world->item[i]->location.Compare("equipped"))
-		{
-			world->item[i]->location = "inventory";
-			health -= world->item[i]->bonus_hp;
-			def -= world->item[i]->bonus_def;
-			atk -= world->item[i]->bonus_atk;
 
-			printf("You unequip the %s.\n", world->item[i]->name.C_str());
-			world->player->num_items++;
-			return true;
-			
-		}
+//TODO: INCREASE STATS WHEN EQUIPPED
+bool Creature::Unequip()
+{
+	if (equipped_item == nullptr)
+	{
+		printf("You have nothing equipped.\n");
+		return false;
+
 	}
 
-	return false;
+	printf("You unequip the %s.\n", equipped_item->name.C_str());
+	equipped_item = nullptr;
+	return true;
 }
 
-void Player::Equip(const String& item)
+bool Creature::Equip(const String& item)
 {
-	int i = 0;
 	
-	for (i = 0; i < MAX_ITEMS; i++)
+	for (List<Entity*>::Node* it = inside.first; it != nullptr; it = it->next)
 	{
-
-		if (world->item[i]->name.Compare(item.C_str()) && world->item[i]->location.Compare("inventory"))
+		if (it->data->name.Compare(item.C_str()))
 		{
-
-			if (world->item[i]->equippable)
-			{ 
-
-			Unequip();
-
-			printf("You equip the %s.\n", world->item[i]->name.C_str());
-			world->item[i]->location = "equipped";
-			world->player->num_items--;
-
-			health += world->item[i]->bonus_hp;
-			atk += world->item[i]->bonus_atk;
-			def += world->item[i]->bonus_def;
-
+			if (it->data->type == NON_EQUIP_ITEM)
+			{
+				printf("You can't equip the %s.\n", item.C_str());
+				return false;
 			}
-			else printf("You can't equip that!\n");
 
-			break;
+			if (it->data->type == EQUIP_ITEM)
+			{
+
+				if (equipped_item != nullptr)
+					printf("You unequip the %s.\n", equipped_item->name.C_str());
+				
+				printf("You equip the %s.\n", item.C_str());
+				equipped_item = it->data;
+				return true;
+			}
+
 		}
-
-		
 	}
 
-	if (i == MAX_ITEMS)
-		printf("You have nothing like that in your inventory.\n");
+	printf("You have no %s in your inventory.\n", item.C_str());
+	return false;
 
 }
 
-*/
