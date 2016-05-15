@@ -107,182 +107,69 @@ void World::CreateWorld()
 	entity.PushBack(new Exit("", "It seems to be the door of a tavern.\n", alley, tavern, W, true, false));
 
 
-/*
-	//Tavern
+	//Tavern exits
 
-
-	exit[24]->orientation = "north";
-	exit[25]->orientation = "south";
-	exit[26]->orientation = "east";
-	exit[27]->orientation = "west";
-
-	exit[24]->origin = "Tavern";
-	exit[25]->origin = "Tavern";
-	exit[26]->origin = "Tavern";
-	exit[27]->origin = "Tavern";
-
-	exit[24]->destination = "";
-	exit[25]->destination = "";
-	exit[26]->destination = "Alley";
-	exit[27]->destination = "";
-
-	exit[24]->description = "The tavern has no more exits than the east one.\n";
-	exit[25]->description = "The tavern has no more exits than the east one.\n";
-	exit[26]->description = "This is the only door of the tavern.\n";
-	exit[27]->description = "The tavern has no more exits than the east one.\n";
-
-	exit[26]->door = true;
-	exit[26]->open = true;
-
-	//Top Disctrict
-
-
-	exit[28]->orientation = "north";
-	exit[29]->orientation = "south";
-	exit[30]->orientation = "east";
-	exit[31]->orientation = "west";
-
-	exit[28]->origin = "Top";
-	exit[29]->origin = "Top";
-	exit[30]->origin = "Top";
-	exit[31]->origin = "Top";
-
-	exit[28]->destination = "";
-	exit[29]->destination = "Alley";
-	exit[30]->destination = "Fells";
-	exit[31]->destination = "";
-
-	exit[28]->description = "The city is surrounded by a chain of old fells.\nThe woody mountain looks dark and threatening.\n";
-	exit[29]->description = "You can see the alley descending to the city.\n";
-	exit[30]->description = "Between dark and high trees, you can see a enormous statue.\n";
-	exit[31]->description = "The city is surrounded by a chain of old fells.\nThe woody mountains looks dark and threatening.\n";
-
-
-	//Fells
-
-
-	exit[32]->orientation = "north";
-	exit[33]->orientation = "south";
-	exit[34]->orientation = "east";
-	exit[35]->orientation = "west";
-
-	exit[32]->origin = "Fells";
-	exit[33]->origin = "Fells";
-	exit[34]->origin = "Fells";
-	exit[35]->origin = "Fells";
-
-	exit[32]->destination = "";
-	exit[33]->destination = "";
-	exit[34]->destination = "Statue";
-	exit[35]->destination = "Top";
-
-	exit[32]->description = "The forest is too dense to go into it.\n";
-	exit[33]->description = "The forest is too dense to go into it.\n";
-	exit[34]->description = "Between dark and high trees, you can see a enormous statue.\n";
-	exit[35]->description = "You can see some buildings between the trees.\n";
+	entity.PushBack(new Exit("", "The tavern has no more exits than the east one.\n", tavern, nullptr, N, false, true));
+	entity.PushBack(new Exit("", "The tavern has no more exits than the east one.\n", tavern, nullptr, S, false, true));
+	entity.PushBack(new Exit("", "This is the only door of the tavern.\n", tavern, alley, E, true, true));
+	entity.PushBack(new Exit("", "The tavern has no more exits than the east one.\n", tavern, nullptr, W, false, true));
 
 
 
-	//Statue
+	
+
+	//Top Disctrict exits
+	entity.PushBack(new Exit("", "The city is surrounded by a chain of old fells.\nThe woody mountain looks dark and threatening.\n", top, nullptr, N, false, true));
+	entity.PushBack(new Exit("", "You can see the alley descending to the city.\n", top, alley, S, false, true));
+	entity.PushBack(new Exit("", "Between dark and high trees, you can see a enormous statue.\n", top, fells, E, false, true));
+	entity.PushBack(new Exit("", "The city is surrounded by a chain of old fells.\nThe woody mountains looks dark and threatening.\n", top, nullptr, W, false, true));
 
 
-	exit[36]->orientation = "north";
-	exit[37]->orientation = "south";
-	exit[38]->orientation = "east";
-	exit[39]->orientation = "west";
 
-	exit[36]->origin = "Statue";
-	exit[37]->origin = "Statue";
-	exit[38]->origin = "Statue";
-	exit[39]->origin = "Statue";
+	//Fells exits
 
-	exit[36]->destination = "";
-	exit[37]->destination = "Forest";
-	exit[38]->destination = "Balcony";
-	exit[39]->destination = "Fells";
-
-	exit[36]->description = "The mountains look so terrifying\n";
-	exit[37]->description = "The hill descends abruptly to a forest.\nIt's possible that you can't climb back.\n";
-	exit[38]->description = "The statue has a little opened door.\nYou can see stairs behind it.\n";
-	exit[39]->description = "The fells look tenebrous, but it's the only way to go to the village.\n";
+	entity.PushBack(new Exit("", "The forest is too dense to go into it.\n", fells, nullptr, N, false, true));
+	entity.PushBack(new Exit("", "The forest is too dense to go into it.\n", fells, nullptr, S, false, true));
+	entity.PushBack(new Exit("", "Between dark and high trees, you can see a enormous statue.\n", fells, statue, E, false, true));
+	entity.PushBack(new Exit("", "You can see some buildings between the trees.\n", fells, top, W, false, true));
 
 
-	//Balcony
 
 
-	exit[40]->orientation = "north";
-	exit[41]->orientation = "south";
-	exit[42]->orientation = "east";
-	exit[43]->orientation = "west";
 
-	exit[40]->origin = "Balcony";
-	exit[41]->origin = "Balcony";
-	exit[42]->origin = "Balcony";
-	exit[43]->origin = "Balcony";
+	//Statue exits
 
-	exit[40]->destination = "";
-	exit[41]->destination = "";
-	exit[42]->destination = "";
-	exit[43]->destination = "Statue";
+	entity.PushBack(new Exit("", "The mountains look so terrifying\n", statue, nullptr, N, false, true));
+	entity.PushBack(new Exit("", "The hill descends abruptly to a forest.\nIt's possible that you can't climb back.\n", statue, forest, S, false, true));
+	entity.PushBack(new Exit("", "The statue has a little opened door.\nYou can see stairs behind it.\n", statue, balcony, E, false, true));
+	entity.PushBack(new Exit("", "The fells look tenebrous, but it's the only way to go to the village.\n", statue, fells, W, false, true));
 
-	exit[40]->description = "The mountains look so terrfying.\n";
-	exit[41]->description = "The gothic city is placed between the feets of the mountains and the grey sea.\nIt looks like a phantom village.\n";
-	exit[42]->description = "You can see a little road at the bottom of the fells.\nOne of its sides goes to the city.\nThe other, vanishes in the distance.\n";
-	exit[43]->description = "That stairs are the only way to go down the balcony.\n";
+
+	
+	//Balcony exits
+
+	entity.PushBack(new Exit("", "The mountains look so terrifying\n", balcony, nullptr, N, false, true));
+	entity.PushBack(new Exit("", "The gothic city is placed between the feets of the mountains and the grey sea.\nIt looks like a phantom village.\n", balcony, nullptr, S, false, true));
+	entity.PushBack(new Exit("", "You can see a little road at the bottom of the fells.\nOne of its sides goes to the city.\nThe other, vanishes in the distance.\n", balcony, nullptr, E, false, true));
+	entity.PushBack(new Exit("", "That stairs are the only way to go down the balcony.\n", balcony, statue, W, false, true));
 
 
 	//House
 
-
-
-	exit[44]->orientation = "north";
-	exit[45]->orientation = "south";
-	exit[46]->orientation = "east";
-	exit[47]->orientation = "west";
-
-	exit[44]->origin = "House";
-	exit[45]->origin = "House";
-	exit[46]->origin = "House";
-	exit[47]->origin = "House";
-
-	exit[44]->destination = "";
-	exit[45]->destination = "";
-	exit[46]->destination = "Center";
-	exit[47]->destination = "";
-
-	exit[44]->description = "The only exit is the door at the east.\n";
-	exit[45]->description = "The only exit is the door at the east.\n";
-	exit[46]->description = "This is the only exit of the old house.\n";
-	exit[47]->description = "The only exit is the door at the east.\n";
-
-	exit[46]->door = true;
-	exit[46]->open = true;
-
+	entity.PushBack(new Exit("", "The only exit is the door at the east.\n", house, nullptr, N, false, true));
+	entity.PushBack(new Exit("", "The only exit is the door at the east.\n", house, nullptr, S, false, true));
+	entity.PushBack(new Exit("", "This is the only exit of the old house.\n", house, center, E, true, true));
+	entity.PushBack(new Exit("", "The only exit is the door at the east.\n", house, nullptr, W, false, true));
 
 	//Shop
 
+	entity.PushBack(new Exit("", "The only exit is the door at the west.\n", shop, nullptr, N, false, true));
+	entity.PushBack(new Exit("", "The only exit is the door at the west.\n", shop, nullptr, S, false, true));
+	entity.PushBack(new Exit("", "The only exit is the door at the west.\n", shop, nullptr, E, false, true));
+	entity.PushBack(new Exit("", "You can see the city center from the interior of the shop.\n", shop, center, W, true, true));
 
-	exit[48]->orientation = "north";
-	exit[49]->orientation = "south";
-	exit[50]->orientation = "east";
-	exit[51]->orientation = "west";
 
-	exit[48]->origin = "Shop";
-	exit[49]->origin = "Shop";
-	exit[50]->origin = "Shop";
-	exit[51]->origin = "Shop";
-
-	exit[48]->destination = "";
-	exit[49]->destination = "";
-	exit[50]->destination = "";
-	exit[51]->destination = "Center";
-
-	exit[48]->description = "The only exit is the door at the west.\n";
-	exit[49]->description = "The only exit is the door at the west.\n";
-	exit[50]->description = "The only exit is the door at the west.\n";
-	exit[51]->description = "You can see the city center from the interior of the shop.\n";
 	
-	*/
 
 //Create stats struct
 Stats Jasna_stats(20, 2, 5, 100);
@@ -316,6 +203,9 @@ entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sust
 //Locates creatures and items
 forest->inside.PushBack(player);
 forest->inside.PushBack(coffer);
+forest->inside.PushBack(coin);
+forest->inside.PushBack(sword);
+forest->inside.PushBack(rope);
 coffer->inside.PushBack(key);
 
 player->position = forest;

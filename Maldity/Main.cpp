@@ -34,6 +34,7 @@ int main(){
 
 		while (1)
 		{	
+			orient = NONE;
 			printf("\n");
 			gets_s(temp, 40);  
 		
@@ -197,22 +198,17 @@ int main(){
 
 			}
 
-/*
 
 				//DROP
 
-			else if (command1.Compare("drop") && command3.Empty())
+			else if (command1.Compare("drop") && command2.Empty()== false && command3.Empty())
 			{
-				if (command2.Empty())
-				{
-					printf("What do you want to %s?\n", command1);
-					scanf_s("%s", command2);
-				}
 
 				world->player->Drop(command2);
 			}
 
-			//PUT IN
+	
+		//PUT IN
 
 			else if ( command1.Compare("put") && command3.Compare("in") && command4.Empty()==false )
 			{
@@ -221,7 +217,7 @@ int main(){
 
 			}
 
-			//EQUIP
+	/*		//EQUIP
 			else if (command1.Compare("equip") && command3.Empty() && command2.Empty() == false)
 			{
 				world->player->Equip(command2);

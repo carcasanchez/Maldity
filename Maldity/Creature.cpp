@@ -110,7 +110,7 @@ void Creature::Close(Cardinal orient)const
 }
 
 
-bool Creature::Take(const String& item_name)const
+bool Creature::Take(const String& item_name)
 {
 
 	List<Entity*>::Node* it = position->inside.first;
@@ -143,7 +143,7 @@ bool Creature::Take(const String& item_name)const
 
 }
 
-bool Creature::Take(const String& what, const String& from)const
+bool Creature::Take(const String& what, const String& from)
 {	
 	List<Entity*>::Node* iterator = position->inside.first;
 	List<Entity*>::Node* it = nullptr;
@@ -209,71 +209,104 @@ bool Creature::Take(const String& what, const String& from)const
 
 }
 
-/*void Player::Drop(const String& item_name)const
+void Creature::Drop(const String& item_name)
 {
-	int i;
-	for (i = 0; i < MAX_ITEMS; i++)
+	List<Entity*>::Node* it = inside.first;
+
+	while (it != nullptr)
 	{
-		if ((world->item[i]->location.Compare("inventory") || world->item[i]->location.Compare("equipped")) && world->item[i]->name.Compare(item_name.C_str()))
-		{ 
-			world->item[i]->location = world->room[position]->name.C_str();
-			printf("You dropped the %s.\n", world->item[i]->name.C_str());
-			world->player->num_items--;
-			break;
-		}	
-	}
-
-	if (i == MAX_ITEMS) printf("You have no %s in your inventory.\n", item_name.C_str());
-}
-
-void Player::PutIn(const String& what, const String& in)const
-{
-	int i=0, j=0;
-	
-	if (what.Compare(in))
-		printf("You can't put an object into itself!\n");
-
-	else for (i = 0; i < MAX_ITEMS; i++)
-	{
-		if (world->item[i]->name.Compare(what.C_str()) && world->item[i]->location.Compare("inventory"))
+		if (it->data->name.Compare(item_name))
 		{
-			for (j = 0; j < MAX_ITEMS; j++)
-			{
-
-				if (world->item[j]->name.Compare(in.C_str()) && (world->item[j]->location.Compare(world->room[position]->name.C_str()) || world->item[j]->location.Compare("inventory")))
-				{
-					if (world->item[j]->capacity == 0)
-						printf("You can't put nothing in the %s!\n", world->item[j]->name.C_str());
-
-					else if (world->item[j]->capacity == world->item[j]->num_items)
-						printf("The %s its full. You can't put more items in it.\n", in.C_str());
-
-					else
-					{
-					printf("You put the %s in the %s.\n", what.C_str(), in.C_str());
-					world->item[i]->location = world->item[j]->name.C_str();
-					world->item[j]->num_items++;
-					world->player->num_items--;
-					}
-
-					break;
-				}
-
-				
-			}
-
-			if (j == MAX_ITEMS)
-				printf("There's nothing like a %s here.\n", in.C_str());
+			Move(this, position, it->data);
+			printf("You drop the %s.\n", item_name.C_str());
 			break;
 		}
 
+		it = it->next;
 	}
 
-	if (i == MAX_ITEMS) printf("You have no %s in your inventory.\n", what.C_str());
+	if (it == nullptr)
+	{
+		printf("There's nothing like a %s in your inventory.\n", item_name.C_str());
+	}
+}
 
+bool Creature::PutIn(const String& what, const String& in)
+{	
+
+	List<Entity*>::Node* iterator = position->inside.first;
+	List<Entity*>::Node* it = inside.first;
+
+
+	if (what.Compare(in))
+	{ 
+		printf("You can't put an object into itself!\n");
+		return false;
+	}
+
+	//Check in the room
+	while (iterator != nullptr)
+	{
+		if (iterator->data->name.Compare(in))
+		{
+			break;
+		}
+		iterator = iterator->next;
+	}
+
+	//Check the inventory
+	if (iterator == nullptr)
+	{
+		iterator = inside.first;
+		while (iterator != nullptr)
+		{
+			if (iterator->data->name.Compare(in))
+			{
+				break;
+			}
+			iterator = iterator->next;
+		}
+	}
+
+	if (iterator == nullptr)
+	{
+		printf("There's nothing like a %s here.\n", in.C_str());
+		return false;
+	}
+
+	if (iterator->data->inside.Size() == ((Item*)iterator->data)->limit)
+	{
+		if (((Item*)iterator->data)->limit == 0)
+			printf("You can't put objects inside the %s\n!", in.C_str());
+		else
+				printf("The %s is full.\n", in.C_str());
+
+		return false;
+	}
+
+
+
+
+	while (it != nullptr)
+	{
+		if (it->data->name.Compare(what))
+		{			
+			Move(this, iterator->data, it->data);
+			printf("You put the %s in the %s.\n", what.C_str(), in.C_str());
+			return true;
+		}
+
+		it = it->next;
+	}
+
+	if (it == nullptr)
+	{
+		printf("There's nothing like a %s in your inventory.\n", what.C_str());
+		return false;
+	}
 
 }
-*/
+
 void Creature::ShowStats()
 {
 	printf("-----%s's Status        Sanity at %i%\n", name.C_str(), sanity);
