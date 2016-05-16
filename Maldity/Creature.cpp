@@ -321,7 +321,7 @@ void Creature::ShowStats()
 }
 
 
-//TODO: INCREASE STATS WHEN EQUIPPED
+
 bool Creature::Unequip()
 {
 	if (equipped_item == nullptr)
@@ -332,6 +332,12 @@ bool Creature::Unequip()
 	}
 
 	printf("You unequip the %s.\n", equipped_item->name.C_str());
+	
+	health -= ((Item*)equipped_item)->bonus_hp;
+	atk -= ((Item*)equipped_item)->bonus_atk;
+	def -= ((Item*)equipped_item)->bonus_def;
+	sanity -= ((Item*)equipped_item)->bonus_sanity;
+
 	equipped_item = nullptr;
 	return true;
 }
@@ -353,9 +359,17 @@ bool Creature::Equip(const String& item)
 			{
 
 				if (equipped_item != nullptr)
-					printf("You unequip the %s.\n", equipped_item->name.C_str());
-				
+				{
+					Unequip();						
+				}
 				printf("You equip the %s.\n", item.C_str());
+
+				health += ((Item*)it->data)->bonus_hp;
+				atk += ((Item*)it->data)->bonus_atk;
+				def += ((Item*)it->data)->bonus_def;
+				sanity += ((Item*)it->data)->bonus_sanity;
+
+
 				equipped_item = it->data;
 				return true;
 			}

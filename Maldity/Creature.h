@@ -19,7 +19,7 @@ public:
 	{
 		atk = stats.atk;
 		health = stats.hp;
-		def = stats.hp;
+		def = stats.def;
 		sanity = stats.sanity;
 	}
 

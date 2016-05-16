@@ -1,7 +1,7 @@
 #include "MemLeaks.h"
 #include "World.h"
 #include "Creature.h"
-
+#include "conio.h"
 
 World* world = nullptr;
 
@@ -14,9 +14,9 @@ int main(){
 
 	Room* player_pos = nullptr;
 
-	char temp[40];
+	char key[2];
 
-	String player_input;
+	String player_input("");
 	String command1;
 	String command2;  
 	String command3;
@@ -29,17 +29,47 @@ int main(){
 
 	while (player_input.Compare("quit")==false)
 	{
+		key[0] = 0;
+		player_input.Clean();
+
 		player_pos = world->player->position;
 		world->Look();
+		printf("\n");
 
 		while (1)
 		{	
 			orient = NONE;
-			printf("\n");
-			gets_s(temp, 40);  
-		
-			player_input = temp;
+			
+			
+			
+			if (_kbhit() != 0)
+			{
+				key[0] = _getch();
+				key[1] = 0;
 
+				if (key[0] == '/b')
+				{
+
+				}
+
+				else if (key[0] != '\r')
+				{
+					printf("%c", key[0]);
+					player_input += key;
+				}
+			}
+
+
+
+			//Update()
+			
+			
+			if (key[0] != '\r')
+				continue;
+
+			
+			printf("\n");
+			
 			command1 = player_input.Strtok(' ', 1);
 			command2 = player_input.Strtok(' ', 2);
 			command3 = player_input.Strtok(' ', 3);
@@ -157,7 +187,11 @@ int main(){
 			//GO
 			else if (command1.Compare("go") && command2.Empty() == false && command3.Empty())
 			{
-				if (world->player->Go(orient))
+
+				if (orient == NONE)
+					printf("That's not a direction you could go.\n");
+				
+				else if (world->player->Go(orient))
 					break;
 
 			}
@@ -190,7 +224,7 @@ int main(){
 				world->player->Take(command2);
 			}
 
-		//TAKE FROM
+			//TAKE FROM
 			else if ((command1.Compare("take") || command1.Compare("pick")) && (command3.Compare("from")) && (command4.Empty() == false))
 			{
 				
@@ -208,7 +242,7 @@ int main(){
 			}
 
 	
-		//PUT IN
+			//PUT IN
 
 			else if ( command1.Compare("put") && command3.Compare("in") && command4.Empty()==false )
 			{
@@ -260,16 +294,20 @@ int main(){
 
 			//INVALID COMMAND
 			else printf("You have entered an invalid command.\n");
-
 			
-			fflush(stdin);
-
+			
+			
+		//	fflush(stdin);
+			key[0] = 0;
+			player_input.Clean();
+			printf("\n");
 		}
 
 		system("cls");
+		
 	
 	}
 
-	
+	printf("Thanks for playing!");
 	return 0;
 }
