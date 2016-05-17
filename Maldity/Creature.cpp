@@ -279,7 +279,7 @@ bool Creature::PutIn(const String& what, const String& in)
 	if (iterator->data->inside.Size() == ((Item*)iterator->data)->limit)
 	{
 		if (((Item*)iterator->data)->limit == 0)
-			printf("You can't put objects inside the %s\n!", in.C_str());
+			printf("You can't put objects inside the %s!\n", in.C_str());
 		else
 				printf("The %s is full.\n", in.C_str());
 

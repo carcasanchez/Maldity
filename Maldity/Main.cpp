@@ -58,10 +58,9 @@ int main(){
 					player_input += key;
 				}
 			}
+			
 
-
-
-			//Update()
+			//UPDATE()
 			
 			
 			if (key[0] != '\r')
