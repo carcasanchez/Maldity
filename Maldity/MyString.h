@@ -29,6 +29,7 @@ public:
 	void Clean();
 	void Shrink_to_fit();
 	char* Strtok(const char character, const int num_word)const;
+	void BackSpace();
 };
 
 #endif

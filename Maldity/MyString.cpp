@@ -225,4 +225,13 @@ void String::Shrink_to_fit()
 
 }
 
+void String::BackSpace()
+{
+	int size = Strlen();
+
+	if (size != 0);
+		buffer[size - 1] = NULL;
+	
+
+}
 

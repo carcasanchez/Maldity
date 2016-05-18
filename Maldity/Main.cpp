@@ -40,16 +40,18 @@ int main(){
 		{	
 			orient = NONE;
 			
-			
-			
+				
 			if (_kbhit() != 0)
 			{
 				key[0] = _getch();
 				key[1] = 0;
 
-				if (key[0] == '/b')
+				if (key[0] == '\b' && player_input.Empty()==false)
 				{
-
+					player_input.BackSpace();
+					printf("\b");
+					printf(" ");
+					printf("\b");
 				}
 
 				else if (key[0] != '\r')
