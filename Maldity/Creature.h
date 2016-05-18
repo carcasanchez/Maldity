@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "World.h"
 
+enum State{ walking, talking, following, buying, selling };
 
 class Creature:public Entity
 {
@@ -13,7 +14,10 @@ public:
 	int def;
 	int health;
 	int limit;
+	State state;
 	Entity* equipped_item = nullptr;
+
+	Cardinal last_direction;
 
 	Creature(const char* name, const char* desc, Room* pos, Tipus type, Stats stats, int limit) :Entity(name, desc, type), position(pos), limit(limit)
 	{
@@ -21,6 +25,8 @@ public:
 		health = stats.hp;
 		def = stats.def;
 		sanity = stats.sanity;
+
+		state = walking;
 	}
 
 	
@@ -36,6 +42,7 @@ public:
 	void ShowStats();
 	bool Unequip();
 	bool Equip(const String& item);
+	void Update();
 
 };
 

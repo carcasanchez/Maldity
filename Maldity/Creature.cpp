@@ -1,8 +1,57 @@
 #include "World.h"
 #include "Creature.h"
 #include "Double-Linked List.h"
+#include <time.h>
 
-//This move enttities from one list to another
+
+void Creature::Update()
+{
+	srand(time(NULL));
+
+	if (this == world->ghost)
+		
+		if (state == walking)
+		{
+			if (GetTickCount() - world->time > 5000)
+			{
+				Cardinal orient = Cardinal(rand() % 4);
+
+				if (Go(Cardinal(orient)))
+					printf("The ghost enters the %s.\n", world->ghost->position->name.C_str());
+				world->ResetTime();
+			}
+
+
+			if (position == world->player->position)
+			{
+				state = following;
+				printf("Ghost enters following state.\n");
+			}
+		}
+
+		else if (state == following)
+		{
+			if (position != world->player->position && GetTickCount() - world->time > 5000)
+			{
+				Go(world->player->last_direction);
+				printf("The ghost enters the %s.\n", world->ghost->position->name.C_str());
+
+				if (position != world->player->position)
+				{
+					state = walking;
+					printf("Ghost enters walking state.\n");
+
+				}
+				world->ResetTime();
+			}
+		}
+
+}
+
+
+
+
+//This move entities from one list to another
 void Move(Entity* source, Entity* destination, const Entity* entity)
 {
 	List <Entity*> ::Node* n = source->inside.first;
@@ -38,13 +87,14 @@ bool Creature::Go(Cardinal dest)
 					if (((Exit*)world->entity[i])->destination == nullptr)
 						break;
 
-					if (((Exit*)world->entity[i])->open == false)
+					if (((Exit*)world->entity[i])->open == false && this != world->ghost)
 					{
 						break;
 					}
 
 					Move(position, ((Exit*)(world->entity[i]))->destination, this);
-					position = ((Exit*)(world->entity[i]))->destination;										
+					position = ((Exit*)(world->entity[i]))->destination;			
+					last_direction = dest;
 					return true;
 				}
 			}
@@ -109,7 +159,6 @@ void Creature::Close(Cardinal orient)const
 		}
 }
 
-
 bool Creature::Take(const String& item_name)
 {
 
@@ -130,6 +179,12 @@ bool Creature::Take(const String& item_name)
 			Move(position, (Entity*)this, it->data);
 			printf("You pick the %s.\n", item_name.C_str());
 			return true;
+		}
+
+		else if (it->data->type == NPC)
+		{
+			printf("You can't take the %s!.\n", it->data->name.C_str());
+			return false;
 		}
 
 		it = it->next;
@@ -320,8 +375,6 @@ void Creature::ShowStats()
 	}
 }
 
-
-
 bool Creature::Unequip()
 {
 	if (equipped_item == nullptr)
@@ -381,4 +434,6 @@ bool Creature::Equip(const String& item)
 	return false;
 
 }
+
+
 

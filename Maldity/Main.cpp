@@ -62,7 +62,10 @@ int main(){
 			}
 			
 
-			//UPDATE()
+			//UPDATE
+			for (int i = 1; i < world->entity.Size(); i++)
+				world->entity[i]->Update();
+
 			
 			
 			if (key[0] != '\r')

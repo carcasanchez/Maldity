@@ -3,8 +3,10 @@
 
 #define MAX_ITEMS 11
 
+#include <Windows.h>
 #include <string.h>
 #include <iostream>
+
 
 #include "MyString.h"
 #include "Double-Linked List.h"
@@ -19,11 +21,14 @@
 
 class World{
 public:
-		
+	
+	unsigned int time = GetTickCount();
 
 	Vector <Entity*> entity;
 	
 	Creature* player;
+	Creature* ghost;
+
 
 	Room* forest = nullptr;
 	Room* road = nullptr;
@@ -58,6 +63,8 @@ public:
 
 	void CreateWorld();
 	void Look()const;
+
+	void ResetTime(){ time = GetTickCount(); };
 	
 };
 

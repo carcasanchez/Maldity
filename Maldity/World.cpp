@@ -182,7 +182,7 @@ Stats fang_bonus(0, 2, 0, 0);
 
 //Create creatures
 entity.PushBack(player = new Creature("Jasna", "", forest, PLAYER, Jasna_stats, 5));
-
+entity.PushBack(ghost = new Creature("Ghost", "A strange ethereal presence. It seems lost.\n", forest, NPC, non_bonus, 0));
 
 
 
@@ -202,6 +202,8 @@ entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sust
 
 //Locates creatures and items
 forest->inside.PushBack(player);
+road->inside.PushBack(ghost);
+
 forest->inside.PushBack(coffer);
 forest->inside.PushBack(coin);
 forest->inside.PushBack(sword);
@@ -209,7 +211,7 @@ forest->inside.PushBack(rope);
 coffer->inside.PushBack(key);
 
 player->position = forest;
-
+ghost->position = road;
 
 
 }
