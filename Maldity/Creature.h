@@ -43,8 +43,7 @@ public:
 	bool Unequip();
 	bool Equip(const String& item);
 	void Update();
-	bool Talk_to(const String& interlocutor);
-	bool Talking();
+
 };
 
 

@@ -12,14 +12,12 @@ void Creature::Update()
 		
 		if (state == walking)
 		{
-			if (GetTickCount() - world->time > 30000)
+			if (GetTickCount() - world->time > 5000)
 			{
 				Cardinal orient = Cardinal(rand() % 4);
 
-				if (Go(Cardinal(orient)) && position == world->player->position)
-					{
-						printf("The ghost enters the %s.\n", world->ghost->position->name.C_str());
-					}
+				if (Go(Cardinal(orient)))
+					printf("The ghost enters the %s.\n", world->ghost->position->name.C_str());
 				world->ResetTime();
 			}
 
@@ -27,6 +25,7 @@ void Creature::Update()
 			if (position == world->player->position)
 			{
 				state = following;
+				printf("Ghost enters following state.\n");
 			}
 		}
 
@@ -35,24 +34,16 @@ void Creature::Update()
 			if (position != world->player->position && GetTickCount() - world->time > 5000)
 			{
 				Go(world->player->last_direction);
-				
-				
+				printf("The ghost enters the %s.\n", world->ghost->position->name.C_str());
 
-				if (position == world->player->position)
+				if (position != world->player->position)
 				{
-					printf("The ghost enters the %s.\n", world->ghost->position->name.C_str());
-				}
-				else state = walking;
+					state = walking;
+					printf("Ghost enters walking state.\n");
 
+				}
 				world->ResetTime();
 			}
-		}
-
-		else if (state == talking)
-		{
-			printf("Ghost: Hello!\n\n");
-			state = following;
-			world->player->state = walking;
 		}
 
 }
@@ -444,37 +435,5 @@ bool Creature::Equip(const String& item)
 
 }
 
-bool Creature::Talk_to(const String& interlocutor)
-{
-	for (List<Entity*>::Node* it = position->inside.first; it != nullptr; it = it->next)
-	{
-		if (it->data->name.Compare(interlocutor.C_str()))
-		{
-			if (it->data->type == NPC)
-			{
-				((Creature*)it->data)->state = talking;
-				state = talking;
-				return true;
-			}
-
-			else if (it->data->type == NON_EQUIP_ITEM || it->data->type == EQUIP_ITEM)
-			{
-				printf("You can't talk to a %s.!\n", interlocutor.C_str());
-				return false;
-			}
-		}
-	}
-
-
-	printf("You can't do that.\n");
-	return false;
-}
-
-bool Creature::Talking()
-{
-	return true;
-
-
-}
 
 

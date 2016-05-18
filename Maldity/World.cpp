@@ -202,7 +202,7 @@ entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sust
 
 //Locates creatures and items
 forest->inside.PushBack(player);
-center->inside.PushBack(ghost);
+road->inside.PushBack(ghost);
 
 forest->inside.PushBack(coffer);
 forest->inside.PushBack(coin);
@@ -211,9 +211,7 @@ forest->inside.PushBack(rope);
 coffer->inside.PushBack(key);
 
 player->position = forest;
-ghost->position = center;
-
-
+ghost->position = road;
 
 
 }
