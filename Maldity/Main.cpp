@@ -111,66 +111,50 @@ int main(){
 			
 
 
+			if (world->player->state == walking)
+			{
+				if (player_input.Empty()){}
+
+				//QUIT
+				else if (player_input.Compare("quit"))
+					break;
 
 
-			if (player_input.Empty()){}
-
-			//QUIT
-			else if (player_input.Compare("quit"))
-				break;
-			
-			
-			//LOOK
-			else if (command1.Compare("look"))
-			{ 
-				//Look the room
-				if(command2.Empty())
-					world->Look();
-
-				
-				else if (command3.Empty())
+				//LOOK
+				else if (command1.Compare("look"))
 				{
-					
-					
-					
-					//Look the exits
-					if (orient != NONE) for (int i = 0; i < world->entity.Size(); i++)
-					{
-						if (world->entity[i]->type == EXIT)
-							if (((Exit*)world->entity[i])->orientation == orient && ((Exit*)world->entity[i])->origin == player_pos)
-							{
-								((Exit*)world->entity[i])->Look();
-								break;
-							}
-					}
+					//Look the room
+					if (command2.Empty())
+						world->Look();
 
-					//Else, look entities
-					else
+
+					else if (command3.Empty())
 					{
-						//In the room
-						List<Entity*>::Node* it = player_pos->inside.first;
-						while (it != nullptr)
+
+
+
+						//Look the exits
+						if (orient != NONE) for (int i = 0; i < world->entity.Size(); i++)
 						{
-							if (it->data->name.Compare(command2) &&
-								(it->data->type == NON_EQUIP_ITEM ||
-								it->data->type == EQUIP_ITEM ||
-								it->data->type == NPC))
-							{
-								it->data->Look();
-								break;
-							}
-
-							it = it->next;
+							if (world->entity[i]->type == EXIT)
+								if (((Exit*)world->entity[i])->orientation == orient && ((Exit*)world->entity[i])->origin == player_pos)
+								{
+									((Exit*)world->entity[i])->Look();
+									break;
+								}
 						}
 
-						//In the inventory
-						if (it == nullptr){
-							it = world->player->inside.first;
+						//Else, look entities
+						else
+						{
+							//In the room
+							List<Entity*>::Node* it = player_pos->inside.first;
 							while (it != nullptr)
 							{
 								if (it->data->name.Compare(command2) &&
 									(it->data->type == NON_EQUIP_ITEM ||
-									it->data->type == EQUIP_ITEM))
+									it->data->type == EQUIP_ITEM ||
+									it->data->type == NPC))
 								{
 									it->data->Look();
 									break;
@@ -178,132 +162,155 @@ int main(){
 
 								it = it->next;
 							}
-						}
 
-						if (it == nullptr)
-							printf("There's nothing like a %s here.\n", command2.C_str());
+							//In the inventory
+							if (it == nullptr){
+								it = world->player->inside.first;
+								while (it != nullptr)
+								{
+									if (it->data->name.Compare(command2) &&
+										(it->data->type == NON_EQUIP_ITEM ||
+										it->data->type == EQUIP_ITEM))
+									{
+										it->data->Look();
+										break;
+									}
+
+									it = it->next;
+								}
+							}
+
+							if (it == nullptr)
+								printf("There's nothing like a %s here.\n", command2.C_str());
+						}
 					}
 				}
-			}
 
 
 
-			//GO
-			else if (command1.Compare("go") && command2.Empty() == false && command3.Empty())
-			{
+				//GO
+				else if (command1.Compare("go") && command2.Empty() == false && command3.Empty())
+				{
 
-				if (orient == NONE)
-					printf("That's not a direction you could go.\n");
-				
-				else if (world->player->Go(orient))
-					break;
+					if (orient == NONE)
+						printf("That's not a direction you could go.\n");
 
-			}
+					else if (world->player->Go(orient))
+						break;
 
-			//OPEN
-			else if (command1.Compare("open") && command3.Empty() == false && command4.Empty())
-			{
+				}
 
-				if (command3.Compare("door"))
-					world->player->Open(orient);
+				//OPEN
+				else if (command1.Compare("open") && command3.Empty() == false && command4.Empty())
+				{
 
-				else printf("You can't do that.\n");
-			}
+					if (command3.Compare("door"))
+						world->player->Open(orient);
 
-			//CLOSE
-			else if (command1.Compare("close") && command3.Empty() == false && command4.Empty())
-			{
+					else printf("You can't do that.\n");
+				}
 
-				if (command3.Compare("door"))
-					world->player->Close(orient);
+				//CLOSE
+				else if (command1.Compare("close") && command3.Empty() == false && command4.Empty())
+				{
 
-
-				else printf("You can't do that.\n");
-			}
+					if (command3.Compare("door"))
+						world->player->Close(orient);
 
 
-			//TAKE
-			else if ((command1.Compare("take") || command1.Compare("pick")) && (command2.Empty() == false) && (command3.Empty()))
-			{
-				world->player->Take(command2);
-			}
+					else printf("You can't do that.\n");
+				}
 
-			//TAKE FROM
-			else if ((command1.Compare("take") || command1.Compare("pick")) && (command3.Compare("from")) && (command4.Empty() == false))
-			{
-				
-				world->player->Take(command2, command4);
 
-			}
+				//TAKE
+				else if ((command1.Compare("take") || command1.Compare("pick")) && (command2.Empty() == false) && (command3.Empty()))
+				{
+					world->player->Take(command2);
+				}
+
+				//TAKE FROM
+				else if ((command1.Compare("take") || command1.Compare("pick")) && (command3.Compare("from")) && (command4.Empty() == false))
+				{
+
+					world->player->Take(command2, command4);
+
+				}
 
 
 				//DROP
 
-			else if (command1.Compare("drop") && command2.Empty()== false && command3.Empty())
-			{
-
-				world->player->Drop(command2);
-			}
-
-	
-			//PUT IN
-
-			else if ( command1.Compare("put") && command3.Compare("in") && command4.Empty()==false )
-			{
-				world->player->PutIn(command2, command4);
-
-
-			}
-
-			//EQUIP
-			else if (command1.Compare("equip") && command3.Empty() && command2.Empty() == false)
-			{
-				world->player->Equip(command2);
-			}
-
-			//UNEQUIP
-			else if (command1.Compare("unequip") && command2.Empty())
-			{ 
-				world->player->Unequip();
-			}
-
-
-			//INVENTORY
-			else if ((command1.Compare("inventory") || command1.Compare("i")) && command2.Empty())
-			{
-				List <Entity*> ::Node *it = world->player->inside.first;
-				printf("\n-----Jasna's inventory:\n");
-
-				if (it == nullptr)
-					printf("The inventory is empty.\n");
-				
-				while (it != nullptr)
+				else if (command1.Compare("drop") && command2.Empty() == false && command3.Empty())
 				{
-					printf("%s\n", it->data->name.C_str());
-					it = it->next;
-				}
-				
-			}
-			
-			//STATS
 
-			else if (command1.Compare("stats") && command2.Empty())
+					world->player->Drop(command2);
+				}
+
+
+				//PUT IN
+
+				else if (command1.Compare("put") && command3.Compare("in") && command4.Empty() == false)
+				{
+					world->player->PutIn(command2, command4);
+
+
+				}
+
+				//EQUIP
+				else if (command1.Compare("equip") && command3.Empty() && command2.Empty() == false)
+				{
+					world->player->Equip(command2);
+				}
+
+				//UNEQUIP
+				else if (command1.Compare("unequip") && command2.Empty())
+				{
+					world->player->Unequip();
+				}
+
+				//TALK TO
+				else if (command1.Compare("talk") && command2.Compare("to") && command3.Empty() == false)
+				{
+					world->player->Talk_to(command3);
+				}
+
+
+				//INVENTORY
+				else if ((command1.Compare("inventory") || command1.Compare("i")) && command2.Empty())
+				{
+					List <Entity*> ::Node *it = world->player->inside.first;
+					printf("\n-----Jasna's inventory:\n");
+
+					if (it == nullptr)
+						printf("The inventory is empty.\n");
+
+					while (it != nullptr)
+					{
+						printf("%s\n", it->data->name.C_str());
+						it = it->next;
+					}
+
+				}
+
+				//STATS
+
+				else if (command1.Compare("stats") && command2.Empty())
 				{
 					world->player->ShowStats();
 				}
 
-			//HELP
-			else if (player_input.Compare("help"))
-				printf("Welcome to Maldity!\nUse the command 'look' for receive a description of the current room.\nCombine it with 'north', 'south', 'east' and 'west' to receive descriptions \nof the exits.	\nUse 'go' and 'north', 'south', 'east' and 'west' to move between rooms. \nUse 'open <orientation> door' if you find a closed door, or \n'close <orientation> door' if you want to close it.\nSee your inventory whit 'inventory' or 'i'.\nCheck your status with 'Stats'.\nUse 'take' or 'pick' to take objects.\nUse 'take <item> from <item>' and 'put <item> in <item>' to take and put in \nother items.\nAlso, you can look at items.\nYou can equip objects to increase your stats. Use 'unequip' to unequip them.\nUse 'help' to see the controls and 'quit' if you want to finish the game.\n");
+				//HELP
+				else if (player_input.Compare("help"))
+					printf("Welcome to Maldity!\nUse the command 'look' for receive a description of the current room.\nCombine it with 'north', 'south', 'east' and 'west' to receive descriptions \nof the exits.	\nUse 'go' and 'north', 'south', 'east' and 'west' to move between rooms. \nUse 'open <orientation> door' if you find a closed door, or \n'close <orientation> door' if you want to close it.\nSee your inventory whit 'inventory' or 'i'.\nCheck your status with 'Stats'.\nUse 'take' or 'pick' to take objects.\nUse 'take <item> from <item>' and 'put <item> in <item>' to take and put in \nother items.\nAlso, you can look at items.\nYou can equip objects to increase your stats. Use 'unequip' to unequip them.\nUse 'help' to see the controls and 'quit' if you want to finish the game.\n");
 
-			//INVALID COMMAND
-			else printf("You have entered an invalid command.\n");
-			
-			
-			
-		//	fflush(stdin);
-			key[0] = 0;
-			player_input.Clean();
+				//INVALID COMMAND
+				else printf("You have entered an invalid command.\n");
+
+
+
+				//	fflush(stdin);
+				key[0] = 0;
+				player_input.Clean();
+			}
 			printf("\n");
 		}
 

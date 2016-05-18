@@ -5,7 +5,7 @@
 #include <iostream>
 
 enum Tipus{ ROOM, EQUIP_ITEM, NON_EQUIP_ITEM, NPC, PLAYER,  EXIT };
-
+enum Cardinal {N, S, E, W, NONE};
 class Entity{
 
 public:
