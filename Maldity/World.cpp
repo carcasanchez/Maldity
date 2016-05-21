@@ -182,36 +182,38 @@ Stats fang_bonus(0, 2, 0, 0);
 
 //Create creatures
 entity.PushBack(player = new Creature("Jasna", "", forest, PLAYER, Jasna_stats, 5));
-entity.PushBack(ghost = new Creature("Ghost", "A strange ethereal presence. It seems lost.\n", forest, NPC, non_bonus, 0));
-
+entity.PushBack(ghost = new Creature("Ghost", "A strange ethereal presence. It seems lost.\n", center, NPC, non_bonus, 0));
+entity.PushBack(vendor = new Creature("Vendor", "The old man glances at you with a smart look.\nIt has a lot of objects to trade with you.\n", shop, NPC, non_bonus, 20));
 
 
 //Creates items
-entity.PushBack(key = new Item("Key", "It's an old, little, rusty key.\n", EQUIP_ITEM, non_bonus, 0));
-entity.PushBack(coffer = new Item("Coffer", "An old wooden box. You can put objects into it.\n", NON_EQUIP_ITEM, non_bonus, 3));
-entity.PushBack(coin = new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", EQUIP_ITEM, non_bonus, 0));
-entity.PushBack(totem = new Item("Totem", "A strange totem, made in wood.\nIt's impossible to determine what it represents...\n", EQUIP_ITEM, non_bonus, 0));
-entity.PushBack(sword = new Item("Sword", "It's a short sword, very sharpen.\n", EQUIP_ITEM, sword_bonus, 0));
-entity.PushBack(armor = new Item("Armor", "A strange, shiny armor that covers the chest.\n", EQUIP_ITEM, armor_bonus, 0));
-entity.PushBack(map = new Item("Map", "The old map of a sailor. It doesn't represent any continent recognizable...\n",  EQUIP_ITEM, non_bonus, 0));
-entity.PushBack(fang = new Item("Fang", "It seems to be the fang of a sea creature.\nBut any sea creature known has that fangs...\n", EQUIP_ITEM, fang_bonus, 0));
-entity.PushBack(rope = new Item("Rope", "A simple piece of rope. Nothing strange.\n", EQUIP_ITEM, non_bonus, 0));
-entity.PushBack(swordcase = new Item("Swordcase", "Very useful case, perfect for keep a sword inside.\n", EQUIP_ITEM, non_bonus, 1));
-entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sustance in it. Maybe blood?\n", EQUIP_ITEM, non_bonus, 0));
+entity.PushBack(key = new Item("Key", "It's an old, little, rusty key.\n", EQUIP_ITEM, non_bonus, 0, 5));
+entity.PushBack(coffer = new Item("Coffer", "An old wooden box. You can put objects into it.\n", NON_EQUIP_ITEM, non_bonus, 3, 0));
+entity.PushBack(coin = new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", EQUIP_ITEM, non_bonus, 0, 200));
+entity.PushBack(totem = new Item("Totem", "A strange totem, made in wood.\nIt's impossible to determine what it represents...\n", EQUIP_ITEM, non_bonus, 0, 3));
+entity.PushBack(sword = new Item("Sword", "It's a short sword, very sharpen.\n", EQUIP_ITEM, sword_bonus, 0, 50));
+entity.PushBack(armor = new Item("Armor", "A strange, shiny armor that covers the chest.\n", EQUIP_ITEM, armor_bonus, 0, 60));
+entity.PushBack(map = new Item("Map", "The old map of a sailor. It doesn't represent any continent recognizable...\n",  EQUIP_ITEM, non_bonus, 0, 1));
+entity.PushBack(fang = new Item("Fang", "It seems to be the fang of a sea creature.\nBut any sea creature known has that fangs...\n", EQUIP_ITEM, fang_bonus, 0, 1));
+entity.PushBack(rope = new Item("Rope", "A simple piece of rope. Nothing strange.\n", EQUIP_ITEM, non_bonus, 0, 2));
+entity.PushBack(swordcase = new Item("Swordcase", "Very useful case, perfect for keep a sword inside.\n", EQUIP_ITEM, non_bonus, 1, 20));
+entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sustance in it. Maybe blood?\n", EQUIP_ITEM, non_bonus, 0, 5));
 
 
 //Locates creatures and items
 forest->inside.PushBack(player);
 center->inside.PushBack(ghost);
+shop->inside.PushBack(vendor);
 
-forest->inside.PushBack(coffer);
-forest->inside.PushBack(coin);
-forest->inside.PushBack(sword);
-forest->inside.PushBack(rope);
-coffer->inside.PushBack(key);
+house->inside.PushBack(coffer);
+vendor->inside.PushBack(coin);
+coffer->inside.PushBack(sword);
+vendor->inside.PushBack(rope);
+vendor->inside.PushBack(key);
 
-player->position = forest;
-ghost->position = center;
+
+//player->position = forest;
+//ghost->position = center;
 
 
 

@@ -9,17 +9,17 @@ void Creature::Update()
 	srand(time(NULL));
 
 	if (this == world->ghost)
-		
+	{
 		if (state == walking)
 		{
-			if (GetTickCount() - world->time > 30000)
+			if (GetTickCount() - world->time > 5000)
 			{
 				Cardinal orient = Cardinal(rand() % 4);
 
 				if (Go(Cardinal(orient)) && position == world->player->position)
-					{
-						printf("The ghost enters the %s.\n", world->ghost->position->name.C_str());
-					}
+				{
+					printf("The ghost enters the %s.\n", world->ghost->position->name.C_str());
+				}
 				world->ResetTime();
 			}
 
@@ -35,8 +35,8 @@ void Creature::Update()
 			if (position != world->player->position && GetTickCount() - world->time > 5000)
 			{
 				Go(world->player->last_direction);
-				
-				
+
+
 
 				if (position == world->player->position)
 				{
@@ -54,6 +54,24 @@ void Creature::Update()
 			state = following;
 			world->player->state = walking;
 		}
+	}
+
+	else if (this == world->vendor)
+	{
+		if (state == talking)
+		{
+			printf("Vendor: Hello, dear, to my shop! I have a lot of thing to trade with you.\n");
+			for (List<Entity*>::Node* it = inside.first; it != nullptr; it = it->next)
+			{
+				printf("%s for %i coins.\n", it->data->name.C_str(), ((Item*)it->data)->value);
+			}
+			printf("\n");
+			state = walking;
+			world->player->state = walking;
+		}
+	}
+	
+
 
 }
 
@@ -230,6 +248,8 @@ bool Creature::Take(const String& what, const String& from)
 		iterator = iterator->next;
 	}
 
+	
+
 	//Else, check in the inventory
 	if (iterator == nullptr)
 	{
@@ -252,6 +272,13 @@ bool Creature::Take(const String& what, const String& from)
 		printf("There's nothing like a %s here.\n", from.C_str());
 		return false;
 	}
+
+	else if (iterator->data->type == NPC)
+	{
+		printf("Better not to try to steal things in this place...\n");
+		return false;
+	}
+
 			
 	while (it != nullptr)
 	{

@@ -28,6 +28,7 @@ public:
 	
 	Creature* player;
 	Creature* ghost;
+	Creature* vendor;
 
 
 	Room* forest = nullptr;
