@@ -200,19 +200,20 @@ bool Creature::Take(const String& item_name)
 
 	while (it != nullptr)
 	{
-		if ((it->data->type == EQUIP_ITEM || it->data->type == NON_EQUIP_ITEM) && it->data->name.Compare(item_name))
+		if (it->data->name.Compare(item_name))
 		{
-			
+			if (it->data->type == NPC)
+			{
+				printf("You can't take the %s!.\n", it->data->name.C_str());
+				return false;
+			}
+
 			Move(position, (Entity*)this, it->data);
 			printf("You pick the %s.\n", item_name.C_str());
 			return true;
 		}
 
-		else if (it->data->type == NPC)
-		{
-			printf("You can't take the %s!.\n", it->data->name.C_str());
-			return false;
-		}
+		
 
 		it = it->next;
 	}
@@ -310,8 +311,7 @@ void Creature::Drop(const String& item_name)
 		{
 			Move(this, position, it->data);
 			printf("You drop the %s.\n", item_name.C_str());
-			if (it->data == equipped_item)
-				equipped_item = nullptr;
+			equipped_item = nullptr;
 			break;
 		}
 
@@ -403,7 +403,7 @@ bool Creature::PutIn(const String& what, const String& in)
 void Creature::ShowStats()
 {
 	printf("-----%s's Status        Sanity at %i%\n", name.C_str(), sanity);
-	printf("Health: %i \nAtk: %i\nDef: %i\n", health, atk, def);	
+	printf("Health: %i \nAtk: %i\nDef: %i\nCoins: %i\n", health, atk, def, coins);	
 
 	if (equipped_item != nullptr)
 	{
@@ -500,8 +500,121 @@ bool Creature::Talk_to(const String& interlocutor)
 bool Creature::Talking()
 {
 	return true;
+}
+
+bool Creature::Buy_from(const String& what, const String& from)
+{
+
+	List<Entity*>::Node* iterator = position->inside.first;
+	List<Entity*>::Node* it = nullptr;
+
+
+	if (inside.Size() == limit)
+	{
+		printf("Your inventory is full.\n");
+		return false;
+	}
+
+	//Check in the room
+	while (iterator != nullptr)
+	{
+		if (iterator->data->name.Compare(from))
+		{
+			it = iterator->data->inside.first;
+			break;
+		}
+		iterator = iterator->next;
+	}
+
+
+	if (iterator == nullptr)
+	{
+		printf("There's nothing like a %s here.\n", from.C_str());
+		return false;
+	}
+
+
+	while (it != nullptr)
+	{
+		if ((it->data->type == EQUIP_ITEM || it->data->type == NON_EQUIP_ITEM) && it->data->name.Compare(what))
+		{
+			if (coins >= ((Item*)it->data)->value)
+			{
+				coins -= ((Item*)it->data)->value;
+				Move(iterator->data, (Entity*)this, it->data);
+				printf("You buy the %s to the %s.\n", what.C_str(), from.C_str());
+				return true;
+			}
+			else
+			{
+				printf("You don't have enough money to buy the %s.\n", what.C_str());
+				break;
+			}
+		}
+
+		it = it->next;
+	}
+
+	if (it == nullptr)
+	{
+		printf("The %s doesn`t have a %s.\n", from.C_str(), what.C_str());
+		return false;
+	}
+}
+
+bool Creature::Sell_to(const String& what, const String& to)
+{
+	List<Entity*>::Node* iterator = position->inside.first;
+	List<Entity*>::Node* it = inside.first;
+
+
+
+	//Check in the room
+	while (iterator != nullptr)
+	{
+		if (iterator->data->name.Compare(to))
+		{
+			break;
+		}
+		iterator = iterator->next;
+	}
+
+	
+
+	if (iterator == nullptr)
+	{
+		printf("There's nothing like a %s here.\n", to.C_str());
+		return false;
+	}
+
+	if (iterator->data->inside.Size() == ((Item*)iterator->data)->limit)
+	{
+		if (((Item*)iterator->data)->limit == 0)
+			printf("You can't sell nothing to the %s.\n", to.C_str());
+		return false;
+	}
+
+
+
+
+	while (it != nullptr)
+	{
+		if (it->data->name.Compare(what))
+		{
+			coins += ((Item*)it->data)->value/2;
+			printf("You sell the %s to the %s for %i coins.\n", what.C_str(), to.C_str(), ((Item*)it->data)->value / 2);
+			Move(this, iterator->data, it->data);
+			return true;
+		}
+
+		it = it->next;
+	}
+
+	if (it == nullptr)
+	{
+		printf("There's nothing like a %s in your inventory.\n", what.C_str());
+		return false;
+	}
 
 
 }
-
-

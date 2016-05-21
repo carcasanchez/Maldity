@@ -14,6 +14,7 @@ public:
 	int def;
 	int health;
 	int limit;
+	int coins = 0;
 	State state;
 	Entity* equipped_item = nullptr;
 
@@ -45,6 +46,8 @@ public:
 	void Update();
 	bool Talk_to(const String& interlocutor);
 	bool Talking();
+	bool Buy_from(const String& what, const String& from);
+	bool Sell_to(const String& what, const String& to);
 };
 
 

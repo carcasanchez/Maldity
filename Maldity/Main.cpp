@@ -273,6 +273,17 @@ int main(){
 					world->player->Talk_to(command3);
 				}
 
+				//BUY FROM
+				else if (command1.Compare("buy") && command3.Compare("from") && command4.Empty() == false)
+				{
+					world->player->Buy_from(command2, command4);
+				}
+
+				//SELL TO
+				else if (command1.Compare("sell") && command3.Compare("to") && command4.Empty() == false)
+				{
+					world->player->Sell_to(command2, command4);
+				}
 
 				//INVENTORY
 				else if ((command1.Compare("inventory") || command1.Compare("i")) && command2.Empty())
@@ -281,7 +292,7 @@ int main(){
 					printf("\n-----Jasna's inventory:\n");
 
 					if (it == nullptr)
-						printf("The inventory is empty.\n");
+						printf("Your inventory is empty.\n");
 
 					while (it != nullptr)
 					{
