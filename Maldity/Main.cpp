@@ -16,7 +16,7 @@ int main(){
 
 	char key[2];
 
-	String player_input("");
+	String player_input;
 	String command1;
 	String command2;  
 	String command3;
@@ -72,13 +72,15 @@ int main(){
 				continue;
 
 			
+			
 			printf("\n");
 			
-			command1 = player_input.Strtok(' ', 1);
-			command2 = player_input.Strtok(' ', 2);
-			command3 = player_input.Strtok(' ', 3);
-			command4 = player_input.Strtok(' ', 4);
+			player_input.Strtok(' ', 1, command1);
+			player_input.Strtok(' ', 2, command2);
+			player_input.Strtok(' ', 3, command3);
+			player_input.Strtok(' ', 4, command4);
 
+			
 			//MOVE USING n/s/e/w
 			
 			if (player_input.Compare("n"))
@@ -329,6 +331,8 @@ int main(){
 		
 	
 	}
+	
+	delete world;
 
 	printf("Thanks for playing!");
 	return 0;

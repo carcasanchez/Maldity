@@ -19,6 +19,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Creature.h" />
+    <ClInclude Include="CreatureChilds.h" />
     <ClInclude Include="Double-Linked List.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Exits.h" />

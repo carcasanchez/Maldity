@@ -6,6 +6,7 @@ class String{
 private:
 	char* buffer;
 	unsigned int mem;
+	
 
 public:
 
@@ -28,7 +29,7 @@ public:
 	unsigned int Memory()const;
 	void Clean();
 	void Shrink_to_fit();
-	char* Strtok(const char character, const int num_word)const;
+	void Strtok(const char character, const int num_word, String& dest)const;
 	void BackSpace();
 };
 

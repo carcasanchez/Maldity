@@ -6,7 +6,15 @@ World::World()
 {}
 
 World::~World()
-{}
+{
+	int size = entity.Size();
+	for (int i = 0; i < size; i++)
+	{
+		delete entity[i];
+	}
+
+
+}
 
 void World::Look()const{
 
@@ -40,7 +48,7 @@ void World::Look()const{
 
 void World::CreateWorld()
 {
-
+	
 
 	
 	//Rooms
@@ -212,8 +220,7 @@ vendor->inside.PushBack(rope);
 forest->inside.PushBack(key);
 
 
-//player->position = forest;
-//ghost->position = center;
+
 
 
 

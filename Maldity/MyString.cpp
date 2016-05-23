@@ -7,6 +7,8 @@ String::String()
 	buffer = new char[mem];
 }
 
+
+
 String::String(const char* str)
 {
 
@@ -129,36 +131,56 @@ void String::operator+=(const String& str)
 
 	int len1 = Strlen();
 	int len2 = str.Strlen();
-	mem = len1 + len2 + 1;
-	char* temp;
-	temp = new char[mem];
+	char* temp = nullptr;
 
-	strcpy_s(temp, mem, buffer);
-	strcat_s(temp, mem, str.C_str());
+	if (len1 + len2 + 1 > mem)
+	{
+		mem = len1 + len2 + 1;
+		
+		temp = new char[mem];
+		strcpy_s(temp, mem, buffer);
+		strcat_s(temp, mem, str.C_str());
 
-	delete[] buffer;
+		delete[] buffer;
+		buffer = temp;
+	}
+	
+	else
+	{
+		mem = len1 + len2 + 1;
+		strcat_s(buffer, mem, str.C_str());
+	}
 
-	buffer = temp;
+	
 
 
 }
 
 void String::operator+=(const char* str)
 {
-
+	//TODO
 	int len1 = Strlen();
 	int len2 = strlen(str);
-	mem = len1 + len2 + 1;
-	char* temp;
-	temp = new char[mem];
+	
+	
+	if (len1 + len2 + 1 > mem)
+	{
+		mem = len1 + len2 + 1;
+		char* temp;
+		temp = new char[mem];
 
-	strcpy_s(temp, mem, buffer);
-	strcat_s(temp, mem, str);
+		strcpy_s(temp, mem, buffer);
+		strcat_s(temp, mem, str);
 
-	delete[] buffer;
+		delete[] buffer;
 
-	buffer = temp;
-
+		buffer = temp;
+	}
+	else
+	{
+		mem = len1 + len2 + 1;
+		strcat_s(buffer, mem, str);
+	}
 }
 
 unsigned int String::Memory()const
@@ -166,11 +188,12 @@ unsigned int String::Memory()const
 	return mem;
 }
 
-char* String::Strtok(const char character, const int num_word)const
+void String::Strtok(const char character, const int num_word, String& dest)const
 {
 	int i, j, num_char = 0;
 	char* temp;
 	int len = Strlen();
+	
 
 	for (i = 0, j = 0; i < len; i++)
 	{
@@ -179,8 +202,6 @@ char* String::Strtok(const char character, const int num_word)const
 		if (num_char == num_word - 1)
 			j++;
 	}
-
-
 
 	temp = new char[j + 1];
 
@@ -200,9 +221,13 @@ char* String::Strtok(const char character, const int num_word)const
 			j++;
 		}
 	}
+
 	temp[j] = '\0';
 
-	return temp;
+	dest = temp;
+	delete[] temp;
+
+
 
 }
 

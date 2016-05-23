@@ -26,7 +26,7 @@ public:
 public:
 
 	List(){};
-	~List(){};
+	~List(){ Clean(); };
 
 	
 	bool Empty() const
