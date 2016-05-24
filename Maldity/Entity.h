@@ -36,6 +36,29 @@ public:
 	
 	virtual void Update(){};
 
+	//This move entities from one list to another
+	void Move(Entity* source, Entity* destination, const Entity* entity)
+	{
+		List <Entity*> ::Node* n = source->inside.first;
+
+
+		while (n != nullptr)
+		{
+			List <Entity*> ::Node* tmp = n->next;
+
+			if (n->data == entity)
+			{
+				destination->inside.PushBack(n->data);
+				source->inside.Erase(n);
+			}
+
+			n = tmp;
+		}
+
+
+	}
+
+
 };
 
 

@@ -1,5 +1,6 @@
 #include "World.h"
-#include "Creature.h"
+#include "CreatureChilds.h"
+
 
 
 World::World()
@@ -189,8 +190,8 @@ Stats fang_bonus(0, 2, 0, 0);
 
 
 //Create creatures
-entity.PushBack(player = new Creature("Jasna", "", forest, PLAYER, Jasna_stats, 5)); player->coins = 100;
-entity.PushBack(ghost = new Creature("Ghost", "A strange ethereal presence. It seems lost.\n", center, NPC, non_bonus, 0));
+entity.PushBack(player = new Player("Jasna", "", forest, PLAYER, Jasna_stats, 5, 100));
+entity.PushBack(ghost = new Ghost("Ghost", "A strange ethereal presence. It seems lost.\n", center, NPC, non_bonus, 0));
 entity.PushBack(vendor = new Creature("Vendor", "The old man glances at you with a smart look.\nIt has a lot of objects to trade with you.\n", shop, NPC, non_bonus, 20));
 
 
@@ -218,7 +219,8 @@ vendor->inside.PushBack(coin);
 coffer->inside.PushBack(sword);
 vendor->inside.PushBack(rope);
 forest->inside.PushBack(key);
-
+beach->inside.PushBack(fang);
+dock->inside.PushBack(map);
 
 
 

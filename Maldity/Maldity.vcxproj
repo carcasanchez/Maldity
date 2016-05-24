@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CreatureChilds.cpp" />
     <ClCompile Include="Exits.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MyString.cpp" />

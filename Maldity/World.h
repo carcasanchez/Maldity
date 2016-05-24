@@ -14,22 +14,24 @@
 #include "Rooms.h"
 #include "Exits.h"
 #include "Items.h"
-#include "Creature.h"
+#include "CreatureChilds.h"
 
-
+class Creature;
+class Player;
+class Ghost;
 
 
 class World{
 public:
 	
-	unsigned int time = GetTickCount();
+
 
 	Vector <Entity*> entity;
 	
-	Creature* player;
-	Creature* ghost;
-	Creature* vendor;
 
+	Ghost* ghost;
+	Creature* vendor;
+	Player* player;
 
 	Room* forest = nullptr;
 	Room* road = nullptr;
@@ -65,7 +67,6 @@ public:
 	void CreateWorld();
 	void Look()const;
 
-	void ResetTime(){ time = GetTickCount(); };
 	
 };
 

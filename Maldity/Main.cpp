@@ -63,10 +63,14 @@ int main(){
 			
 
 			//UPDATE
-			for (int i = 1; i < world->entity.Size(); i++)
+			for (int i = 0; i < world->entity.Size(); i++)
 				world->entity[i]->Update();
 
-			
+			if (world->player->sanity == 0)
+			{
+				player_input = "quit";
+				break;
+			}
 			
 			if (key[0] != '\r')
 				continue;
@@ -112,19 +116,22 @@ int main(){
 				orient = W;
 			
 
+			if (player_input.Empty())
+				break;
+		
+			//QUIT
+			else if (player_input.Compare("quit"))
+				break;
+
+			
 
 			if (world->player->state == walking)
 			{
-				if (player_input.Empty()){}
-
-				//QUIT
-				else if (player_input.Compare("quit"))
-					break;
-
+				
 
 				//LOOK
-				else if (command1.Compare("look"))
-				{
+				if (command1.Compare("look"))
+					{
 					//Look the room
 					if (command2.Empty())
 						world->Look();
@@ -333,7 +340,5 @@ int main(){
 	}
 	
 	delete world;
-
-	printf("Thanks for playing!");
 	return 0;
 }
