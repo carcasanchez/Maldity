@@ -263,10 +263,7 @@ public:
 		}
 	}
 
-	Node* Iterate()
-	{
-		//TODO: arguments passing
-	}
+	
 
 };
 

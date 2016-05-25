@@ -13,10 +13,10 @@ int main(){
 
 
 	Room* player_pos = nullptr;
-
+	
 	char key[2];
 
-	String player_input;
+	
 	String command1;
 	String command2;  
 	String command3;
@@ -27,10 +27,10 @@ int main(){
 	
 	printf("\n				MALDITY\n\n");
 
-	while (player_input.Compare("quit")==false)
+	while (world->player_input.Compare("quit")==false)
 	{
 		key[0] = 0;
-		player_input.Clean();
+		world->player_input.Clean();
 
 		player_pos = world->player->position;
 		world->Look();
@@ -46,9 +46,9 @@ int main(){
 				key[0] = _getch();
 				key[1] = 0;
 
-				if (key[0] == '\b' && player_input.Empty()==false)
+				if (key[0] == '\b' && world->player_input.Empty() == false)
 				{
-					player_input.BackSpace();
+					world->player_input.BackSpace();
 					printf("\b");
 					printf(" ");
 					printf("\b");
@@ -57,10 +57,11 @@ int main(){
 				else if (key[0] != '\r')
 				{
 					printf("%c", key[0]);
-					player_input += key;
+					world->player_input += key;
 				}
 			}
 			
+			world->last_key = &key[0];
 
 			//UPDATE
 			for (int i = 0; i < world->entity.Size(); i++)
@@ -68,7 +69,7 @@ int main(){
 
 			if (world->player->sanity == 0)
 			{
-				player_input = "quit";
+				world->player_input = "quit";
 				break;
 			}
 			
@@ -79,27 +80,27 @@ int main(){
 			
 			printf("\n");
 			
-			player_input.Strtok(' ', 1, command1);
-			player_input.Strtok(' ', 2, command2);
-			player_input.Strtok(' ', 3, command3);
-			player_input.Strtok(' ', 4, command4);
+			world->player_input.Strtok(' ', 1, command1);
+			world->player_input.Strtok(' ', 2, command2);
+			world->player_input.Strtok(' ', 3, command3);
+			world->player_input.Strtok(' ', 4, command4);
 
 			
 			//MOVE USING n/s/e/w
 			
-			if (player_input.Compare("n"))
+			if (world->player_input.Compare("n"))
 			{
 				command1 = "go"; command2 = "north"; command3.Clean(); 
 			}
-			else if (player_input.Compare("s"))
+			else if (world->player_input.Compare("s"))
 			{
 				command1 = "go"; command2 = "south"; command3.Clean();
 			}
-			else if (player_input.Compare("e"))
+			else if (world->player_input.Compare("e"))
 			{
 				command1 = "go"; command2 = "east"; command3.Clean();
 			}
-			else if (player_input.Compare("w"))
+			else if (world->player_input.Compare("w"))
 			{
 				command1 = "go"; command2 = "west"; command3.Clean();
 			}
@@ -116,11 +117,11 @@ int main(){
 				orient = W;
 			
 
-			if (player_input.Empty())
+			if (world->player_input.Empty())
 				break;
 		
 			//QUIT
-			else if (player_input.Compare("quit"))
+			else if (world->player_input.Compare("quit"))
 				break;
 
 			
@@ -319,18 +320,19 @@ int main(){
 				}
 
 				//HELP
-				else if (player_input.Compare("help"))
+				else if (world->player_input.Compare("help"))
 					printf("Welcome to Maldity!\nUse the command 'look' for receive a description of the current room.\nCombine it with 'north', 'south', 'east' and 'west' to receive descriptions \nof the exits.	\nUse 'go' and 'north', 'south', 'east' and 'west' to move between rooms. \nUse 'open <orientation> door' if you find a closed door, or \n'close <orientation> door' if you want to close it.\nSee your inventory whit 'inventory' or 'i'.\nCheck your status with 'Stats'.\nUse 'take' or 'pick' to take objects.\nUse 'take <item> from <item>' and 'put <item> in <item>' to take and put in \nother items.\nAlso, you can look at items.\nYou can equip objects to increase your stats. Use 'unequip' to unequip them.\nUse 'help' to see the controls and 'quit' if you want to finish the game.\n");
 
 				//INVALID COMMAND
 				else printf("You have entered an invalid command.\n");
+				
 
-
-
-				//	fflush(stdin);
-				key[0] = 0;
-				player_input.Clean();
 			}
+
+
+			key[0] = 0;
+			world->player_input.Clean();
+			
 			printf("\n");
 		}
 

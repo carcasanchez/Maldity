@@ -4,26 +4,7 @@
 
 
 
-void Creature::Update()
-{
-
-
-	if (this == world->vendor)
-	{
-		if (state == talking)
-		{
-			printf("Vendor: Hello, dear, to my shop! I have a lot of thing to trade with you.\n");
-			for (List<Entity*>::Node* it = inside.first; it != nullptr; it = it->next)
-			{
-				printf("%s for %i coins.\n", it->data->name.C_str(), ((Item*)it->data)->value);
-			}
-			printf("\n");
-			state = walking;
-			world->player->state = walking;
-		}
-	}
-	
-}
+void Creature::Update(){}
 
 
 bool Creature::Go(Cardinal dest)

@@ -19,6 +19,10 @@ public:
 	Vector()
 	{
 		elements = new type[mem];
+		for (int i = 0; i < mem; i++)
+		{
+			elements[i] = nullptr;
+		}
 	}
 
 	Vector(const int num)

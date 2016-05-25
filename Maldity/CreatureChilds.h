@@ -53,8 +53,16 @@ public:
 };
 
 
-class Vendor
+class Vendor : public Creature
 {
+public:
+
+
+	Vendor(const char* name, const char* desc, Room* pos, Tipus type, Stats stats, int limit) :Creature(name, desc, pos, type, stats, limit){}
+
+
+	void Update();
+
 
 
 };

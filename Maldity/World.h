@@ -15,8 +15,9 @@
 #include "Exits.h"
 #include "Items.h"
 #include "CreatureChilds.h"
+#include "Dialogue.h"
 
-class Creature;
+class Vendor;
 class Player;
 class Ghost;
 
@@ -24,14 +25,15 @@ class Ghost;
 class World{
 public:
 	
-
+	String player_input;
+	char* last_key = nullptr;
 
 	Vector <Entity*> entity;
 	
 
-	Ghost* ghost;
-	Creature* vendor;
-	Player* player;
+	Ghost* ghost = nullptr;
+	Vendor* vendor = nullptr;
+	Player* player = nullptr;
 
 	Room* forest = nullptr;
 	Room* road = nullptr;

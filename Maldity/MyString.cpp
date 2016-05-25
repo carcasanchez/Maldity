@@ -158,7 +158,7 @@ void String::operator+=(const String& str)
 
 void String::operator+=(const char* str)
 {
-	//TODO
+
 	int len1 = Strlen();
 	int len2 = strlen(str);
 	
@@ -189,7 +189,7 @@ unsigned int String::Memory()const
 }
 
 void String::Strtok(const char character, const int num_word, String& dest)const
-{
+{//TODO
 	int i, j, num_char = 0;
 	char* temp;
 	int len = Strlen();

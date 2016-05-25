@@ -192,7 +192,7 @@ Stats fang_bonus(0, 2, 0, 0);
 //Create creatures
 entity.PushBack(player = new Player("Jasna", "", forest, PLAYER, Jasna_stats, 5, 100));
 entity.PushBack(ghost = new Ghost("Ghost", "A strange ethereal presence. It seems lost.\n", center, NPC, non_bonus, 0));
-entity.PushBack(vendor = new Creature("Vendor", "The old man glances at you with a smart look.\nIt has a lot of objects to trade with you.\n", shop, NPC, non_bonus, 20));
+entity.PushBack(vendor = new Vendor("Vendor", "The old man glances at you with a smart look.\nIt has a lot of objects to trade with you.\n", shop, NPC, non_bonus, 20));
 
 
 //Creates items
@@ -223,9 +223,12 @@ beach->inside.PushBack(fang);
 dock->inside.PushBack(map);
 
 
+ghost->dialog = new Dialogue("This is a default line of dialogue.\n");
 
-
-
+ghost->dialog->AddLine("First option\n", "This is the first option.\n Here will go the text.\n", 0, 1);
+ghost->dialog->AddLine("Second option\n", "This is the second option.\n Here will go the text.\n", 0, 2);
+ghost->dialog->AddLine("Ram. of the first option\n", "This is a ramification of the first option.\n Here will go the text.\n", 1, 1);
+ghost->dialog->AddLine("Second Ram. of the first option\n", "This is another ramification of the first option.\n Here will go the text.\n", 1, 2);
 
 }
 

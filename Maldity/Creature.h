@@ -3,6 +3,8 @@
 #include "Entity.h"
 #include "World.h"
 
+class Dialogue;
+
 enum State{ walking, talking, following, buying, selling };
 
 class Creature:public Entity
@@ -15,6 +17,7 @@ public:
 	int health;
 	int limit;
 
+	Dialogue* dialog;
 	State state;
 	Entity* equipped_item = nullptr;
 

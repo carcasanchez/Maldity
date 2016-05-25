@@ -3,7 +3,7 @@
 
 void Player::Update()
 {
-	
+	/*
 	if (world->ghost->position == position && timer == 0)
 	{
 		timer = GetTickCount();
@@ -25,7 +25,7 @@ void Player::Update()
 			{ 
 				sanity--;
 			}
-	}
+	}*/
 
 }
 
@@ -404,6 +404,14 @@ bool Player::Talk_to(const String& interlocutor)
 			{
 				((Creature*)it->data)->state = talking;
 				state = talking;
+				printf("%s", ((Creature*)it->data)->dialog->lines[0]->text.C_str());
+				((Creature*)it->data)->dialog->index = 0;
+
+				for (int i = 0, size = ((Creature*)it->data)->dialog->lines[0]->option.Size(); i < size; i++)
+				{
+					printf("%i: %s", i+1, ((Creature*)it->data)->dialog->lines[0]->option[i]->title.C_str());
+
+				}
 				return true;
 			}
 
@@ -593,9 +601,60 @@ void Ghost::Update()
 
 	else if (state == talking)
 	{
-		printf("The ghost doesn't seem able to talk.\n");
-		state = following;
-		world->player->state = walking;
+		
+		if (*world->last_key == '\r')
+		{
+			int size = dialog->lines[dialog->index]->option.Size();
+
+			for (int i = 0; i < size; i++)
+			{
+				if (dialog->lines[dialog->index]->option[i]->index == ((int)world->player_input.C_str()) + 48)
+				{
+					printf("%s", dialog->lines[dialog->index]->option[i]->text);
+					
+					dialog->index = dialog->lines[dialog->index]->option[i]->index;
+
+					if (dialog->lines[dialog->index]->option.Empty())
+					{
+						state = following;
+						world->player->state = walking;
+
+					}
+
+					else
+					{
+						size = dialog->lines[dialog->index]->option.Size();
+
+						for (int i = 0; i < size; i++)
+						{
+							printf("%i: %s", i + 1,  dialog->lines[dialog->index]->option[i]->title.C_str());
+						}
+					}
+					
+				}
+			}
+			
+		}
+				
 	}
 
+}
+
+
+void Vendor::Update()
+{
+
+
+		if (state == talking)
+		{
+			printf("Vendor: Hello, dear, to my shop! I have a lot of thing to trade with you.\n");
+			for (List<Entity*>::Node* it = inside.first; it != nullptr; it = it->next)
+			{
+				printf("%s for %i coins.\n", it->data->name.C_str(), ((Item*)it->data)->value);
+			}
+			printf("\n");
+			state = walking;
+			world->player->state = walking;
+		}
+	
 }
