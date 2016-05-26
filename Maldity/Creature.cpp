@@ -38,7 +38,45 @@ bool Creature::Go(Cardinal dest)
 	return false;
 }
 
+bool Creature::Talking()
+{
+	
+		int i = world->player_input.FirstAscii() - 1;
 
+		printf("\n");
+
+		if (i < 0 || i > dialog->current->option.Size())
+		{
+			printf("You have chose an invalid option.\n");
+			return false;
+		}
+
+		printf("%s", dialog->current->option[i]->text);
+
+		dialog->current = dialog->current->option[i];
+
+		printf("\n");
+
+		if (dialog->current->option.Empty())
+		{
+			state = following;
+			world->player->state = walking;
+			world->player_input.Clean();
+			return false;
+		}
+		
+		else
+		{
+			int size = dialog->current->option.Size();
+
+			for (int i = 0; i < size; i++)
+			{
+				printf("%i: %s", i + 1, dialog->current->option[i]->title.C_str());
+			}
+			return true;
+		}
+	
+}
 
 
 

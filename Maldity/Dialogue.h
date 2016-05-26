@@ -13,9 +13,9 @@ public:
 		String title;
 		String text;
 		Vector <Node*> option;
-		int index;
+		
 
-		Node(const char* text, const char* title, int index) : index (index)
+		Node(const char* text, const char* title) 
 		{
 			this->text = text;
 			this->title = title;
@@ -26,19 +26,20 @@ public:
 public:
 
 	Vector <Node*> lines;
-	int index;
+	Node* current;
 
 
 	Dialogue(const char* text)
 	{
-		Node* first = new Node(text, "first", 0);
+		Node* first = new Node(text, "first");
 
 		lines.PushBack(first);
+
 	}
 
-	void AddLine(const char* title, const char* text, int previous, int index)
+	void AddLine(const char* title, const char* text, int previous)
 	{
-		Node* new_line = new Node(text, title, index);
+		Node* new_line = new Node(text, title);
 
 		lines.PushBack(new_line);
 

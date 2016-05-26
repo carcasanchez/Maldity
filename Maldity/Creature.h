@@ -34,6 +34,7 @@ public:
 	
 	void Update();
 	virtual bool Go(Cardinal orientation);
+	virtual bool Talking();
 	
 };
 

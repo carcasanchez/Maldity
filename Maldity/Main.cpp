@@ -75,20 +75,27 @@ int main(){
 			
 			if (key[0] != '\r')
 				continue;
+				
+			
+			printf("\n");			
 
+			//QUIT
+			if (world->player_input.Compare("quit"))
+				break;
 			
-			
-			printf("\n");
-			
+			if (world->player->state == walking)
+			{
+
 			world->player_input.Strtok(' ', 1, command1);
 			world->player_input.Strtok(' ', 2, command2);
 			world->player_input.Strtok(' ', 3, command3);
 			world->player_input.Strtok(' ', 4, command4);
-
 			
+
 			//MOVE USING n/s/e/w
 			
-			if (world->player_input.Compare("n"))
+
+			 if (world->player_input.Compare("n"))
 			{
 				command1 = "go"; command2 = "north"; command3.Clean(); 
 			}
@@ -117,21 +124,13 @@ int main(){
 				orient = W;
 			
 
-			if (world->player_input.Empty())
-				break;
-		
-			//QUIT
-			else if (world->player_input.Compare("quit"))
-				break;
+
+				if (world->player_input.Empty()){}
 
 			
 
-			if (world->player->state == walking)
-			{
-				
-
 				//LOOK
-				if (command1.Compare("look"))
+				else if (command1.Compare("look"))
 					{
 					//Look the room
 					if (command2.Empty())

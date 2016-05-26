@@ -31,6 +31,7 @@ public:
 	void Shrink_to_fit();
 	void Strtok(const char character, const int num_word, String& dest)const;
 	void BackSpace();
+	int FirstAscii()const;
 };
 
 #endif

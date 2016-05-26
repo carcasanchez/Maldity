@@ -260,3 +260,8 @@ void String::BackSpace()
 
 }
 
+
+int String::FirstAscii()const
+{
+	return buffer[0] - 48;
+}

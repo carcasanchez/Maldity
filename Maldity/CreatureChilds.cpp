@@ -402,17 +402,23 @@ bool Player::Talk_to(const String& interlocutor)
 		{
 			if (it->data->type == NPC)
 			{
+
 				((Creature*)it->data)->state = talking;
 				state = talking;
+
 				printf("%s", ((Creature*)it->data)->dialog->lines[0]->text.C_str());
-				((Creature*)it->data)->dialog->index = 0;
+				((Creature*)it->data)->dialog->current = ((Creature*)it->data)->dialog->lines[0];
+								
+				printf("\n");
 
 				for (int i = 0, size = ((Creature*)it->data)->dialog->lines[0]->option.Size(); i < size; i++)
 				{
 					printf("%i: %s", i+1, ((Creature*)it->data)->dialog->lines[0]->option[i]->title.C_str());
 
 				}
+
 				return true;
+
 			}
 
 			else if (it->data->type == NON_EQUIP_ITEM || it->data->type == EQUIP_ITEM)
@@ -601,40 +607,8 @@ void Ghost::Update()
 
 	else if (state == talking)
 	{
-		
-		if (*world->last_key == '\r')
-		{
-			int size = dialog->lines[dialog->index]->option.Size();
-
-			for (int i = 0; i < size; i++)
-			{
-				if (dialog->lines[dialog->index]->option[i]->index == ((int)world->player_input.C_str()) + 48)
-				{
-					printf("%s", dialog->lines[dialog->index]->option[i]->text);
-					
-					dialog->index = dialog->lines[dialog->index]->option[i]->index;
-
-					if (dialog->lines[dialog->index]->option.Empty())
-					{
-						state = following;
-						world->player->state = walking;
-
-					}
-
-					else
-					{
-						size = dialog->lines[dialog->index]->option.Size();
-
-						for (int i = 0; i < size; i++)
-						{
-							printf("%i: %s", i + 1,  dialog->lines[dialog->index]->option[i]->title.C_str());
-						}
-					}
-					
-				}
-			}
-			
-		}
+		state = walking;
+		world->player->state = walking;
 				
 	}
 
@@ -643,18 +617,31 @@ void Ghost::Update()
 
 void Vendor::Update()
 {
-
-
 		if (state == talking)
-		{
-			printf("Vendor: Hello, dear, to my shop! I have a lot of thing to trade with you.\n");
-			for (List<Entity*>::Node* it = inside.first; it != nullptr; it = it->next)
+		{	
+
+			if (*world->last_key == '\r')
 			{
-				printf("%s for %i coins.\n", it->data->name.C_str(), ((Item*)it->data)->value);
+				Talking();
 			}
-			printf("\n");
-			state = walking;
-			world->player->state = walking;
+
 		}
 	
+}
+
+void Vendor::Look()
+{
+	if (inside.Empty())
+	{
+		printf("The vendor smiles sadly and shows an empty bar.\n He has nothing to sell right now.\n");
+	}
+	printf("The vendor smiles at you and shows his genre:\n");
+	
+	for (List<Entity*>::Node* it = inside.first; it != nullptr; it = it->next)
+	{
+		printf("%s for %i coins.\n", it->data->name.C_str(), ((Item*)it->data)->value);
+	}
+	printf("\n");
+
+
 }

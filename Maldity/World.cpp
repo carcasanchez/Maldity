@@ -192,7 +192,7 @@ Stats fang_bonus(0, 2, 0, 0);
 //Create creatures
 entity.PushBack(player = new Player("Jasna", "", forest, PLAYER, Jasna_stats, 5, 100));
 entity.PushBack(ghost = new Ghost("Ghost", "A strange ethereal presence. It seems lost.\n", center, NPC, non_bonus, 0));
-entity.PushBack(vendor = new Vendor("Vendor", "The old man glances at you with a smart look.\nIt has a lot of objects to trade with you.\n", shop, NPC, non_bonus, 20));
+entity.PushBack(vendor = new Vendor("Vendor", "", shop, NPC, non_bonus, 20));
 
 
 //Creates items
@@ -223,12 +223,17 @@ beach->inside.PushBack(fang);
 dock->inside.PushBack(map);
 
 
-ghost->dialog = new Dialogue("This is a default line of dialogue.\n");
+//Add dialogues
 
-ghost->dialog->AddLine("First option\n", "This is the first option.\n Here will go the text.\n", 0, 1);
-ghost->dialog->AddLine("Second option\n", "This is the second option.\n Here will go the text.\n", 0, 2);
-ghost->dialog->AddLine("Ram. of the first option\n", "This is a ramification of the first option.\n Here will go the text.\n", 1, 1);
-ghost->dialog->AddLine("Second Ram. of the first option\n", "This is another ramification of the first option.\n Here will go the text.\n", 1, 2);
+ghost->dialog = new Dialogue("The ghost doesn't seem able to talk.\n");
+
+vendor->dialog = new Dialogue("Vendor: Welcome, dear, to my shop! I have a lot of interesting items for you.\nSome information, maybe.\n");
+vendor->dialog->AddLine("What is this city?\n", "Vendor: My dear, this is our home, Baiona. The weather here is so pleasant,\nisn't it?. We have not much work, but... the life here is still interesting.\n", 0);
+vendor->dialog->AddLine("What interesting objects do you have?\n", "Vendor: Oh, glad you ask. I have anything you want, from utility objects to \nsome old relics!\n", 0);
+vendor->dialog->AddLine("Interesting? What do you mean?\n", "Vendor: Oh, dear. We receive visits from once to once. Visits from very \nimportant... person.\n", 1);
+vendor->dialog->AddLine("(Ok, I think I have better things to do)\n", "Vendor: See you later\n", 1);
+vendor->dialog->AddLine("Person? What person?\n", "Vendor: Oh, maybe you will know him, soon or later. Don't be impatient.\n", 3);
+vendor->dialog->AddLine("Mhf. Ok, see you later.\n", "Vendor: Don't you want to buy something?\n", 3);
 
 }
 
