@@ -53,28 +53,37 @@ bool Creature::Talking()
 
 		printf("%s", dialog->current->option[i]->text);
 
-		dialog->current = dialog->current->option[i];
+		
+
+		if (dialog->current->option[i]->next == nullptr)
+		{
+			dialog->current = dialog->current->option[i];
+
+			if (dialog->current->option.Empty())
+			{
+				state = following;
+				world->player->state = walking;
+				world->player_input.Clean();
+				return false;
+			}			
+		}
+
+		else
+		{
+			dialog->current = dialog->current->option[i]->next;
+		}
+
 
 		printf("\n");
 
-		if (dialog->current->option.Empty())
-		{
-			state = following;
-			world->player->state = walking;
-			world->player_input.Clean();
-			return false;
-		}
-		
-		else
-		{
-			int size = dialog->current->option.Size();
+		int size = dialog->current->option.Size();
 
-			for (int i = 0; i < size; i++)
+		for (int i = 0; i < size; i++)
 			{
 				printf("%i: %s", i + 1, dialog->current->option[i]->title.C_str());
 			}
 			return true;
-		}
+		
 	
 }
 

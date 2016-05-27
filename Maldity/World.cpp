@@ -192,7 +192,7 @@ Stats fang_bonus(0, 2, 0, 0);
 //Create creatures
 entity.PushBack(player = new Player("Jasna", "", forest, PLAYER, Jasna_stats, 5, 100));
 entity.PushBack(ghost = new Ghost("Ghost", "A strange ethereal presence. It seems lost.\n", center, NPC, non_bonus, 0));
-entity.PushBack(vendor = new Vendor("Vendor", "", shop, NPC, non_bonus, 20));
+entity.PushBack(vendor = new Vendor("Vendor", "", forest, NPC, non_bonus, 20));
 
 
 //Creates items
@@ -212,7 +212,7 @@ entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sust
 //Locates creatures and items
 forest->inside.PushBack(player);
 center->inside.PushBack(ghost);
-shop->inside.PushBack(vendor);
+forest->inside.PushBack(vendor);
 
 house->inside.PushBack(coffer);
 vendor->inside.PushBack(coin);
@@ -228,12 +228,13 @@ dock->inside.PushBack(map);
 ghost->dialog = new Dialogue("The ghost doesn't seem able to talk.\n");
 
 vendor->dialog = new Dialogue("Vendor: Welcome, dear, to my shop! I have a lot of interesting items for you.\nSome information, maybe.\n");
-vendor->dialog->AddLine("What is this city?\n", "Vendor: My dear, this is our home, Baiona. The weather here is so pleasant,\nisn't it?. We have not much work, but... the life here is still interesting.\n", 0);
-vendor->dialog->AddLine("What interesting objects do you have?\n", "Vendor: Oh, glad you ask. I have anything you want, from utility objects to \nsome old relics!\n", 0);
-vendor->dialog->AddLine("Interesting? What do you mean?\n", "Vendor: Oh, dear. We receive visits from once to once. Visits from very \nimportant... person.\n", 1);
-vendor->dialog->AddLine("(Ok, I think I have better things to do)\n", "Vendor: See you later\n", 1);
-vendor->dialog->AddLine("Person? What person?\n", "Vendor: Oh, maybe you will know him, soon or later. Don't be impatient.\n", 3);
-vendor->dialog->AddLine("Mhf. Ok, see you later.\n", "Vendor: Don't you want to buy something?\n", 3);
+vendor->dialog->AddLine("What is this city?\n", "Vendor: My dear, this is our home, Baiona. The weather here is so pleasant,\nisn't it?. We have not much work, but... the life here is still interesting.\n", 0, -1);
+vendor->dialog->AddLine("What interesting objects do you have?\n", "Vendor: Oh, glad you ask. I have anything you want, from utility objects to \nsome old relics!\n", 0, 0);
+vendor->dialog->AddLine("Interesting? What do you mean?\n", "Vendor: Oh, dear. We receive visits from once to once. Visits from very \nimportant... person.\n", 1, -1);
+vendor->dialog->AddLine("(Ok, I think I have better things to do)\n", "Vendor: See you later\n", 1, -1);
+vendor->dialog->AddLine("Person? What person?\n", "Vendor: Oh, maybe you will know him, soon or later. Don't be impatient.\n", 3, 0);
+vendor->dialog->AddLine("Mhf. Ok, see you later.\n", "Vendor: Don't you want to buy something?\n", 3, -1);
+vendor->dialog->AddLine("I'm not interested, thanks.\n", "Vendor: What a pity\n", 0, -1);
 
 }
 

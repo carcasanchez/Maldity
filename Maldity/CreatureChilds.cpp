@@ -411,6 +411,7 @@ bool Player::Talk_to(const String& interlocutor)
 								
 				printf("\n");
 
+				
 				for (int i = 0, size = ((Creature*)it->data)->dialog->lines[0]->option.Size(); i < size; i++)
 				{
 					printf("%i: %s", i+1, ((Creature*)it->data)->dialog->lines[0]->option[i]->title.C_str());
