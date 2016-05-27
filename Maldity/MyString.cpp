@@ -190,45 +190,97 @@ unsigned int String::Memory()const
 
 void String::Strtok(const char character, const int num_word, String& dest)const
 {//TODO
-	int i, j, num_char = 0;
+
 	char* temp;
-	int len = Strlen();
+	int new_mem = 1;
+	int current_word = 0;
+	int k = 0;
+
+	/*	int i, j, num_char = 0;
+	
+		int len = Strlen();
 	
 
-	for (i = 0, j = 0; i < len; i++)
-	{
-		if ((buffer[i] == character) || (buffer[i] == NULL))
+		for (i = 0, j = 0; i < len; i++)
+		{
+			if ((buffer[i] == character) || (buffer[i] == NULL))
+				num_char++;
+			if (num_char == num_word - 1)
+				j++;
+		}
+
+		temp = new char[j + 1];
+
+
+		for (i = 0, j = 0, num_char = 0; i < len; i++)
+		{
+
+			if ((buffer[i] == character) || (buffer[i] == NULL))
+			{
 			num_char++;
-		if (num_char == num_word - 1)
-			j++;
-	}
+			i++;
+			}
 
-	temp = new char[j + 1];
+			if (num_char == num_word - 1)
+			{
+				temp[j] = buffer[i];
+				j++;
+			}
+		}
 
+		temp[j] = '\0';
 
-	for (i = 0, j = 0, num_char = 0; i < len; i++)
+		dest = temp;
+		delete[] temp;
+
+		*/
+
+	for (int i = 0, j = Strlen(); i < j; i++)
 	{
-
-		if ((buffer[i] == character) || (buffer[i] == NULL))
+		if (buffer[i] != character)
 		{
-		num_char++;
-		i++;
+			current_word++;
+			while (buffer[i] != character && buffer[i] != '\0')
+			{
+				i++;
+				if (current_word == num_word)
+				{
+					new_mem++;
+				}
+			}
 		}
 
-		if (num_char == num_word - 1)
-		{
-			temp[j] = buffer[i];
-			j++;
-		}
 	}
 
-	temp[j] = '\0';
+	if (new_mem > 1)
+	{
+		temp = new char[new_mem];
+		current_word = 0;
 
-	dest = temp;
-	delete[] temp;
+		for (int i = 0, j = Strlen(); i < j; i++)
+		{
+			if (buffer[i] != character && buffer[i] != '\0')
+			{
+				current_word++;
+				while (buffer[i] != character && buffer[i] != '\0')
+				{	
+					if (current_word == num_word)
+					{
+						temp[k] = buffer[i];
+						k++;
+					}
+					i++;
+				}
+			}
 
+		}
 
+		temp[k] = '\0';
+		dest = temp;
+		delete[] temp;
+	}
 
+	else dest = "";
 }
 
 void String::Clean()

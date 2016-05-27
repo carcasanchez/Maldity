@@ -21,6 +21,14 @@ public:
 			this->title = title;
 		}
 
+		~Node()
+		{
+			for (int i = 0, j = option.Size(); i < j; i++)
+			{
+				delete option[i];
+			}
+		}
+
 	};
 
 public:
@@ -35,6 +43,14 @@ public:
 
 		lines.PushBack(first);
 
+	}
+
+	~Dialogue()
+	{
+		for (int i = 0, j = lines.Size(); i < j; i++)
+		{
+			delete lines[i];
+		}
 	}
 
 	void AddLine(const char* title, const char* text, int previous)

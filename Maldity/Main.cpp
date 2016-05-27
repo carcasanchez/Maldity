@@ -95,19 +95,19 @@ int main(){
 			//MOVE USING n/s/e/w
 			
 
-			 if (world->player_input.Compare("n"))
+			 if (command1.Compare("n") && command2.Empty())
 			{
 				command1 = "go"; command2 = "north"; command3.Clean(); 
 			}
-			else if (world->player_input.Compare("s"))
+			 else if (command1.Compare("s") && command2.Empty())
 			{
 				command1 = "go"; command2 = "south"; command3.Clean();
 			}
-			else if (world->player_input.Compare("e"))
+			 else if (command1.Compare("e") && command2.Empty())
 			{
 				command1 = "go"; command2 = "east"; command3.Clean();
 			}
-			else if (world->player_input.Compare("w"))
+			 else if (command1.Compare("w") && command2.Empty())
 			{
 				command1 = "go"; command2 = "west"; command3.Clean();
 			}
