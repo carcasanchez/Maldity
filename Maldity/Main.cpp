@@ -283,15 +283,23 @@ int main(){
 				}
 
 				//BUY FROM
-				else if (command1.Compare("buy") && command3.Compare("from") && command4.Empty() == false)
+				else if (command1.Compare("buy"))
 				{
-					world->player->Buy_from(command2, command4);
+					if (command3.Compare("from") && command4.Empty() == false)
+						world->player->Buy_from(command2, command4);
+
+					else if (command2.Compare("from") && command3.Empty() == false)
+						world->player->Buy_from(command2);
 				}
 
 				//SELL TO
-				else if (command1.Compare("sell") && command3.Compare("to") && command4.Empty() == false)
+				else if (command1.Compare("sell"))
 				{
-					world->player->Sell_to(command2, command4);
+					if (command3.Compare("to") && command4.Empty() == false)
+						world->player->Sell_to(command2, command4);
+
+					else if (command2.Compare("to") && command3.Empty()==false)
+						world->player->Sell_to(command3);
 				}
 
 				//INVENTORY

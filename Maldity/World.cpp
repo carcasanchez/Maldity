@@ -192,7 +192,7 @@ Stats fang_bonus(0, 2, 0, 0);
 //Create creatures
 entity.PushBack(player = new Player("Jasna", "", forest, PLAYER, Jasna_stats, 5, 100));
 entity.PushBack(ghost = new Ghost("Ghost", "A strange ethereal presence. It seems lost.\n", center, NPC, non_bonus, 0));
-entity.PushBack(vendor = new Vendor("Vendor", "", forest, NPC, non_bonus, 20));
+entity.PushBack(vendor = new Vendor("Vendor", "Short and wearing a dusty cloak, the vendor looks at you with a smart glance.\n", forest, NPC, non_bonus, 20));
 
 
 //Creates items

@@ -467,6 +467,7 @@ bool Player::Buy_from(const String& what, const String& from)
 	}
 
 
+
 	while (it != nullptr)
 	{
 		if ((it->data->type == EQUIP_ITEM || it->data->type == NON_EQUIP_ITEM) && it->data->name.Compare(what))
@@ -493,6 +494,33 @@ bool Player::Buy_from(const String& what, const String& from)
 		printf("The %s doesn`t have a %s.\n", from.C_str(), what.C_str());
 		return false;
 	}
+}
+
+bool Player::Buy_from(const String& from)const
+{
+	List<Entity*>::Node* it = position->inside.first;
+
+	while (it != nullptr)
+	{
+		if (it->data->type == NPC && it->data->name.Compare(from.C_str()))
+		{
+			if (it->data->inside.Empty())
+			{
+				printf("The %s has nothing to sell to you.\n", it->data->name.C_str());
+				return false;
+			}
+			printf("The %s has to sell:\n", it->data->name.C_str());
+			for (List<Entity*>::Node* j = it->data->inside.first; j != nullptr; j = j->next)
+			{
+				printf("%s for %i coins\n", j->data->name.C_str(), ((Item*)j->data)->value);
+			}
+			return true;
+		}
+		it = it->next;
+	}
+
+	printf("You can't do that.\n");
+	return false;
 }
 
 bool Player::Sell_to(const String& what, const String& to)
@@ -549,6 +577,46 @@ bool Player::Sell_to(const String& what, const String& to)
 		return false;
 	}
 
+
+}
+
+bool Player::Sell_to(const String& to)const
+{
+	List<Entity*>::Node* it = position->inside.first;
+	
+
+	while (it != nullptr)
+	{
+		if (it->data->type == NPC && it->data->name.Compare(to.C_str()))
+		{
+			if (it->data != world->vendor)
+			{
+				printf("The %s is not interested in buy nothing from you.\n", it->data->name.C_str());
+				return false;
+			}
+
+			else if (inside.Empty())
+			{
+				printf("You have nothing to sell.\n");
+				return false;
+			}
+
+			else
+			{
+				printf("The %s offers you:\n", it->data->name.C_str());
+
+				for (List<Entity*>::Node* j = inside.first; j != nullptr; j = j->next)
+				{
+					printf("%i coins for the %s\n", ((Item*)j->data)->value/2, j->data->name.C_str());
+				}
+				return true;
+			}
+		}
+		it = it->next;
+	}
+
+	printf("You can't do that.\n");
+	return false;
 
 }
 
@@ -616,6 +684,8 @@ void Ghost::Update()
 }
 
 
+
+
 void Vendor::Update()
 {
 		if (state == talking)
@@ -630,19 +700,3 @@ void Vendor::Update()
 	
 }
 
-void Vendor::Look()
-{
-	if (inside.Empty())
-	{
-		printf("The vendor smiles sadly and shows an empty bar.\n He has nothing to sell right now.\n");
-	}
-	printf("The vendor smiles at you and shows his genre:\n");
-	
-	for (List<Entity*>::Node* it = inside.first; it != nullptr; it = it->next)
-	{
-		printf("%s for %i coins.\n", it->data->name.C_str(), ((Item*)it->data)->value);
-	}
-	printf("\n");
-
-
-}

@@ -35,7 +35,9 @@ public:
 	bool Equip(const String& item);
 	bool Talk_to(const String& interlocutor);
 	bool Buy_from(const String& what, const String& from);
+	bool Buy_from(const String& from)const;
 	bool Sell_to(const String& what, const String& to);
+	bool Sell_to(const String& to)const;
 
 };
 
@@ -60,8 +62,6 @@ public:
 
 	Vendor(const char* name, const char* desc, Room* pos, Tipus type, Stats stats, int limit) :Creature(name, desc, pos, type, stats, limit){}
 
-
-	void Look();
 	void Update();
 
 
