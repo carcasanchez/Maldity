@@ -191,9 +191,9 @@ Stats fang_bonus(0, 2, 0, 0);
 
 //Create creatures
 entity.PushBack(player = new Player("Jasna", "", forest, PLAYER, Jasna_stats, 5, 100));
-entity.PushBack(ghost = new Ghost("Ghost", "A strange ethereal presence. It seems lost.\n", center, NPC, non_bonus, 0));
-entity.PushBack(vendor = new Vendor("Vendor", "Short and wearing a dusty cloak, the vendor looks at you with a smart glance.\n", forest, NPC, non_bonus, 20));
-
+entity.PushBack(ghost = new Ghost("Ghost", "A strange ethereal presence. It seems lost.\n", fells, NPC, non_bonus, 0));
+entity.PushBack(vendor = new Vendor("Vendor", "Short and wearing a dusty cloak, the vendor looks at you with a smart glance.\n", shop, NPC, non_bonus, 20));
+entity.PushBack(knight = new Creature("Knight", "A skeletal knight, wearing a dark armor. He's resting in against a pillar.\n", center, NPC, non_bonus, 0));
 
 //Creates items
 entity.PushBack(key = new Item("Key", "It's an old, little, rusty key.\n", EQUIP_ITEM, non_bonus, 0, 5));
@@ -211,8 +211,9 @@ entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sust
 
 //Locates creatures and items
 forest->inside.PushBack(player);
-center->inside.PushBack(ghost);
-forest->inside.PushBack(vendor);
+fells->inside.PushBack(ghost);
+shop->inside.PushBack(vendor);
+center->inside.PushBack(knight);
 
 house->inside.PushBack(coffer);
 vendor->inside.PushBack(coin);
@@ -236,5 +237,22 @@ vendor->dialog->AddLine("Person? What person?\n", "Vendor: Oh, maybe you will kn
 vendor->dialog->AddLine("Mhf. Ok, see you later.\n", "Vendor: Don't you want to buy something?\n", 3, -1);
 vendor->dialog->AddLine("I'm not interested, thanks.\n", "Vendor: What a pity\n", 0, -1);
 
+
+knight->dialog = new Dialogue("Knight: Hello. You seem a little bit lost. Be careful here. Don't forget \nwho you are.\n");
+knight->dialog->AddLine("What do you mean?\n", "Knight: Don't be afraid. Everybody here is lost.\nBut only a few realizes it.\n", 0, -1);
+knight->dialog->AddLine("What is happening in this village?\n", "Knight: ...\n", 0, -1);
+knight->dialog->AddLine("I need help. I want to leave this city, but...\n", "Knight: I see. If you leave the city by yourself...\nProbably you won't last so much.\nBut I think i could help you.\nThere's an old transistor somewhere... you can use it.\n", 0, -1);
+
+knight->dialog->AddLine("Ah... But, why they are lost?\n", "Knight: They not only lost their lives. They lost themselves.\n", 1, 0);
+knight->dialog->AddLine("I didn't mean... bah, forget it.\n", "Knight: ...\n", 1, -1);
+
+knight->dialog->AddLine("Please, tell me!\n", "Knight: Something big... so big, that we can't understand it...\nAt north...\n", 2, 0);
+knight->dialog->AddLine("(He doesn't seem so much talkative. I am losing my time)\n", "Knight: ...\n", 2, -1);
+
+knight->dialog->AddLine("A transistor? Where?\n", "Knight: ...I don't know. Ask to the rest of inhabitants. But don't get lost.\n", 3, 3);
+knight->dialog->AddLine("Why do you help me?\n", "Knight: ...Knowledge is dangerous. Be afraid of the truth.\n", 3, 3);
+knight->dialog->AddLine("Ok... thanks for the help.\n", "Knight: ...\n", 3, -1);
+
+knight->dialog->AddLine("Ok...Bye...\n", "Knight: Bye. Be careful.\n", 0, -1);
 }
 

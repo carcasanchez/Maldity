@@ -17,6 +17,7 @@
 #include "CreatureChilds.h"
 #include "Dialogue.h"
 
+class Creature;
 class Vendor;
 class Player;
 class Ghost;
@@ -34,6 +35,15 @@ public:
 	Ghost* ghost = nullptr;
 	Vendor* vendor = nullptr;
 	Player* player = nullptr;
+	Creature* knight = nullptr;
+	Creature* sailor = nullptr;
+	Creature* collector = nullptr;
+	Creature* brute = nullptr;
+	
+	/*
+	Inkeeper* inkeeper=nullptr;
+	Seer* seer=nullptr;
+	*/
 
 	Room* forest = nullptr;
 	Room* road = nullptr;

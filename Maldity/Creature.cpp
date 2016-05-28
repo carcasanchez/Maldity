@@ -4,7 +4,19 @@
 
 
 
-void Creature::Update(){}
+void Creature::Update(){
+
+	if (state == talking)
+	{
+
+		if (*world->last_key == '\r')
+		{
+			Talking();
+		}
+
+	}
+
+}
 
 
 bool Creature::Go(Cardinal dest)
@@ -61,7 +73,7 @@ bool Creature::Talking()
 
 			if (dialog->current->option.Empty())
 			{
-				state = following;
+				state = walking;
 				world->player->state = walking;
 				world->player_input.Clean();
 				return false;

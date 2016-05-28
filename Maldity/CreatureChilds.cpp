@@ -408,9 +408,12 @@ bool Player::Talk_to(const String& interlocutor)
 
 				printf("%s", ((Creature*)it->data)->dialog->lines[0]->text.C_str());
 				((Creature*)it->data)->dialog->current = ((Creature*)it->data)->dialog->lines[0];
-								
-				printf("\n");
-
+			
+				if (((Creature*)it->data)->dialog->lines[0]->option.Empty())
+				{ 
+					state = walking;
+					((Creature*)it->data)->state = walking;
+				}
 				
 				for (int i = 0, size = ((Creature*)it->data)->dialog->lines[0]->option.Size(); i < size; i++)
 				{
@@ -672,13 +675,6 @@ void Ghost::Update()
 				timer = 0;
 			}
 		}
-	}
-
-	else if (state == talking)
-	{
-		state = walking;
-		world->player->state = walking;
-				
 	}
 
 }
