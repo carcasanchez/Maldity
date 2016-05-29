@@ -35,7 +35,7 @@ void World::Look()const{
 					printf("There's a %s in the floor.\n", it->data->name.C_str());
 
 				else if (it->data->type == NPC)
-					printf("%s is here.\n", it->data->name.C_str());
+					printf("The %s is here.\n", it->data->name.C_str());
 
 
 				it = it->next;
@@ -194,6 +194,8 @@ entity.PushBack(player = new Player("Jasna", "", forest, PLAYER, Jasna_stats, 5,
 entity.PushBack(ghost = new Ghost("Ghost", "A strange ethereal presence. It seems lost.\n", fells, NPC, non_bonus, 0));
 entity.PushBack(vendor = new Vendor("Vendor", "Short and wearing a dusty cloak, the vendor looks at you with a smart glance.\n", shop, NPC, non_bonus, 20));
 entity.PushBack(knight = new Creature("Knight", "A skeletal knight, wearing a dark armor. He's resting in against a pillar.\n", center, NPC, non_bonus, 0));
+entity.PushBack(sailor = new Creature("Sailor", "It's a decrepit body with a sailor coat. His empty eyes\nlook at some point in the sea.\n", dock, NPC, non_bonus, 0));
+
 
 //Creates items
 entity.PushBack(key = new Item("Key", "It's an old, little, rusty key.\n", EQUIP_ITEM, non_bonus, 0, 5));
@@ -214,6 +216,7 @@ forest->inside.PushBack(player);
 fells->inside.PushBack(ghost);
 shop->inside.PushBack(vendor);
 center->inside.PushBack(knight);
+dock->inside.PushBack(sailor);
 
 house->inside.PushBack(coffer);
 vendor->inside.PushBack(coin);
@@ -228,6 +231,8 @@ dock->inside.PushBack(map);
 
 ghost->dialog = new Dialogue("The ghost doesn't seem able to talk.\n");
 
+
+
 vendor->dialog = new Dialogue("Vendor: Welcome, dear, to my shop! I have a lot of interesting items for you.\nSome information, maybe.\n");
 vendor->dialog->AddLine("What is this city?\n", "Vendor: My dear, this is our home, Baiona. The weather here is so pleasant,\nisn't it?. We have not much work, but... the life here is still interesting.\n", 0, -1);
 vendor->dialog->AddLine("What interesting objects do you have?\n", "Vendor: Oh, glad you ask. I have anything you want, from utility objects to \nsome old relics!\n", 0, 0);
@@ -238,21 +243,35 @@ vendor->dialog->AddLine("Mhf. Ok, see you later.\n", "Vendor: Don't you want to 
 vendor->dialog->AddLine("I'm not interested, thanks.\n", "Vendor: What a pity\n", 0, -1);
 
 
+
 knight->dialog = new Dialogue("Knight: Hello. You seem a little bit lost. Be careful here. Don't forget \nwho you are.\n");
 knight->dialog->AddLine("What do you mean?\n", "Knight: Don't be afraid. Everybody here is lost.\nBut only a few realizes it.\n", 0, -1);
 knight->dialog->AddLine("What is happening in this village?\n", "Knight: ...\n", 0, -1);
 knight->dialog->AddLine("I need help. I want to leave this city, but...\n", "Knight: I see. If you leave the city by yourself...\nProbably you won't last so much.\nBut I think i could help you.\nThere's an old transistor somewhere... you can use it.\n", 0, -1);
-
 knight->dialog->AddLine("Ah... But, why they are lost?\n", "Knight: They not only lost their lives. They lost themselves.\n", 1, 0);
 knight->dialog->AddLine("I didn't mean... bah, forget it.\n", "Knight: ...\n", 1, -1);
-
 knight->dialog->AddLine("Please, tell me!\n", "Knight: Something big... so big, that we can't understand it...\nAt north...\n", 2, 0);
 knight->dialog->AddLine("(He doesn't seem so much talkative. I am losing my time)\n", "Knight: ...\n", 2, -1);
-
 knight->dialog->AddLine("A transistor? Where?\n", "Knight: ...I don't know. Ask to the rest of inhabitants. But don't get lost.\n", 3, 3);
 knight->dialog->AddLine("Why do you help me?\n", "Knight: ...Knowledge is dangerous. Be afraid of the truth.\n", 3, 3);
 knight->dialog->AddLine("Ok... thanks for the help.\n", "Knight: ...\n", 3, -1);
-
 knight->dialog->AddLine("Ok...Bye...\n", "Knight: Bye. Be careful.\n", 0, -1);
+
+
+
+sailor->dialog = new Dialogue("Sailor: ...\n");
+
+sailor->dialog->AddLine("Hello. Maybe you could help me...\n", "Sailor: Why I would want to help you?\n", 0, -1);
+sailor->dialog->AddLine("(Ok, better I leave him)\n", "Sailor: ...\n", 0, -1);
+
+sailor->dialog->AddLine("I'm only searching for a transistor.\n", "Sailor: What? What the hell is a transistor?\nThis city is cursed enough. We don't need people like you here.\n", 1, -1);
+sailor->dialog->AddLine("(Mmf, what a rude man. I don't want to speak to him more)\n", "Sailor: ...Leave me alone.\n", 1, -1);
+
+sailor->dialog->AddLine("Cursed?\n", "Sailor: ...Yes, cursed. Look at me. Look at the rest of inhabitants.\nDon't you think so?\n", 3, -1);
+sailor->dialog->AddLine("Don't you know what a transistor is?\n", "Sailor: Would you kindly stop bothering me? I have been here for years.\nI only mind my boats and my work.\n", 3, 3);
+
+sailor->dialog->AddLine("Tell me more about that curse.\n", "(The sailor looks at the sea, between the giant boats, and keeps silent)\n", 5, 5);
+sailor->dialog->AddLine("That boats... Why are them so big?\n", "Sailor: ...It's for him... at north...\n", 5, 5);
+sailor->dialog->AddLine("...farewell...\n", "(The sailor still looks at the sea)\n", 5, -1);
 }
 
