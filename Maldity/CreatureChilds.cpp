@@ -3,7 +3,7 @@
 
 void Player::Update()
 {
-	/*
+	
 	if (world->ghost->position == position && timer == 0)
 	{
 		timer = GetTickCount();
@@ -17,15 +17,41 @@ void Player::Update()
 	}
 
 
-	if (sanity == 1)
+	switch (sanity)
 	{
-		printf("~7☻83-♣</,1Étodos_uswe89hgaysg@#~€¬546#wvr€~ERA@#~€€#452");
-
-		if (GetTickCount() - timer > 2000)
-			{ 
+		case 1:
+			printf("~7☻83-♣</,1todos_uswe89hgaysg@#~€¬546#wvr€~ERA@#~€€#452");
+			if (GetTickCount() - timer > 2000)
 				sanity--;
-			}
-	}*/
+			break;
+
+		case 75:
+			printf("You start to feel a little bit tired.\n");
+			sanity--;
+			break;
+
+		case 50:
+			printf("You feel nervous while the city goes darker around you.\n");
+			sanity--;
+			break;
+
+		case 30:
+			printf("You hear voices and screams. But around you, there's nobody.\n");
+			sanity--;
+			break;
+
+		case 20:
+			printf("You feel exhausted. The city seems to call you.\n");
+			sanity--;
+			break;
+
+		case 10:
+			printf("You collapse at the ground. When you stand up, the whole world seems to fall\ndown.\n");
+			sanity--;
+			break;
+
+	}
+	
 
 }
 
@@ -427,7 +453,7 @@ bool Player::Talk_to(const String& interlocutor)
 
 			else if (it->data->type == NON_EQUIP_ITEM || it->data->type == EQUIP_ITEM)
 			{
-				printf("You can't talk to a %s.!\n", interlocutor.C_str());
+				printf("You can't talk to a %s!\n", interlocutor.C_str());
 				return false;
 			}
 		}

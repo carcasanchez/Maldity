@@ -193,9 +193,9 @@ Stats fang_bonus(0, 2, 0, 0);
 entity.PushBack(player = new Player("Jasna", "", forest, PLAYER, Jasna_stats, 5, 100));
 entity.PushBack(ghost = new Ghost("Ghost", "A strange ethereal presence. It seems lost.\n", fells, NPC, non_bonus, 0));
 entity.PushBack(vendor = new Vendor("Vendor", "Short and wearing a dusty cloak, the vendor looks at you with a smart glance.\n", shop, NPC, non_bonus, 20));
-entity.PushBack(knight = new Creature("Knight", "A skeletal knight, wearing a dark armor. He's resting in against a pillar.\n", center, NPC, non_bonus, 0));
+entity.PushBack(knight = new Creature("Knight", "A skeletal knight, wearing a dark armor. He's resting against a pillar.\n", road, NPC, non_bonus, 0));
 entity.PushBack(sailor = new Creature("Sailor", "It's a decrepit body with a sailor coat. His empty eyes\nlook at some point in the sea.\n", dock, NPC, non_bonus, 0));
-
+entity.PushBack(collector = new Creature("Collector", "A well dressed and highborn-looking tall man. He wears a strange mask.\n", beach, NPC, non_bonus, 0));
 
 //Creates items
 entity.PushBack(key = new Item("Key", "It's an old, little, rusty key.\n", EQUIP_ITEM, non_bonus, 0, 5));
@@ -215,8 +215,9 @@ entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sust
 forest->inside.PushBack(player);
 fells->inside.PushBack(ghost);
 shop->inside.PushBack(vendor);
-center->inside.PushBack(knight);
+road->inside.PushBack(knight);
 dock->inside.PushBack(sailor);
+beach->inside.PushBack(collector);
 
 house->inside.PushBack(coffer);
 vendor->inside.PushBack(coin);
@@ -258,20 +259,37 @@ knight->dialog->AddLine("Ok... thanks for the help.\n", "Knight: ...\n", 3, -1);
 knight->dialog->AddLine("Ok...Bye...\n", "Knight: Bye. Be careful.\n", 0, -1);
 
 
-
 sailor->dialog = new Dialogue("Sailor: ...\n");
-
 sailor->dialog->AddLine("Hello. Maybe you could help me...\n", "Sailor: Why I would want to help you?\n", 0, -1);
 sailor->dialog->AddLine("(Ok, better I leave him)\n", "Sailor: ...\n", 0, -1);
-
 sailor->dialog->AddLine("I'm only searching for a transistor.\n", "Sailor: What? What the hell is a transistor?\nThis city is cursed enough. We don't need people like you here.\n", 1, -1);
 sailor->dialog->AddLine("(Mmf, what a rude man. I don't want to speak to him more)\n", "Sailor: ...Leave me alone.\n", 1, -1);
-
 sailor->dialog->AddLine("Cursed?\n", "Sailor: ...Yes, cursed. Look at me. Look at the rest of inhabitants.\nDon't you think so?\n", 3, -1);
 sailor->dialog->AddLine("Don't you know what a transistor is?\n", "Sailor: Would you kindly stop bothering me? I have been here for years.\nI only mind my boats and my work.\n", 3, 3);
-
 sailor->dialog->AddLine("Tell me more about that curse.\n", "(The sailor looks at the sea, between the giant boats, and keeps silent)\n", 5, 5);
 sailor->dialog->AddLine("That boats... Why are them so big?\n", "Sailor: ...It's for him... at north...\n", 5, 5);
 sailor->dialog->AddLine("...farewell...\n", "(The sailor still looks at the sea)\n", 5, -1);
+
+
+
+collector->dialog = new Dialogue("Collector: Oh. Hello, My Lady. Looking for a good sight of the sea?\n");
+collector->dialog->AddLine("Maybe. But this sea is a bit ferocious for me.\n", "Collector: Oh, true. The sea here is not peaceful.\nBut, our souls are not peaceful too...\n", 0, -1);
+collector->dialog->AddLine("Actually not. I'm searching for help.\n", "Collector: Oh, how I could help such a beautiful lady?\n", 0, -1);
+collector->dialog->AddLine("Yes. And you, what are you sarching for?\n", "Collector: I search for the strange.\n", 0, -1);
+
+collector->dialog->AddLine("Souls? What do you mean?\n", "Collector: Our souls, MyLady, our souls. The souls trapped in this city.\n", 1, -1);
+collector->dialog->AddLine("Trapped?\n", "Collector: Yes... I have been trapped here for a few years.\nThe Knight is the oldest soul here. But is the most lucid.\nWould you become the youngest soul here?\	n", 4, 4);
+collector->dialog->AddLine("(Probably is crazy. I will leave)\n", "Collector: Farewell, MyLady\n", 4, -1);
+
+collector->dialog->AddLine("Did you know where I can found something like a transistor?\n","Collector: A radio machine? I have one in my house, I think.\nI can let you using it if you... make something for me.", 2, -1);
+collector->dialog->AddLine("Probably you can't. See you later.\n", "Collector: Oh, how dissapointing...\n", 2, -1);
+
+collector->dialog->AddLine("What do you want?\n", "Collector: I am a collector. I search for strange things.\nI know a strange thing is in the north fells of the city.\nA strange totem... Talk to me when you got it.\n", 7, -1);
+collector->dialog->AddLine("I have not time. I will continue without help\n", "Collector: ...Ok...\n", 7, -1);
+
+collector->dialog->AddLine("The strange?\n", "Collector: Yes! I am a collector. I love strange things.\nAnd in this beach, there are those strange rests...\n", 3, 3);
+collector->dialog->AddLine("Those fangs, do you mean?\n", "Collector: Yes... they are interesting, aren't it? I don't know \nwhat creature could have those fangs, but... Sure, it was weird.\nBut, you know? It's better not know it. The truth can be dangerous, sometimes.\n", 3, 3);
+collector->dialog->AddLine("OK... I think I have something to do...\n", "Collector: Bye, MyLady. Be careful with the truth...\n", 3, -1);
+
 }
 

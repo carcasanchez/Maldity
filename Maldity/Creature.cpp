@@ -57,9 +57,9 @@ bool Creature::Talking()
 
 		printf("\n");
 
-		if (i < 0 || i > dialog->current->option.Size())
+		if (i < 0 || i >= dialog->current->option.Size())
 		{
-			printf("You have chose an invalid option.\n");
+			printf("You have chose an invalid option.");
 			return false;
 		}
 
