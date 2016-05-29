@@ -11,7 +11,9 @@ class Player : public Creature
 public:
 	int sanity;
 	int coins;
-	int timer;
+	int ghost_timer;
+	int creature_timer;
+	int gameover_timer;
 
 
 	Cardinal last_direction;
@@ -19,6 +21,7 @@ public:
 
 	Player(const char* name, const char* desc, Room* pos, Tipus type, Stats stats, int limit, int coins) :Creature(name, desc, pos, type, stats, limit), coins(coins)
 	{
+		ghost_timer = creature_timer = gameover_timer = 0;
 		sanity = stats.sanity;
 	}
 

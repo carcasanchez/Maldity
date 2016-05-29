@@ -25,7 +25,7 @@ int main(){
 	Cardinal orient = NONE;
 	
 	
-	printf("\n				MALDITY\n\n");
+	printf("\n				MALDITY\n\nYou are Jasna, member of the army. In the course of a special operation to \ninvestigate the ghost city of Baiona, you get lost from your companions. \nSearch the city for a way to contact the army, and scape.\n\n");
 
 	while (world->player_input.Compare("quit")==false)
 	{
@@ -166,6 +166,7 @@ int main(){
 									it->data->type == NPC))
 								{
 									it->data->Look();
+									world->player->sanity -= it->data->madness_damage;
 									break;
 								}
 
@@ -182,6 +183,7 @@ int main(){
 										it->data->type == EQUIP_ITEM))
 									{
 										it->data->Look();
+										world->player->sanity -= it->data->madness_damage;
 										break;
 									}
 

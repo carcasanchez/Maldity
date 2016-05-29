@@ -198,17 +198,17 @@ entity.PushBack(sailor = new Creature("Sailor", "It's a decrepit body with a sai
 entity.PushBack(collector = new Creature("Collector", "A well dressed and highborn-looking tall man. He wears a strange mask.\n", beach, NPC, non_bonus, 0));
 
 //Creates items
-entity.PushBack(key = new Item("Key", "It's an old, little, rusty key.\n", EQUIP_ITEM, non_bonus, 0, 5));
-entity.PushBack(coffer = new Item("Coffer", "An old wooden box. You can put objects into it.\n", NON_EQUIP_ITEM, non_bonus, 3, 0));
-entity.PushBack(coin = new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", EQUIP_ITEM, non_bonus, 0, 200));
-entity.PushBack(totem = new Item("Totem", "A strange totem, made in wood.\nIt's impossible to determine what it represents...\n", EQUIP_ITEM, non_bonus, 0, 3));
-entity.PushBack(sword = new Item("Sword", "It's a short sword, very sharpen.\n", EQUIP_ITEM, sword_bonus, 0, 50));
-entity.PushBack(armor = new Item("Armor", "A strange, shiny armor that covers the chest.\n", EQUIP_ITEM, armor_bonus, 0, 60));
-entity.PushBack(map = new Item("Map", "The old map of a sailor. It doesn't represent any continent recognizable...\n",  EQUIP_ITEM, non_bonus, 0, 1));
-entity.PushBack(fang = new Item("Fang", "It seems to be the fang of a sea creature.\nBut any sea creature known has that fangs...\n", EQUIP_ITEM, fang_bonus, 0, 1));
-entity.PushBack(rope = new Item("Rope", "A simple piece of rope. Nothing strange.\n", EQUIP_ITEM, non_bonus, 0, 2));
-entity.PushBack(swordcase = new Item("Swordcase", "Very useful case, perfect for keep a sword inside.\n", EQUIP_ITEM, non_bonus, 1, 20));
-entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sustance in it. Maybe blood?\n", EQUIP_ITEM, non_bonus, 0, 5));
+entity.PushBack(key = new Item("Key", "It's an old, little, rusty key.\n", EQUIP_ITEM, non_bonus, 0, 5, 0));
+entity.PushBack(coffer = new Item("Coffer", "An old wooden box. You can put objects into it.\n", NON_EQUIP_ITEM, non_bonus, 3, 0, 0));
+entity.PushBack(coin = new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", EQUIP_ITEM, non_bonus, 0, 200, 0));
+entity.PushBack(totem = new Item("Totem", "A strange totem, made in wood.\nIt's impossible to determine what it represents...\n", EQUIP_ITEM, non_bonus, 0, 3, 3));
+entity.PushBack(sword = new Item("Sword", "It's a short sword, very sharpen.\n", EQUIP_ITEM, sword_bonus, 0, 50, 0));
+entity.PushBack(armor = new Item("Armor", "A strange, shiny armor that covers the chest.\n", EQUIP_ITEM, armor_bonus, 0, 60, 0));
+entity.PushBack(map = new Item("Map", "The old map of a sailor. It doesn't represent any continent recognizable...\n",  EQUIP_ITEM, non_bonus, 0, 1, 2));
+entity.PushBack(fang = new Item("Fang", "It seems to be the fang of a sea creature.\nBut any sea creature known has that fangs...\n", EQUIP_ITEM, fang_bonus, 0, 1, 5));
+entity.PushBack(rope = new Item("Rope", "A simple piece of rope. Nothing strange.\n", EQUIP_ITEM, non_bonus, 0, 2, 0));
+entity.PushBack(swordcase = new Item("Swordcase", "Very useful case, perfect for keep a sword inside.\n", EQUIP_ITEM, non_bonus, 1, 20, 0));
+entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sustance in it. Maybe blood?\n", EQUIP_ITEM, non_bonus, 0, 5, 5));
 
 
 //Locates creatures and items
@@ -245,7 +245,7 @@ vendor->dialog->AddLine("I'm not interested, thanks.\n", "Vendor: What a pity\n"
 
 
 
-knight->dialog = new Dialogue("Knight: Hello. You seem a little bit lost. Be careful here. Don't forget \nwho you are.\n");
+knight->dialog = new Dialogue("Knight: Hello. You seem a little bit lost. Be careful here. Don't forget \nwho you are. I will help you if madness stalks you.\n");
 knight->dialog->AddLine("What do you mean?\n", "Knight: Don't be afraid. Everybody here is lost.\nBut only a few realizes it.\n", 0, -1);
 knight->dialog->AddLine("What is happening in this village?\n", "Knight: ...\n", 0, -1);
 knight->dialog->AddLine("I need help. I want to leave this city, but...\n", "Knight: I see. If you leave the city by yourself...\nProbably you won't last so much.\nBut I think i could help you.\nThere's an old transistor somewhere... you can use it.\n", 0, -1);
@@ -254,7 +254,7 @@ knight->dialog->AddLine("I didn't mean... bah, forget it.\n", "Knight: ...\n", 1
 knight->dialog->AddLine("Please, tell me!\n", "Knight: Something big... so big, that we can't understand it...\nAt north...\n", 2, 0);
 knight->dialog->AddLine("(He doesn't seem so much talkative. I am losing my time)\n", "Knight: ...\n", 2, -1);
 knight->dialog->AddLine("A transistor? Where?\n", "Knight: ...I don't know. Ask to the rest of inhabitants. But don't get lost.\n", 3, 3);
-knight->dialog->AddLine("Why do you help me?\n", "Knight: ...Knowledge is dangerous. Be afraid of the truth.\n", 3, 3);
+knight->dialog->AddLine("Why do you help me?\n", "Knight: ...Knowledge is dangerous. Be afraid of the truth.\nIf you start to forget who you are... Talk to me.\n", 3, 3);
 knight->dialog->AddLine("Ok... thanks for the help.\n", "Knight: ...\n", 3, -1);
 knight->dialog->AddLine("Ok...Bye...\n", "Knight: Bye. Be careful.\n", 0, -1);
 

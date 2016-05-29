@@ -4,24 +4,41 @@
 void Player::Update()
 {
 	
-	if (world->ghost->position == position && timer == 0)
+	if (world->ghost->position == position && ghost_timer == 0)
 	{
-		timer = GetTickCount();
+		ghost_timer = GetTickCount();
 	}
 
-	if (world->ghost->position == position && GetTickCount() - timer > 1000 && sanity > 1)
+	if (world->ghost->position == position && GetTickCount() - ghost_timer > 1000 && sanity > 1)
 	{
-		timer = GetTickCount();
+		ghost_timer = GetTickCount();
 		sanity--;
-		
+		gameover_timer = ghost_timer;
 	}
+
+	if (state == talking)
+	{
+		if (creature_timer == 0)
+		{
+			creature_timer = GetTickCount();
+		}
+
+		if (GetTickCount() - creature_timer > 5000 && sanity > 1 && world->knight->state != talking)
+		{
+			creature_timer = GetTickCount();
+			sanity--;
+			gameover_timer = creature_timer;
+		}
+
+	}	
+
 
 
 	switch (sanity)
 	{
 		case 1:
-			printf("~7☻83-♣</,1todos_uswe89hgaysg@#~€¬546#wvr€~ERA@#~€€#452");
-			if (GetTickCount() - timer > 2000)
+			printf("~7☻83-todos♣</,1_uswe89hg@#~€¬546#wvr€~ERAgays@#~€€#452");
+			if (GetTickCount() - gameover_timer > 2000)
 				sanity--;
 			break;
 
@@ -46,7 +63,7 @@ void Player::Update()
 			break;
 
 		case 10:
-			printf("You collapse at the ground. When you stand up, the whole world seems to fall\ndown.\n");
+			printf("You collapse at the ground. When you stand up, the whole world seems to \nfall down.\n");
 			sanity--;
 			break;
 
@@ -440,6 +457,9 @@ bool Player::Talk_to(const String& interlocutor)
 					state = walking;
 					((Creature*)it->data)->state = walking;
 				}
+
+				if (it->data == world->knight)
+					sanity = 100;
 				
 				for (int i = 0, size = ((Creature*)it->data)->dialog->lines[0]->option.Size(); i < size; i++)
 				{

@@ -1,5 +1,6 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
+
 #include "MyString.h"
 #include "Double-Linked List.h"
 #include <iostream>
@@ -13,7 +14,7 @@ public:
 	String name;
 	String description;
 	Tipus type;
-	
+	int madness_damage = 0;
 
 	List <Entity*> inside;
 
@@ -27,11 +28,13 @@ public:
 	{
 
 		printf("%s",  description.C_str());
-		if (type==NON_EQUIP_ITEM ||type==EQUIP_ITEM)
+		if (type == NON_EQUIP_ITEM || type == EQUIP_ITEM)
+		{
 			for (List<Entity*>::Node *it = inside.first; it != nullptr; it = it->next)
 			{
 				printf("It has a %s inside.\n", it->data->name.C_str());
 			}
+		}
 	};
 	
 	virtual void Update(){};

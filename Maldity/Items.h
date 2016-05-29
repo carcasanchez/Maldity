@@ -18,12 +18,14 @@ public:
 
 
 
-	Item(const char* name, const char* description, Tipus type, Stats bonus, int limit, int value) : Entity(name, description, type), limit(limit), value(value)
+
+	Item(const char* name, const char* description, Tipus type, Stats bonus, int limit, int value, int madness) : Entity(name, description, type), limit(limit), value(value)
 	{
 		bonus_atk = bonus.atk;
 		bonus_hp = bonus.hp;
 		bonus_def = bonus.hp;
 		bonus_sanity = bonus.sanity;
+		madness_damage = madness;
 	}
 	
 };
