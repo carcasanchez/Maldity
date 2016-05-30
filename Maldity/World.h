@@ -28,6 +28,7 @@ public:
 	
 	String player_input;
 	char* last_key = nullptr;
+	bool game_ended = false;
 
 	Vector <Entity*> entity;
 	
@@ -39,6 +40,7 @@ public:
 	Creature* sailor = nullptr;
 	Creature* collector = nullptr;
 	Creature* brute = nullptr;
+	Creature* patrol = nullptr;
 	
 	/*
 	Inkeeper* inkeeper=nullptr;
@@ -60,7 +62,6 @@ public:
 	Room* balcony = nullptr;
 
 
-	Item* key = nullptr;
 	Item* coffer = nullptr;
 	Item* coin = nullptr;
 	Item* totem = nullptr;
@@ -68,9 +69,10 @@ public:
 	Item* armor = nullptr;
 	Item* map = nullptr;
 	Item* fang = nullptr;
-	Item* rope = nullptr;
-	Item* swordcase = nullptr;
 	Item* vial = nullptr;
+	Item* transistor = nullptr;
+
+	Exit* house_door = nullptr;
 
 
 	World();

@@ -27,7 +27,7 @@ int main(){
 	
 	printf("\n				MALDITY\n\nYou are Jasna, member of the army. In the course of a special operation to \ninvestigate the ghost city of Baiona, you get lost from your companions. \nSearch the city for a way to contact the army, and scape.\n\n");
 
-	while (world->player_input.Compare("quit")==false)
+	while (world->player_input.Compare("quit")==false && world->game_ended == false)
 	{
 		key[0] = 0;
 		world->player_input.Clean();
@@ -69,7 +69,7 @@ int main(){
 
 			if (world->player->sanity == 0)
 			{
-				world->player_input = "quit";
+				world->game_ended = true;
 				break;
 			}
 			
@@ -80,7 +80,7 @@ int main(){
 			printf("\n");			
 
 			//QUIT
-			if (world->player_input.Compare("quit"))
+			if (world->player_input.Compare("quit") || world->game_ended)
 				break;
 			
 			if (world->player->state == walking)

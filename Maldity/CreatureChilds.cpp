@@ -68,6 +68,23 @@ void Player::Update()
 			break;
 
 	}
+
+
+	if (contacted_with_army == false && equipped_item == world->transistor)
+	{
+		
+		printf("\n(You turn on the radio machine, and a voice surges from it)\n\nRadio: Hello? Here's the army... Soldier Jasna, it's you? Oh, god, we think...\nOk, what's your position?...Ok. We send a patrol to the place...\nThey will wait for you at the eastern forest of the city.\nBe careful!\n\n");
+
+		world->forest->inside.PushBack(world->patrol);
+		
+		if (position == world->forest)
+			printf("The patrol arrives at the forest.\n");
+
+		contacted_with_army = true;
+	}
+
+
+	
 	
 
 }
@@ -460,6 +477,9 @@ bool Player::Talk_to(const String& interlocutor)
 
 				if (it->data == world->knight)
 					sanity = 100;
+
+				else if (it->data == world->patrol)
+					world->game_ended = true;
 				
 				for (int i = 0, size = ((Creature*)it->data)->dialog->lines[0]->option.Size(); i < size; i++)
 				{

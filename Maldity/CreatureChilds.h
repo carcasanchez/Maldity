@@ -15,6 +15,8 @@ public:
 	int creature_timer;
 	int gameover_timer;
 
+	bool contacted_with_army = false;
+
 
 	Cardinal last_direction;
 

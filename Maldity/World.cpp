@@ -105,7 +105,7 @@ void World::CreateWorld()
 	entity.PushBack(new Exit("", "The northern alley leaves the square between buildings. It seems to ascend.\n", center, alley, N, false, true));
 	entity.PushBack(new Exit("", "You can see the main road, near the sea.\n", center, road, S, false, true));
 	entity.PushBack(new Exit("", "It seems to be the entrance a shop.\n", center, shop, E, true, false));
-	entity.PushBack(new Exit("", "It seems to be a door to a house.\n", center, house, W, true, false));
+	entity.PushBack(house_door = new Exit("", "It seems to be a door to a house. The door is firmly closed.\n", center, nullptr, W, false, true));
 	
 
 	//Alley exits
@@ -196,19 +196,19 @@ entity.PushBack(vendor = new Vendor("Vendor", "Short and wearing a dusty cloak, 
 entity.PushBack(knight = new Creature("Knight", "A skeletal knight, wearing a dark armor. He's resting against a pillar.\n", road, NPC, non_bonus, 0));
 entity.PushBack(sailor = new Creature("Sailor", "It's a decrepit body with a sailor coat. His empty eyes\nlook at some point in the sea.\n", dock, NPC, non_bonus, 0));
 entity.PushBack(collector = new Creature("Collector", "A well dressed and highborn-looking tall man. He wears a strange mask.\n", beach, NPC, non_bonus, 0));
+entity.PushBack(patrol = new Creature("Patrol", "The army patrol! They were sent to rescue you from the city.\n", forest, NPC, non_bonus, 0));
 
 //Creates items
-entity.PushBack(key = new Item("Key", "It's an old, little, rusty key.\n", EQUIP_ITEM, non_bonus, 0, 5, 0));
+
 entity.PushBack(coffer = new Item("Coffer", "An old wooden box. You can put objects into it.\n", NON_EQUIP_ITEM, non_bonus, 3, 0, 0));
-entity.PushBack(coin = new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", EQUIP_ITEM, non_bonus, 0, 200, 0));
+entity.PushBack(coin = new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", EQUIP_ITEM, non_bonus, 0, 50, 0));
 entity.PushBack(totem = new Item("Totem", "A strange totem, made in wood.\nIt's impossible to determine what it represents...\n", EQUIP_ITEM, non_bonus, 0, 3, 3));
 entity.PushBack(sword = new Item("Sword", "It's a short sword, very sharpen.\n", EQUIP_ITEM, sword_bonus, 0, 50, 0));
 entity.PushBack(armor = new Item("Armor", "A strange, shiny armor that covers the chest.\n", EQUIP_ITEM, armor_bonus, 0, 60, 0));
 entity.PushBack(map = new Item("Map", "The old map of a sailor. It doesn't represent any continent recognizable...\n",  EQUIP_ITEM, non_bonus, 0, 1, 2));
 entity.PushBack(fang = new Item("Fang", "It seems to be the fang of a sea creature.\nBut any sea creature known has that fangs...\n", EQUIP_ITEM, fang_bonus, 0, 1, 5));
-entity.PushBack(rope = new Item("Rope", "A simple piece of rope. Nothing strange.\n", EQUIP_ITEM, non_bonus, 0, 2, 0));
-entity.PushBack(swordcase = new Item("Swordcase", "Very useful case, perfect for keep a sword inside.\n", EQUIP_ITEM, non_bonus, 1, 20, 0));
 entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sustance in it. Maybe blood?\n", EQUIP_ITEM, non_bonus, 0, 5, 5));
+entity.PushBack(transistor = new Item("Transistor", "A very oxidized radio machine. Still working.\n", EQUIP_ITEM, non_bonus, 0, 10, 0));
 
 
 //Locates creatures and items
@@ -219,13 +219,15 @@ road->inside.PushBack(knight);
 dock->inside.PushBack(sailor);
 beach->inside.PushBack(collector);
 
-house->inside.PushBack(coffer);
+statue->inside.PushBack(coffer);
 vendor->inside.PushBack(coin);
 coffer->inside.PushBack(sword);
-vendor->inside.PushBack(rope);
-forest->inside.PushBack(key);
+coffer->inside.PushBack(armor);
+coffer->inside.PushBack(vial);
 beach->inside.PushBack(fang);
 dock->inside.PushBack(map);
+center->inside.PushBack(transistor);
+
 
 
 //Add dialogues
@@ -276,20 +278,17 @@ collector->dialog = new Dialogue("Collector: Oh. Hello, My Lady. Looking for a g
 collector->dialog->AddLine("Maybe. But this sea is a bit ferocious for me.\n", "Collector: Oh, true. The sea here is not peaceful.\nBut, our souls are not peaceful too...\n", 0, -1);
 collector->dialog->AddLine("Actually not. I'm searching for help.\n", "Collector: Oh, how I could help such a beautiful lady?\n", 0, -1);
 collector->dialog->AddLine("Yes. And you, what are you sarching for?\n", "Collector: I search for the strange.\n", 0, -1);
-
 collector->dialog->AddLine("Souls? What do you mean?\n", "Collector: Our souls, MyLady, our souls. The souls trapped in this city.\n", 1, -1);
 collector->dialog->AddLine("Trapped?\n", "Collector: Yes... I have been trapped here for a few years.\nThe Knight is the oldest soul here. But is the most lucid.\nWould you become the youngest soul here?\	n", 4, 4);
 collector->dialog->AddLine("(Probably is crazy. I will leave)\n", "Collector: Farewell, MyLady\n", 4, -1);
-
 collector->dialog->AddLine("Did you know where I can found something like a transistor?\n","Collector: A radio machine? I have one in my house, I think.\nI can let you using it if you... make something for me.", 2, -1);
 collector->dialog->AddLine("Probably you can't. See you later.\n", "Collector: Oh, how dissapointing...\n", 2, -1);
-
 collector->dialog->AddLine("What do you want?\n", "Collector: I am a collector. I search for strange things.\nI know a strange thing is in the north fells of the city.\nA strange totem... Talk to me when you got it.\n", 7, -1);
 collector->dialog->AddLine("I have not time. I will continue without help\n", "Collector: ...Ok...\n", 7, -1);
-
 collector->dialog->AddLine("The strange?\n", "Collector: Yes! I am a collector. I love strange things.\nAnd in this beach, there are those strange rests...\n", 3, 3);
 collector->dialog->AddLine("Those fangs, do you mean?\n", "Collector: Yes... they are interesting, aren't it? I don't know \nwhat creature could have those fangs, but... Sure, it was weird.\nBut, you know? It's better not know it. The truth can be dangerous, sometimes.\n", 3, 3);
 collector->dialog->AddLine("OK... I think I have something to do...\n", "Collector: Bye, MyLady. Be careful with the truth...\n", 3, -1);
 
+patrol->dialog = new Dialogue("Jasna! You are alive! C'mon, we must leave this city.\n\n(You get on the car and leaves the cursed city)\n					 END\n\n\n(press any key to end the game)");
 }
 
