@@ -39,8 +39,10 @@ public:
 	Creature* knight = nullptr;
 	Creature* sailor = nullptr;
 	Creature* collector = nullptr;
-	Creature* brute = nullptr;
 	Creature* patrol = nullptr;
+	Creature* demented = nullptr;
+
+	Creature* brute = nullptr;
 	
 	/*
 	Inkeeper* inkeeper=nullptr;

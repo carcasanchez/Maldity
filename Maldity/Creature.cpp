@@ -77,6 +77,17 @@ bool Creature::Talking()
 				state = walking;
 				world->player->state = walking;
 				world->player_input.Clean();
+				if (this == world->demented)
+				{
+					for (List<Entity*>::Node* it = world->balcony->inside.first; it != nullptr; it = it->next)
+					{
+						if (it->data == world->demented)
+						{
+							world->balcony->inside.Erase(it);
+							break;
+						}
+					}
+				}
 				return false;
 			}			
 		}

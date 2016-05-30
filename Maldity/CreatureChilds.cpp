@@ -475,9 +475,6 @@ bool Player::Talk_to(const String& interlocutor)
 					((Creature*)it->data)->state = walking;
 				}
 
-				if (it->data == world->knight)
-					sanity = 100;
-
 				else if (it->data == world->patrol)
 					world->game_ended = true;
 				
