@@ -748,7 +748,7 @@ void Ghost::Update()
 
 	if (state == walking)
 	{
-		if (GetTickCount() - timer > 5000)
+		if (GetTickCount() - timer > 10000)
 		{
 			Cardinal orient = Cardinal(rand() % 4);
 
