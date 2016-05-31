@@ -41,13 +41,9 @@ public:
 	Creature* collector = nullptr;
 	Creature* patrol = nullptr;
 	Creature* demented = nullptr;
-
 	Creature* brute = nullptr;
-	
-	/*
-	Inkeeper* inkeeper=nullptr;
-	Seer* seer=nullptr;
-	*/
+	Creature* seer=nullptr;
+
 
 	Room* forest = nullptr;
 	Room* road = nullptr;

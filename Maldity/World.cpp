@@ -60,7 +60,7 @@ void World::CreateWorld()
 	entity.PushBack(dock = new Room("Dock", "The dock is really impressive.\nThere are enourmous woody ships in all directions except for the east.\n"));
 	entity.PushBack(center = new Room("Center", "Gothic buildings are all around of a narrow square.\nYou can see the main road at south, and a couple of sinister alleys that go \ndeeper into the city.\nOnly the alley of the north seems a little bit safer.\nYou can see two doors, at west and at east.\n"));
 	entity.PushBack(alley = new Room("Alley", "The narrow alley goes up from the city center.\nThere's a small door that have a 'Tavern' placard at your left.\nThe alley continues ascending to the north.\n"));
-	entity.PushBack(tavern = new Room("Tavern", "The house seems to be an old tavern, with the door oriented at east.\n"));
+	entity.PushBack(tavern = new Room("Tavern", "The house seems to be an old tavern, with the door oriented at east.\nThere're a few clients that look at you with hostile eyes.\n"));
 	entity.PushBack(top = new Room("Top", "You are in the elevated district of the city.\nYou can see a little alley at south and a enormous statue at east, beyond the\nfells.\n"));
 	entity.PushBack(fells = new Room("Fells", "The fells are surrounded by dark trees. The enourmous statue rises over them.\n"));
 	entity.PushBack(statue = new Room("Statue", "The enormous statue seems to be a Virgin.\nIt looks like she has a balcony on her top.\nThe dark mass of trees looks you from the west.\nThere are stairs that go up inside the statue.\nAt south, a little road goes down the fells.\n"));
@@ -198,11 +198,10 @@ entity.PushBack(sailor = new Creature("Sailor", "It's a decrepit body with a sai
 entity.PushBack(collector = new Creature("Collector", "A well dressed and highborn-looking tall man. He wears a strange mask.\n", beach, NPC, non_bonus, 0));
 entity.PushBack(patrol = new Creature("Patrol", "The army patrol! They were sent to rescue you from the city.\n", forest, NPC, non_bonus, 0));
 entity.PushBack(demented = new Creature("Demented", "Strange, dark, tall figure. You only can see his eyes, under his cloak.\nHe emanes an aura of terror.\n", balcony, NPC, non_bonus, 0));
-
-
+entity.PushBack(brute = new Creature("Brute", "Incredible robuste, ugly giant. It drinks slowly in the bar.\n", tavern, NPC, non_bonus, 0));
+entity.PushBack(seer = new Creature("Seer", "A short figure, resting in a bench, covered in a cloack.", center, NPC, non_bonus, 0));
 
 //Creates items
-
 entity.PushBack(coffer = new Item("Coffer", "An old wooden box. You can put objects into it.\n", NON_EQUIP_ITEM, non_bonus, 3, 0, 0));
 entity.PushBack(coin = new Item("Coin", "A very old coin. It seems to be made in gold.\nIt has a strange symbol impressed in it.\n", EQUIP_ITEM, non_bonus, 0, 50, 0));
 entity.PushBack(totem = new Item("Totem", "A strange totem, made in wood.\nIt's impossible to determine what it represents...\n", EQUIP_ITEM, non_bonus, 0, 3, 3));
@@ -222,6 +221,8 @@ road->inside.PushBack(knight);
 dock->inside.PushBack(sailor);
 beach->inside.PushBack(collector);
 balcony->inside.PushBack(demented);
+tavern->inside.PushBack(brute);
+center->inside.PushBack(seer);
 
 statue->inside.PushBack(coffer);
 vendor->inside.PushBack(coin);
@@ -240,7 +241,6 @@ house->inside.PushBack(transistor);
 ghost->dialog = new Dialogue("The ghost doesn't seem able to talk.\n");
 
 
-
 vendor->dialog = new Dialogue("Vendor: Welcome, dear, to my shop! I have a lot of interesting items for you.\nSome information, maybe.\n");
 vendor->dialog->AddLine("What is this city?\n", "Vendor: My dear, this is our home, Baiona. The weather here is so pleasant,\nisn't it?. We have not much work, but... the life here is still interesting.\n", 0, -1);
 vendor->dialog->AddLine("What interesting objects do you have?\n", "Vendor: Oh, glad you ask. I have anything you want, from utility objects to \nsome old relics!\n", 0, 0);
@@ -249,7 +249,6 @@ vendor->dialog->AddLine("(Ok, I think I have better things to do)\n", "Vendor: S
 vendor->dialog->AddLine("Person? What person?\n", "Vendor: Oh, maybe you will know him, soon or later. Don't be impatient.\n", 3, 0);
 vendor->dialog->AddLine("Mhf. Ok, see you later.\n", "Vendor: Don't you want to buy something?\n", 3, -1);
 vendor->dialog->AddLine("I'm not interested, thanks.\n", "Vendor: What a pity\n", 0, -1);
-
 
 
 knight->dialog = new Dialogue("Knight: Hello. You seem a little bit lost. Be careful here. Don't forget \nwho you are. I will help you if madness stalks you.\n");
@@ -303,6 +302,17 @@ demented->dialog->AddLine("Who are you? What's happening in this city?\n", "Stra
 demented->dialog->AddLine("What? Harbinger of what?\n","Strange figure: Of those who came from the sea.\nOf those who converted you in what you are now.\n", 2, -1);
 demented->dialog->AddLine("More? What do you mean? Are you not human?\n", "(The strange figure inclines to you. You can slightly see a mass of darkness, a horrible non-human face)\nStrange figure: Do you want to know more? Knowledge could be your ruin.\n", 2, 2);
 demented->dialog->AddLine("Who came from the sea?\n", "Strange figure: The Great. So Great, you can't understand.\nA superior existence. This city tried to reach their glory.\nThey reach their lore.\nAnd with the glory and the lore, they reach de Madness.\n", 4, 4);
-demented->dialog->AddLine("Shut up! You are crazy.\n", "Strange figure: Crazy? Oh, no. I'm not crazy. You, humans, regret all you can't understand.\nAnd, when you finally understand... you mind shatters in pieces.\n(The dark figure points to the south, to the grey sea. At the cloudy horizon,\nyou can barely distinguish three enormous silhouettes. They are slowly moving, \nlike they were alive)\nHarbinger of the Great: You see, little human? The greatness, the terrible greatness.\nNow, you know the truth. What will you do with it?\n(The dark figure vanishes silently)\n", 4, -1);
+demented->dialog->AddLine("Shut up! You are crazy.\n", "Strange figure: Crazy? Oh, no. I'm not crazy. You, humans, regret all you can't understand.\nAnd, when you finally understand... you mind shatters in pieces.\n(The dark figure points to the south, to the grey sea. At the cloudy horizon,\nyou can barely distinguish three enormous silhouettes. They are slowly moving, \nlike they were alive)\nHarbinger of the Great: You see, little human? The greatness, \nthe terrible greatness. Now, you know the truth. What will you do with it?\n(The dark figure vanishes silently)\n", 4, -1);
+
+brute->dialog = new Dialogue("Brute: What do you want? Didn't you see that I'm busy?\n");
+brute->dialog->AddLine("Sorry, I must ask you some questions.\n", "Brute: What? Mf. Ok. Be quick.\n", 0, -1);
+brute->dialog->AddLine("(It seems aggressive. Better I leave)\n", "(The brute continues drinking)\n", 0, -1);
+brute->dialog->AddLine("Why are all afraid of the north part of the city?\n", "Brute: Probably is the ghost. There's a strange entity around the Virgin\nstatue. From once to once, it comes to the city. It's really disturbing.\nIf I were you, I won't approach to it...\n", 1, 1);
+brute->dialog->AddLine("Those giant boats of the dock...\n", "Brute: They aren't for us. Don't ask.\n", 1, 1);
+brute->dialog->AddLine("Who is that knight?\n", "Brute: It's the oldest here. He doesn't talk very much.\n", 1, 1);
+brute->dialog->AddLine("What is the giant statue at the top of the village?\n", "Brute: The Virgin of the Stone... is very ancient. You can go\ninto it, but it's no a good idea.\n", 1, 1);
+brute->dialog->AddLine("The fells of the north...\n", "Brute: They are as cursed as this village. Even more. Don't walk through \nthem if you can.\n", 1, 1);
+brute->dialog->AddLine("Ok. Thanks for the answers.\n", "Brute:...farewell...\n", 1, -1);
+
 }
 

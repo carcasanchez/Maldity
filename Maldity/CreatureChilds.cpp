@@ -23,7 +23,18 @@ void Player::Update()
 			creature_timer = GetTickCount();
 		}
 
-		if (GetTickCount() - creature_timer > 5000 && sanity > 1 && world->knight->state != talking)
+		if (world->demented->state == talking)
+		{
+			if (GetTickCount() - creature_timer > 1000)
+			{
+				creature_timer = GetTickCount();
+				sanity--;
+				gameover_timer = creature_timer;
+			}
+
+		}
+
+		else if (GetTickCount() - creature_timer > 5000 && sanity > 1 && world->knight->state != talking)
 		{
 			creature_timer = GetTickCount();
 			sanity--;
@@ -462,6 +473,12 @@ bool Player::Talk_to(const String& interlocutor)
 		{
 			if (it->data->type == NPC)
 			{
+				if (it->data == world->seer)
+				{
+					printf("Seer:...the lost soul...is wandering in the %s...\n", world->ghost->position->name.C_str());
+					return true;
+				}
+
 				//For when you have the totem and talk with the collector
 				if (it->data == world->collector && world->player->equipped_item == world->totem)
 				{
@@ -720,7 +737,7 @@ void Ghost::Update()
 
 	if (state == walking)
 	{
-		if (GetTickCount() - timer > 10000)
+		if (GetTickCount() - timer > 5000)
 		{
 			Cardinal orient = Cardinal(rand() % 4);
 
