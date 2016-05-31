@@ -210,7 +210,7 @@ entity.PushBack(armor = new Item("Armor", "A strange, shiny armor that covers th
 entity.PushBack(map = new Item("Map", "The old map of a sailor. It doesn't represent any continent recognizable...\n",  EQUIP_ITEM, non_bonus, 0, 1, 2));
 entity.PushBack(fang = new Item("Fang", "It seems to be the fang of a sea creature.\nBut any sea creature known has that fangs...\n", EQUIP_ITEM, fang_bonus, 0, 1, 5));
 entity.PushBack(vial = new Item("Vial", "A cristal bottle, with a dark, red sustance in it. Maybe blood?\n", EQUIP_ITEM, non_bonus, 0, 5, 5));
-entity.PushBack(transistor = new Item("Transistor", "A very oxidized radio machine. Still working.\n", EQUIP_ITEM, non_bonus, 0, 10, 0));
+entity.PushBack(transistor = new Item("Transistor", "A very oxidized radio machine. Still working.\nEquip it to use.\n", EQUIP_ITEM, non_bonus, 0, 10, 0));
 
 
 //Locates creatures and items
