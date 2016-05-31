@@ -48,18 +48,19 @@ public:
 	}
 
 	~Dialogue()
-	{
-		for (int i = 0, j = lines.Size(); i < j; i++)
+	{		//TODO
+		/*int size = lines.Size();
+		for (int i = 0; i < size; i++)
 		{
 			delete lines[i];
-		}
+		}*/
 	}
 
 	void AddLine(const char* title, const char* text, int previous, int next)
 	{
 		Node* new_line = nullptr;
 
-		if (next==-1)	new_line = new Node(text, title, nullptr);
+		if (next == -1) new_line = new Node(text, title, nullptr);
 		else new_line = new Node(text, title, lines[next]);
 
 		lines.PushBack(new_line);

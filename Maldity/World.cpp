@@ -228,9 +228,10 @@ vendor->inside.PushBack(coin);
 coffer->inside.PushBack(sword);
 coffer->inside.PushBack(armor);
 coffer->inside.PushBack(vial);
+coffer->inside.PushBack(totem);
 beach->inside.PushBack(fang);
 dock->inside.PushBack(map);
-center->inside.PushBack(transistor);
+house->inside.PushBack(transistor);
 
 
 
@@ -287,7 +288,7 @@ collector->dialog->AddLine("Trapped?\n", "Collector: Yes... I have been trapped 
 collector->dialog->AddLine("(Probably is crazy. I will leave)\n", "Collector: Farewell, MyLady\n", 4, -1);
 collector->dialog->AddLine("Did you know where I can found something like a transistor?\n","Collector: A radio machine? I have one in my house, I think.\nI can let you using it if you... make something for me.\n", 2, -1);
 collector->dialog->AddLine("Probably you can't. See you later.\n", "Collector: Oh, how dissapointing...\n", 2, -1);
-collector->dialog->AddLine("What do you want?\n", "Collector: I am a collector. I search for strange things.\nI know a strange thing is in the north fells of the city.\nA strange totem... Talk to me when you got it.\n", 7, -1);
+collector->dialog->AddLine("What do you want?\n", "Collector: I am a collector. I search for strange things.\nI know a strange thing is in the giant statue, at north.\nA strange totem... Talk to me when you got it.\n", 7, -1);
 collector->dialog->AddLine("I have not time. I will continue without help\n", "Collector: ...Ok...\n", 7, -1);
 collector->dialog->AddLine("The strange?\n", "Collector: Yes! I am a collector. I love strange things.\nAnd in this beach, there are those strange rests...\n", 3, 3);
 collector->dialog->AddLine("Those fangs, do you mean?\n", "Collector: Yes... they are interesting, aren't it? I don't know \nwhat creature could have those fangs, but... Sure, it was weird.\nBut, you know? It's better not know it. The truth can be dangerous, sometimes.\n", 3, 3);
@@ -299,10 +300,8 @@ demented->dialog = new Dialogue("Strange figure: Ah. Hello. I have waiting for y
 demented->dialog->AddLine("What did you mean?\n","Strange figure: Waiting, dear, waiting. For you. I saw you from here, walking through \nthe forest, coming to this cursed village...\n", 0, 0);
 demented->dialog->AddLine("Are you the important person everybody is talking about here?\n", "Strange figure: Person? Did you call me a 'person'? How disappointing.\nI am the harbinger. I'm not a person. I am more.\n", 0, -1);
 demented->dialog->AddLine("Who are you? What's happening in this city?\n", "Strange figure: Oh, are you searching for the truth? It could be dangerous.", 0 , 0);
-
 demented->dialog->AddLine("What? Harbinger of what?\n","Strange figure: Of those who came from the sea.\nOf those who converted you in what you are now.\n", 2, -1);
 demented->dialog->AddLine("More? What do you mean? Are you not human?\n", "(The strange figure inclines to you. You can slightly see a mass of darkness, a horrible non-human face)\nStrange figure: Do you want to know more? Knowledge could be your ruin.\n", 2, 2);
-
 demented->dialog->AddLine("Who came from the sea?\n", "Strange figure: The Great. So Great, you can't understand.\nA superior existence. This city tried to reach their glory.\nThey reach their lore.\nAnd with the glory and the lore, they reach de Madness.\n", 4, 4);
 demented->dialog->AddLine("Shut up! You are crazy.\n", "Strange figure: Crazy? Oh, no. I'm not crazy. You, humans, regret all you can't understand.\nAnd, when you finally understand... you mind shatters in pieces.\n(The dark figure points to the south, to the grey sea. At the cloudy horizon,\nyou can barely distinguish three enormous silhouettes. They are slowly moving, \nlike they were alive)\nHarbinger of the Great: You see, little human? The greatness, the terrible greatness.\nNow, you know the truth. What will you do with it?\n(The dark figure vanishes silently)\n", 4, -1);
 }

@@ -462,6 +462,32 @@ bool Player::Talk_to(const String& interlocutor)
 		{
 			if (it->data->type == NPC)
 			{
+				//For when you have the totem and talk with the collector
+				if (it->data == world->collector && world->player->equipped_item == world->totem)
+				{
+
+					printf("Collector: Oh! You have the totem! Excellent. I have the transistor in \nmy house, at the centre. I will open the door for you.\n");
+					printf("(You give the totem to the collector)\n");
+
+					Move(world->player, world->collector, world->totem);
+
+					world->player->equipped_item = nullptr;
+
+					delete world->collector->dialog;
+					world->collector->dialog = new Dialogue("Collector: Excellent, excellent. I hope you find whatever you search for.\nBut, remember, knowledge can be dangerous...\n");
+
+					
+					for (int i = 0, j = world->entity.Size(); i < j; i++)
+					{
+						if (world->entity[i] == world->house_door)
+						{
+							delete world->entity[i];
+							world->entity[i] = new Exit("", "It seems to be a door to a house.\n", world->center, world->house, W, true, false);
+							break;
+						}
+					}
+
+				}
 
 				((Creature*)it->data)->state = talking;
 				state = talking;
@@ -474,8 +500,8 @@ bool Player::Talk_to(const String& interlocutor)
 					state = walking;
 					((Creature*)it->data)->state = walking;
 				}
-
-				else if (it->data == world->patrol)
+					
+			    if (it->data == world->patrol)
 					world->game_ended = true;
 				
 				for (int i = 0, size = ((Creature*)it->data)->dialog->lines[0]->option.Size(); i < size; i++)
@@ -741,7 +767,6 @@ void Ghost::Update()
 	}
 
 }
-
 
 
 

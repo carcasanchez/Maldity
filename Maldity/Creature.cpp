@@ -68,6 +68,7 @@ bool Creature::Talking()
 
 		
 
+
 		if (dialog->current->option[i]->next == nullptr)
 		{
 			dialog->current = dialog->current->option[i];
@@ -88,6 +89,8 @@ bool Creature::Talking()
 						}
 					}
 				}
+
+
 				return false;
 			}			
 		}
