@@ -47,14 +47,7 @@ public:
 
 	}
 
-	~Dialogue()
-	{		//TODO
-		/*int size = lines.Size();
-		for (int i = 0; i < size; i++)
-		{
-			delete lines[i];
-		}*/
-	}
+	~Dialogue(){}
 
 	void AddLine(const char* title, const char* text, int previous, int next)
 	{
